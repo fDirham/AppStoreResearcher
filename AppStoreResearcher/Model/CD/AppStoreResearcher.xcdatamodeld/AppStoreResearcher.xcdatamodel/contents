@@ -2,8 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PageGroup" representedClassName="PageGroup" syncable="YES" codeGenerationType="class">
         <attribute name="group_notes" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="PageItem" representedClassName="PageItem" syncable="YES" codeGenerationType="class">
         <attribute name="age_rating" optional="YES" attributeType="String"/>
@@ -15,9 +15,9 @@
         <attribute name="built_by_url" optional="YES" attributeType="String"/>
         <attribute name="compatibility" optional="YES" attributeType="String"/>
         <attribute name="copyright" optional="YES" attributeType="String"/>
-        <attribute name="group_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="group_id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="icon_url" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="in_app_purchases" optional="YES" attributeType="String"/>
         <attribute name="item_notes" optional="YES" attributeType="String"/>
         <attribute name="purchase_price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>

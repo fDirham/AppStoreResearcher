@@ -13,10 +13,24 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        
+        // Create groups
+        var groupIdList: [UUID] = []
+        for _ in 0..<5 {
+            let newItem = PageGroup(context: viewContext)
+            newItem.id = UUID()
+            groupIdList.append(newItem.id!)
+            newItem.title = ["Journaling", "Fitness","Action games", "Anti smoking", "Focus"].randomElement()
         }
+        
+        // Create items
+        for _ in 0..<15 {
+            let newItem = PageItem(context: viewContext)
+            newItem.id = UUID()
+            newItem.group_id = groupIdList.randomElement()
+            newItem.app_title = ["Focus Duck", "Pomo Focus","Puff Quit", "Smoke free", "Ad Blocker", "Temple Run", "Flappy Bird", "Golf Mini", "Screen Zen"].randomElement()
+        }
+
         do {
             try viewContext.save()
         } catch {

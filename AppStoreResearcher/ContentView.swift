@@ -10,38 +10,33 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    struct Ocean: Identifiable, Hashable {
-        let name: String
-        let id = UUID()
+
+    @State private var showDetail = true
+    @State private var selectedGroupId: PageGroup.ID? = nil
+    @State private var contentTitle: String = "Test"
+    @State private var selectedView: String = "Choco"
+
+    private var selectedGroup: PageGroup? {
+        if let selectedGroupId = selectedGroupId {
+            return groupItems.first(where: {e in e.id == selectedGroupId})
+        }
+        
+        return nil
     }
 
-    private var oceans = [
-        Ocean(name: "Pacific"),
-        Ocean(name: "Atlantic"),
-        Ocean(name: "Indian"),
-        Ocean(name: "Southern"),
-        Ocean(name: "Arctic")
-    ]
-
-
-    @State private var multiSelection = Set<UUID>()
-    @State private var showDetail = true
-
-
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-//        animation: .default)
-//    private var items: FetchedResults<Item>
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \PageGroup.id, ascending: true)],
+        animation: .default) private var groupItems: FetchedResults<PageGroup>
 
     var body: some View {
         NavigationSplitView {
-            List(oceans, selection: $multiSelection) {
-                Text($0.name)
+            List(groupItems, selection: $selectedGroupId){
+                Text($0.title ?? "")
             }
         } content: {
             HStack(spacing: 0) {
-                if let firstItem = multiSelection.first {
-                    Text(firstItem.uuidString)
+                if let selectedGroup = selectedGroup {
+                    Text(selectedGroup.title ?? "")
                 }
                 Spacer()
                 Divider()
@@ -54,12 +49,25 @@ struct ContentView: View {
                     .frame(width: 100)
                 }
             }
+            .navigationTitle(contentTitle)
         } detail: {
             Spacer()
                 .navigationSplitViewColumnWidth(0)
         }
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .navigation) {
+                Picker("Flavor", selection: $selectedView) {
+                    Text("Chocolate").tag("choco")
+                        Text("Vanilla").tag("vanilli")
+                    }
+            }
+            ToolbarItemGroup(placement: .secondaryAction) {
+                Button("Add app") {
+                    print("Credits tapped")
+                }
+            }
+            ToolbarItemGroup(placement: .primaryAction) {
+                Spacer()
                 Button(action: {
                     withAnimation {
                         showDetail.toggle()
@@ -67,6 +75,11 @@ struct ContentView: View {
                 }) {
                     Image(systemName: "sidebar.right")
                 }
+            }
+        }
+        .onChange(of: selectedGroup) {
+            if let selectedGroup = selectedGroup {
+                contentTitle = selectedGroup.title ?? ""
             }
         }
     }
