@@ -16,6 +16,7 @@
 		8B0951B12C8F665700960603 /* AppStoreResearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951B02C8F665700960603 /* AppStoreResearcherTests.swift */; };
 		8B0951BB2C8F665700960603 /* AppStoreResearcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951BA2C8F665700960603 /* AppStoreResearcherUITests.swift */; };
 		8B0951BD2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951BC2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift */; };
+		8B0951CC2C8F761F00960603 /* CDFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951CB2C8F761F00960603 /* CDFields.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8B0951B62C8F665700960603 /* AppStoreResearcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreResearcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0951BA2C8F665700960603 /* AppStoreResearcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreResearcherUITests.swift; sourceTree = "<group>"; };
 		8B0951BC2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreResearcherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8B0951CB2C8F761F00960603 /* CDFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDFields.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +104,8 @@
 				8B0951992C8F665500960603 /* AppStoreResearcherApp.swift */,
 				8B09519B2C8F665500960603 /* ContentView.swift */,
 				8B09519D2C8F665700960603 /* Assets.xcassets */,
-				8B0951A22C8F665700960603 /* Persistence.swift */,
 				8B0951A72C8F665700960603 /* AppStoreResearcher.entitlements */,
-				8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */,
+				8B0951C92C8F75D600960603 /* Model */,
 				8B09519F2C8F665700960603 /* Preview Content */,
 			);
 			path = AppStoreResearcher;
@@ -133,6 +134,24 @@
 				8B0951BC2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift */,
 			);
 			path = AppStoreResearcherUITests;
+			sourceTree = "<group>";
+		};
+		8B0951C92C8F75D600960603 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B0951CA2C8F75EF00960603 /* CD */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8B0951CA2C8F75EF00960603 /* CD */ = {
+			isa = PBXGroup;
+			children = (
+				8B0951A22C8F665700960603 /* Persistence.swift */,
+				8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */,
+				8B0951CB2C8F761F00960603 /* CDFields.swift */,
+			);
+			path = CD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +287,7 @@
 				8B0951A32C8F665700960603 /* Persistence.swift in Sources */,
 				8B0951A62C8F665700960603 /* AppStoreResearcher.xcdatamodeld in Sources */,
 				8B09519C2C8F665500960603 /* ContentView.swift in Sources */,
+				8B0951CC2C8F761F00960603 /* CDFields.swift in Sources */,
 				8B09519A2C8F665500960603 /* AppStoreResearcherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
