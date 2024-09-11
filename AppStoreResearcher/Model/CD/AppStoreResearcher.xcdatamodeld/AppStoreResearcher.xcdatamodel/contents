@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="PageGroup" representedClassName="PageGroup" syncable="YES" codeGenerationType="class">
-        <attribute name="group_notes" optional="YES" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="title" attributeType="String"/>
-    </entity>
-    <entity name="PageItem" representedClassName="PageItem" syncable="YES" codeGenerationType="class">
-        <attribute name="age_rating" optional="YES" attributeType="String"/>
+    <entity name="AppStorePage" representedClassName="AppStorePage" syncable="YES" codeGenerationType="class">
+        <attribute name="app_bundle_id" attributeType="String"/>
         <attribute name="app_description" optional="YES" attributeType="String"/>
+        <attribute name="app_icon_60" optional="YES" attributeType="String"/>
+        <attribute name="app_icon_512" optional="YES" attributeType="String"/>
+        <attribute name="app_id" attributeType="String"/>
+        <attribute name="app_store_url" optional="YES" attributeType="String"/>
         <attribute name="app_subtitle" optional="YES" attributeType="String"/>
-        <attribute name="app_title" optional="YES" attributeType="String"/>
-        <attribute name="app_url" optional="YES" attributeType="String"/>
-        <attribute name="built_by" optional="YES" attributeType="String"/>
-        <attribute name="built_by_url" optional="YES" attributeType="String"/>
-        <attribute name="compatibility" optional="YES" attributeType="String"/>
-        <attribute name="copyright" optional="YES" attributeType="String"/>
-        <attribute name="group_id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="icon_url" optional="YES" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="in_app_purchases" optional="YES" attributeType="String"/>
-        <attribute name="item_notes" optional="YES" attributeType="String"/>
+        <attribute name="app_title" attributeType="String"/>
+        <attribute name="content_rating" optional="YES" attributeType="String"/>
+        <attribute name="creator_name" attributeType="String"/>
+        <attribute name="creator_url" attributeType="String"/>
+        <attribute name="current_version" optional="YES" attributeType="String"/>
+        <attribute name="current_version_release_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="minimum_os_version" optional="YES" attributeType="String"/>
+        <attribute name="primary_genre" optional="YES" attributeType="String"/>
+        <attribute name="purchase_currency" optional="YES" attributeType="String"/>
         <attribute name="purchase_price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="rating_avg" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="rating_total" optional="YES" attributeType="String"/>
-        <attribute name="screenshots" optional="YES" attributeType="String"/>
+        <attribute name="rating_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="release_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="genre_list" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
+        <relationship name="in_app_purchases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InAppPurchaseSpec"/>
+        <relationship name="screenshot_ios" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
+        <relationship name="screenshot_ipad" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
+    </entity>
+    <entity name="InAppPurchaseSpec" representedClassName="InAppPurchaseSpec" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="price_str" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <attribute name="contents" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="PageGroup" representedClassName="PageGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="group_name" attributeType="String"/>
+        <attribute name="group_notes" optional="YES" attributeType="String"/>
+        <relationship name="page_items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PageItem"/>
+    </entity>
+    <entity name="PageItem" representedClassName="PageItem" syncable="YES" codeGenerationType="class">
+        <relationship name="app_store_page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage"/>
+        <relationship name="item_notes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note"/>
+    </entity>
+    <entity name="StringHolder" representedClassName="StringHolder" syncable="YES" codeGenerationType="class">
+        <attribute name="string" optional="YES" attributeType="String"/>
     </entity>
 </model>

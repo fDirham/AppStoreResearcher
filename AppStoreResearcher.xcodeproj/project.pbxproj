@@ -16,7 +16,15 @@
 		8B0951B12C8F665700960603 /* AppStoreResearcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951B02C8F665700960603 /* AppStoreResearcherTests.swift */; };
 		8B0951BB2C8F665700960603 /* AppStoreResearcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951BA2C8F665700960603 /* AppStoreResearcherUITests.swift */; };
 		8B0951BD2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951BC2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift */; };
-		8B0951CC2C8F761F00960603 /* CDFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951CB2C8F761F00960603 /* CDFields.swift */; };
+		8B0952102C90C20C00960603 /* pageitem_1528322796.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520A2C90C20C00960603 /* pageitem_1528322796.json */; };
+		8B0952112C90C20C00960603 /* pageitem_1638027598.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520B2C90C20C00960603 /* pageitem_1638027598.json */; };
+		8B0952122C90C20C00960603 /* pageitem_6608983404.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520C2C90C20C00960603 /* pageitem_6608983404.json */; };
+		8B0952132C90C20C00960603 /* pageitem_1044867788.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520D2C90C20C00960603 /* pageitem_1044867788.json */; };
+		8B0952142C90C20C00960603 /* pageitem_1194023242.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520E2C90C20C00960603 /* pageitem_1194023242.json */; };
+		8B0952152C90C20C00960603 /* pageitem_1252208166.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B09520F2C90C20C00960603 /* pageitem_1252208166.json */; };
+		8B0952192C90C2B900960603 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0952182C90C2B900960603 /* Helpers.swift */; };
+		8B09521B2C90C4DF00960603 /* JSONHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09521A2C90C4DF00960603 /* JSONHelpers.swift */; };
+		8B09521E2C90C53A00960603 /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09521D2C90C53A00960603 /* String+Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +58,15 @@
 		8B0951B62C8F665700960603 /* AppStoreResearcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreResearcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0951BA2C8F665700960603 /* AppStoreResearcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreResearcherUITests.swift; sourceTree = "<group>"; };
 		8B0951BC2C8F665700960603 /* AppStoreResearcherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreResearcherUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8B0951CB2C8F761F00960603 /* CDFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDFields.swift; sourceTree = "<group>"; };
+		8B09520A2C90C20C00960603 /* pageitem_1528322796.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_1528322796.json; sourceTree = "<group>"; };
+		8B09520B2C90C20C00960603 /* pageitem_1638027598.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_1638027598.json; sourceTree = "<group>"; };
+		8B09520C2C90C20C00960603 /* pageitem_6608983404.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_6608983404.json; sourceTree = "<group>"; };
+		8B09520D2C90C20C00960603 /* pageitem_1044867788.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_1044867788.json; sourceTree = "<group>"; };
+		8B09520E2C90C20C00960603 /* pageitem_1194023242.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_1194023242.json; sourceTree = "<group>"; };
+		8B09520F2C90C20C00960603 /* pageitem_1252208166.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pageitem_1252208166.json; sourceTree = "<group>"; };
+		8B0952182C90C2B900960603 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		8B09521A2C90C4DF00960603 /* JSONHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelpers.swift; sourceTree = "<group>"; };
+		8B09521D2C90C53A00960603 /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +117,15 @@
 		8B0951982C8F665500960603 /* AppStoreResearcher */ = {
 			isa = PBXGroup;
 			children = (
+				8B09521C2C90C53000960603 /* Extensions */,
+				8B0952172C90C2AB00960603 /* Utilities */,
 				8B0951992C8F665500960603 /* AppStoreResearcherApp.swift */,
 				8B09519B2C8F665500960603 /* ContentView.swift */,
 				8B09519D2C8F665700960603 /* Assets.xcassets */,
 				8B0951A72C8F665700960603 /* AppStoreResearcher.entitlements */,
 				8B0951C92C8F75D600960603 /* Model */,
 				8B09519F2C8F665700960603 /* Preview Content */,
+				8B0952092C90991A00960603 /* Dummy */,
 			);
 			path = AppStoreResearcher;
 			sourceTree = "<group>";
@@ -149,9 +168,46 @@
 			children = (
 				8B0951A22C8F665700960603 /* Persistence.swift */,
 				8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */,
-				8B0951CB2C8F761F00960603 /* CDFields.swift */,
 			);
 			path = CD;
+			sourceTree = "<group>";
+		};
+		8B0952092C90991A00960603 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				8B0952162C90C21900960603 /* DummyPageItem */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		8B0952162C90C21900960603 /* DummyPageItem */ = {
+			isa = PBXGroup;
+			children = (
+				8B09520D2C90C20C00960603 /* pageitem_1044867788.json */,
+				8B09520E2C90C20C00960603 /* pageitem_1194023242.json */,
+				8B09520F2C90C20C00960603 /* pageitem_1252208166.json */,
+				8B09520A2C90C20C00960603 /* pageitem_1528322796.json */,
+				8B09520B2C90C20C00960603 /* pageitem_1638027598.json */,
+				8B09520C2C90C20C00960603 /* pageitem_6608983404.json */,
+			);
+			path = DummyPageItem;
+			sourceTree = "<group>";
+		};
+		8B0952172C90C2AB00960603 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8B0952182C90C2B900960603 /* Helpers.swift */,
+				8B09521A2C90C4DF00960603 /* JSONHelpers.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8B09521C2C90C53000960603 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B09521D2C90C53A00960603 /* String+Error.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +314,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B0952152C90C20C00960603 /* pageitem_1252208166.json in Resources */,
+				8B0952122C90C20C00960603 /* pageitem_6608983404.json in Resources */,
+				8B0952112C90C20C00960603 /* pageitem_1638027598.json in Resources */,
+				8B0952132C90C20C00960603 /* pageitem_1044867788.json in Resources */,
 				8B0951A12C8F665700960603 /* Preview Assets.xcassets in Resources */,
+				8B0952102C90C20C00960603 /* pageitem_1528322796.json in Resources */,
 				8B09519E2C8F665700960603 /* Assets.xcassets in Resources */,
+				8B0952142C90C20C00960603 /* pageitem_1194023242.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,9 +347,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0951A32C8F665700960603 /* Persistence.swift in Sources */,
+				8B09521E2C90C53A00960603 /* String+Error.swift in Sources */,
+				8B0952192C90C2B900960603 /* Helpers.swift in Sources */,
+				8B09521B2C90C4DF00960603 /* JSONHelpers.swift in Sources */,
 				8B0951A62C8F665700960603 /* AppStoreResearcher.xcdatamodeld in Sources */,
 				8B09519C2C8F665500960603 /* ContentView.swift in Sources */,
-				8B0951CC2C8F761F00960603 /* CDFields.swift in Sources */,
 				8B09519A2C8F665500960603 /* AppStoreResearcherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
