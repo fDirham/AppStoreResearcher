@@ -16,10 +16,8 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
 
-        // TODO: Fill with dummy data
-        // Create app store pages
-
         do {
+            // Create app store pages
             var appStorePageList: [AppStorePage] = try createDummyAppStorePages(viewContext: viewContext)
             
             // Create page items
@@ -88,6 +86,22 @@ struct PersistenceController {
         }
         
         return toReturn
+    }
+    
+    func getRandomAppGroup() -> PageGroup?{
+        let fetchRequest: NSFetchRequest<PageGroup>
+        fetchRequest = PageGroup.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let objects = try container.viewContext.fetch(fetchRequest)
+            if objects.isEmpty {
+                return nil
+            }
+            return objects[0]
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
     }
 //#endif
 

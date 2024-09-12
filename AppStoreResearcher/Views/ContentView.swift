@@ -48,7 +48,7 @@ struct ContentView: View {
                 if let selectedGroup = selectedGroup {
                     switch viewMode {
                     case .OVERVIEW:
-                        OverviewModeView()
+                        OverviewModeView(pg: selectedGroup)
                     case .SCREENSHOTS:
                         ScreenshotModeView()
                     case .ICONS:
