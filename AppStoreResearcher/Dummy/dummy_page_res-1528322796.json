@@ -1,0 +1,89 @@
+{
+   "app_title": "FocusPomo · Pomodoro Timer",
+   "app_store_url": "https://apps.apple.com/us/app/focuspomo-pomodoro-timer/id1528322796?uo=4",
+   "app_bundle_id": "com.MINE.PomodoroTimer",
+   "app_id": 1528322796,
+   "app_description": "FocusPomo is a minimalist, beautiful and professional app based on the \"Pomodoro Technique\". It helps you to stay focused without being distracted and become more productive when you are studying or working.\n\n#Who need FocusPomo#\n1.Low learning efficiency\n2.Easy distraction\n3.Procrastination\n4.Not self-discipline\n5.Learning pressure\n\n#Key Features#\n1.Real-time iCloud Sync across iPhone and iPad\n2.Simple designed Pomodoro timer\n3.Stay focused to get cute tomatoes which support gravity sensor\n4.Productive charts and insights\n5.Track time throughout the day\n6.Minimalist and amazing design\n\n#Other Features#\n- App Whitelist\n- Desktop widgets, Lock Screen widgets, Interactive widgets, Live Activities, Dynamic Island\n- Standby Mode\n- Customizable Countdown\n- Stopwatch with Pause Support\n- Apple Health Synchronization\n- Manual Addition of Focus Time\n- Ad-Free Forever\n- Current Lifetime Membership Plan includes all future updates, including for Watch and Mac\n- Customizable Pomodoro Cycle Numbers, Long Breaks, and Short Breaks\n- Customizable Focus Tags\n- Continuous Optimization for iPad\n\n#Contact and Follow Us#\nIf you have any ideas, please let us know! We are appreciating your help to build FocusPomo better than ever！\n\nInstagram: focuspomo_app\nEmail: amazingwork@126.com\n\nTerms: https://frill-butternut-b24.notion.site/FocusPomo-Terms-a990d3b371e84d9685beb94cefbe5e0e\nPrivacy: https://frill-butternut-b24.notion.site/FocusPomo-Privacy-23f9b9bf3003454581bdd22520508f75",
+   "app_icon_60": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ee/72/06/ee72060b-ca2b-f9b8-a36b-49b65c89da0a/AppIcon-0-0-1x_U007epad-0-0-85-220.png/60x60bb.jpg",
+   "app_icon_512": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ee/72/06/ee72060b-ca2b-f9b8-a36b-49b65c89da0a/AppIcon-0-0-1x_U007epad-0-0-85-220.png/512x512bb.jpg",
+   "creator_name": "FocusPomo Apps",
+   "creator_url": "https://apps.apple.com/us/developer/focuspomo-apps/id1617608471?uo=4",
+   "rating_avg": 4.78952,
+   "rating_count": 2214,
+   "current_version": "4.0",
+   "release_date": "2020-08-24T07:00:00Z",
+   "current_version_release_date": "2024-09-05T13:58:24Z",
+   "primary_genre": "Productivity",
+   "genre_list": [
+      "Productivity",
+      "Health & Fitness"
+   ],
+   "purchase_price": 0,
+   "purchase_currency": "USD",
+   "content_rating": "4+",
+   "minimum_os_version": "14.0",
+   "screenshot_ios": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/b0/50/50/b050501f-ddc7-67c5-41e4-38b560bc62c2/ad11fc6a-8dad-4e7a-b4bc-26b2aedc134d_en001.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/12/e3/cc/12e3cc7e-8305-6f2b-c642-4772e82e0c16/e4981262-a4c3-4f36-b0ae-9f7349e4e010_en002.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/c5/91/4f/c5914f3a-2ec6-d3ca-d469-2f3b52ef1b73/5b5c4989-2114-4fb3-8fde-b38ba3b7a2dd_watch_U4ecb_U7ecd.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a8/ca/c0/a8cac090-9ceb-c31b-ed14-3bd08dd432bf/269a50f6-984a-47c3-9647-f1a85960a2a2_watchmore.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/d0/a9/1a/d0a91a02-2af4-f691-cc8d-b76785f0ef1c/2199e369-d965-49f9-a47e-1f507cb4226e_en_U65f6_U95f4_U8f74.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/26/e4/79/26e479a9-0d82-c2ac-b896-9bff971a031e/da250ab0-75c6-4126-ae9b-1d63d5ebe826_en_U6570_U636e.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/75/2f/0b/752f0baf-b4a5-0ec2-f1ea-16b83ee87f81/09dd125d-de20-42ca-9f3d-b754e9ae4e1d_en_U767d_U540d_U5355.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/05/33/c4/0533c41b-4af1-72c1-80eb-8f840e04220a/1677ce26-9ed4-4f6c-99a9-ac69bd45d8f9_enstandby.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/cf/58/7d/cf587dbe-2434-c8fe-7930-6709d4bf502a/c0563b68-fbce-4a84-a45a-12197a496ca1_en_U5c0f_U7ec4_U4ef6.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/0b/a6/c6/0ba6c635-3886-c7d8-3bf1-52c378e3dac6/cc798cab-e5a2-44a4-8a95-38d4d94f63b0_en_U9996_U9875.jpg/392x696bb.jpg"
+   ],
+   "screenshot_ipad": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/9e/cd/20/9ecd2029-79ab-ab7a-34d8-c8e17ef1581d/0deb9708-2237-41c4-949f-6d4ceb57b96b_en000.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dc/af/f6/dcaff67c-a2ed-3726-44ce-608f0f451fe5/7e4efc5e-0769-447e-b6ff-57f55189efdb_en17.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/30/7c/18/307c18c2-3126-46a7-1284-9db4dd50b5a0/9e83ce23-f8e7-4859-a4a2-dded3fd3ccdd_en__U540c_U6b65.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/73/6c/ef/736cef64-29c7-673e-e8cc-3db8bec636d2/16e8e7e3-2a71-4e53-8acc-0a4bfe064124_en_U65f6_U95f4_U8f74.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/f6/23/1a/f6231a01-06bf-47e7-06e2-4fdf949add3b/9a012fe3-0569-4a1f-9781-74ce1c4ac073_en__U9996_U9875.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dd/29/7c/dd297cf3-7a97-59b9-f9b7-8385a26e92ad/6e9feb18-51a4-4a4f-9957-d5b9bf1cdb85_en__U6df1_U8272.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/df/60/bb/df60bbca-39b5-de53-e13f-32c681766019/ab2f668d-5d41-46d0-a189-239fb41248fb_en_U6570_U636e_U4e2d_U5fc3.jpg/552x414bb.jpg"
+   ],
+   "app_subtitle": "Productivity｜for Work & Study",
+   "in_app_purchases": [
+      {
+         "desc": "FocusPomo Plus Yearly",
+         "price": "$9.99"
+      },
+      {
+         "desc": "FocusPomo Plus Monthly",
+         "price": "$1.99"
+      },
+      {
+         "desc": "FocusPomo Plus Lifetime",
+         "price": "$19.99"
+      },
+      {
+         "desc": "FocusPomo Plus Half Yearly",
+         "price": "$5.99"
+      },
+      {
+         "desc": "FocusPomo Plus 永久会员（年订阅优惠）",
+         "price": "$14.99"
+      },
+      {
+         "desc": "FocusPomo Lifetime Family",
+         "price": "$39.99"
+      },
+      {
+         "desc": "FocusPomo Plus Lifetime",
+         "price": "$19.99"
+      },
+      {
+         "desc": "FocusPomo Plus Lifetime (-1y)",
+         "price": "$14.99"
+      },
+      {
+         "desc": "FocusPomo Plus Lifetime (-1m)",
+         "price": "$19.99"
+      },
+      {
+         "desc": "FocusPomo Plus Lifetime",
+         "price": "$14.99"
+      }
+   ]
+}

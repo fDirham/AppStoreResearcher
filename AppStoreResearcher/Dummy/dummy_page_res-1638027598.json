@@ -1,0 +1,86 @@
+{
+   "app_title": "ReLens Camera-DSLR Portrait",
+   "app_store_url": "https://apps.apple.com/us/app/relens-camera-dslr-portrait/id1638027598?uo=4",
+   "app_bundle_id": "com.risingcabbage.pro.camera",
+   "app_id": 1638027598,
+   "app_description": "# App Store Editors' Choice\nHow to turn your mobile into a professional camera in a blink? We did something cool.\n\nApplying advanced computational photography and artificial intelligence algorithms, ReLens can instantly turn your phone into a DSLR professional camera.\nWith its powerful DSLR-grade large aperture that creates blur background bokeh effect and its 4K Ultra HD camera, ReLens camera portrait mode makes it easy to capture \"DSLR-like\" and \"cinematic\" shots. \n\nReLens is designed to be a professional camera photography app for mobile photography enthusiasts and to help everyone enjoy the fun of photography easily.\n\n# Excellent features\n\n● F1.4-F20.0 aperture adjustment range, combined with background bokeh effect, say goodbye to simple and dull Gaussian Blur.\n\n● Reproduction of several classic SLR lenses, such as the 50mm 1.4 fixed focal length lens, Burn 35, and the Swirly bokeh effect lens.\n\n● AI recalculates the depth of field and adds realistic portrait camera bokeh effects.\n\n● Freely modify the depth of field information of the image with the depth brush.\n\n● Abundant professional photography watermarks and artistic photo frames to make your work show off your charm.\n\n● Various professional camera lens optical effects include eclipse, Smooth Trans Focus, out-of-focus reflex, out-of-focus rotation, lens distortions, color shift, etc.\n\n● Simulation of shutter blade shapes, over twenty realistic focus camera bokeh shapes such as the pentagram, hexagon, octagon, heart, etc.\n \n● Reproduction of the unique spots, textures, and light effects of classic lenses.\n\n● Intelligent partitioning for you to adjust different depth-of-field layers. You can tone the foreground, background, or sky without impacting the rest of the image.\n\n● Professional photo editor: specialized color toning tools, such as Posterization, Curves, and HSL.\n\n● AI HDR brightness algorithm analyses the photo scene and applies 5 different brightness fix modes: ultra-low light mode, slightly low light mode, normal low light mode, normal light mode, and backlight mode.\n\n● Ultra-HD restoration enhances image quality comparable to that of a DSLR.\n\n● Using high-speed machine learning algorithms for devices with Apple's chips, including the latest Metal, CoreML, and Apple Neural Engine (ANE)\n\n● Privacy protection: Image processing runs locally on your device and does not upload your images to the server.\n\n\n\n# All-Purpose Professional Camera Photography App\n \n● Multiple camera modes: manual, auto, aperture (portrait), and self-timer.\n\n● Camera custom color adjustment: White Balance Shift, Sharpening, Contrast, Saturation, Hue; built-in 6 commonly used presets such as Standard, Portrait, Neutral, etc.; dozens of classic cameras and master filters.\n\n● Multiple image-quality options: Smart, De-sharpen, and High Quality. Disable the iPhone's auto-sharpening and auto-greyish.\n\n● iPhone front and rear 20x magnification and a 136mm telephoto lens compared to a DSLR.\n\n● Manual control of Exposure, Shutter, ISO, Focus, and White Balance.\n\n● High-quality video recording, supporting 4K and 4K MAX video recording with up to 120 Mbps encoding rate and up to 240 FPS.\n\n● Video Color Space: supports SDR, HDR10, and Dolby Vision. \n\n● Video stabilization: standard, cinematic, and extreme stabilization.\n\n● Shoot ProRaw format and RAW format, and support shooting full-size HEIF or JPEG.\n\n● Support for Single Autofocus (AF-S) and Continuous Autofocus (AF-C).\n\n● SLR effect beauty: provides three modes: Clear, Natural, Cream, and Ruddy.\n\n● Supports iPhone, iPad, and all other devices.\n\n● Support setting the lock screen and home screen widget to open the camera quickly.\n\n\n# Contact Us\nrisingcabbage@163.com\n\n# More Information\n- Privacy Policy: https://www.risingcabbage.com/privacy.html\n-Terms of Use: https://www.risingcabbage.com/agreement.html",
+   "app_icon_60": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/be/61/8c/be618cd6-cbfd-6ed3-b44a-f970c3722366/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/60x60bb.jpg",
+   "app_icon_512": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/be/61/8c/be618cd6-cbfd-6ed3-b44a-f970c3722366/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/512x512bb.jpg",
+   "creator_name": "Pixl Concerto Technology Limited",
+   "creator_url": "https://apps.apple.com/us/developer/pixl-concerto-technology-limited/id1755343530?uo=4",
+   "rating_avg": 4.78533,
+   "rating_count": 1146,
+   "current_version": "4.9.1",
+   "release_date": "2022-08-14T07:00:00Z",
+   "current_version_release_date": "2024-08-26T23:54:10Z",
+   "primary_genre": "Photo & Video",
+   "genre_list": [
+      "Photo & Video"
+   ],
+   "purchase_price": 0,
+   "purchase_currency": "USD",
+   "content_rating": "12+",
+   "minimum_os_version": "12.0",
+   "screenshot_ios": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/ae/8e/29/ae8e2935-42a3-ae85-109c-9dd1069d3f45/5241c2ec-a1b0-4d11-98f5-71dbf11b0d43__U82f1_U8bed_U622a_U56fe.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/80/da/81/80da8110-268b-ceeb-30cd-dbfb2c407826/6a0f3322-6d68-4e19-ae04-329f37895279_6.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/bb/e1/ae/bbe1aef0-6bcb-4c25-012f-b6fb8295ede3/62eb3e59-9d04-458e-8481-0c3d823986fa_4_U82f1.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/99/a2/a0/99a2a029-5f68-cde6-84a4-3cf7127fa3e7/c4177869-6a1d-45c3-8d73-138d4e4bdece_5_U82f1.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/b2/ee/38/b2ee38cf-f137-ad67-c6ae-421489bf8d90/0c0df806-e727-46b3-96b3-a480a9e9e14e_2_U82f1.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/a2/79/52/a279520f-952f-6c42-686a-1380642c7edc/69c7c42a-bdc6-4aa9-954d-7402ee2fa637_3_U82f1.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/11/3c/79/113c799b-57a6-db38-296c-5f9ed044ee4d/84c9ea1c-39a0-4808-9fcc-f53107b3edee_7.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/07/ec/5c/07ec5ce2-d6d2-94a4-e68b-f3468c6757e8/c63abe78-54a2-491c-b407-4c489aeb950d_8.jpg/392x696bb.jpg"
+   ],
+   "screenshot_ipad": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/ca/8a/66/ca8a664b-5358-c925-ba71-1287d434796c/b33b3771-ba55-4f6d-8527-55a469ed2c88_ipad__U5bf9_U7126en.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a4/8c/8a/a48c8aa6-1aff-921f-d2c0-5f31127d1b36/cf5a3243-ea8f-4092-8968-0f0bbb20f3f0_3.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/1a/03/e3/1a03e3eb-d453-5b90-3caa-2dc2536e73cd/50ee624e-866a-447c-8f29-1f25f9ff0360_4.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/99/5c/d7/995cd72c-ee50-437e-e370-178ca0f56884/8f602424-408f-4c03-a498-28801e575cda_5.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/23/62/64/236264aa-1019-afdd-0d69-51e1789d86e6/c1a39b72-a9a0-4196-bd3a-59424e6ba0b9_5.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2c/93/c82c93c3-cafd-ddd6-be78-edd3551bef93/23a77073-3279-451b-8448-320c95084c7f_7.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d5/9d/d2/d59dd262-a1e7-8280-e43b-b09304c62a1a/eaf4d1c5-01e5-4502-9171-dfbe86aa0de2_8.jpg/552x414bb.jpg"
+   ],
+   "app_subtitle": "Focus Bokeh & Blur Background",
+   "in_app_purchases": [
+      {
+         "desc": "Monthly subscription",
+         "price": "$3.99"
+      },
+      {
+         "desc": "Yearly subscription 2023",
+         "price": "$15.99"
+      },
+      {
+         "desc": "Yearly subscription 2024",
+         "price": "$15.99"
+      },
+      {
+         "desc": "ReLens Pro Forever",
+         "price": "$24.99"
+      },
+      {
+         "desc": "ReLens Pro Forever",
+         "price": "$19.99"
+      },
+      {
+         "desc": "ReLens Pro Forever",
+         "price": "$16.99"
+      },
+      {
+         "desc": "Yearly subscription",
+         "price": "$15.99"
+      },
+      {
+         "desc": "Remove watermark",
+         "price": "$1.99"
+      },
+      {
+         "desc": "Year Pro Special Offer 2023",
+         "price": "$12.99"
+      },
+      {
+         "desc": "Year Pro Special Offer 2023_2",
+         "price": "$15.99"
+      }
+   ]
+}

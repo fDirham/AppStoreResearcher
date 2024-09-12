@@ -1,0 +1,51 @@
+{
+   "app_title": "Private Diary & Journal App",
+   "app_store_url": "https://apps.apple.com/us/app/private-diary-journal-app/id6608983404?uo=4",
+   "app_bundle_id": "com.private.diary.app",
+   "app_id": 6608983404,
+   "app_description": "Private Diary & Journal App is the ultimate journaling app designed to help you capture every moment of your life, from the extraordinary to the everyday. With a focus on simplicity and security, Private Diary & Journal App offers a personalized, safe space where you can write, reflect, and preserve your memories.\n\nWhy Choose Private Diary & Journal App?\n\nIntuitive & User-Friendly: The clean, beautifully designed interface makes writing your thoughts effortless. Whether it's a daily entry or a deep reflection, you'll find it easy to jot down everything on your mind.\nComplete Privacy: Your entries are protected with advanced security features like passcodes, Touch ID, and Face ID, ensuring that your personal thoughts stay private. End-to-end encryption keeps your data secure and inaccessible to anyone but you.\nMultimedia Rich Entries: Enhance your diary by adding photos, videos, or voice recordings to capture the full essence of your memories. Turn your entries into vibrant records of your life.\nCustomizable Experience: Tailor your diary to suit your style with various themes, fonts, and backgrounds. Organize your thoughts with tags and categories, making it easy to revisit past memories.\nMood & Mental Health Tracking: Use the built-in mood tracker to log your emotions, helping you understand and manage your mental health. Gain insights into your well-being with mood trends and statistics.\nSeamless Integration: Automatically sync your entries across all your iOS devices with iCloud backup, ensuring you never lose your precious memories. Export your diaries in text or PDF formats, keeping them accessible anytime, anywhere.\nForm a Daily Habit:\nPrivate Diary & Journal App gently reminds you to write each day, helping you build a consistent journaling habit. The app’s calendar view and streaks feature motivate you to stay on track.\n\nExplore & Reminisce:\nRevisit your past entries with ease using the search and favorites functions. Relive your memories and reflect on your growth over time.\n\nWhether you're documenting your daily life, managing your mental health, or simply capturing thoughts, Private Diary & Journal App provides a secure and enjoyable way to journal. Download Private Diary & Journal App today and start preserving your life’s most important moments.\n\nPremium Subscription Plans\nEnhance your experience with our Premium Subscription plans, which offer additional features and benefits\n\nAll subscription plans may include a 3-day trial period. Your iTunes account will be charged upon confirmation of purchase. Subscriptions automatically renew unless turned off at least 24 hours before the end of the current period. Manage your subscriptions and auto-renewal settings easily in your Account Settings after purchase.\n\nPrivacy Policy:\nhttps://pridiaploc.info/IOS_APP_PrivateDiaryApp_PrivacyPolicy.html\nTerms Of Use:\nhttps://pridiaploc.info/IOS_APP_PrivateDiaryApp_TermsOfUse.html\nSupport: \npatrik5012beran@outlook.com",
+   "app_icon_60": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d1/51/32/d1513249-f2de-b042-0437-3f4a0da98e71/AppIcon-0-0-1x_U007ephone-0-0-85-220.jpeg/60x60bb.jpg",
+   "app_icon_512": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d1/51/32/d1513249-f2de-b042-0437-3f4a0da98e71/AppIcon-0-0-1x_U007ephone-0-0-85-220.jpeg/512x512bb.jpg",
+   "creator_name": "Patrik Beran",
+   "creator_url": "https://apps.apple.com/us/developer/patrik-beran/id1761197118?uo=4",
+   "rating_avg": 4.16667,
+   "rating_count": 12,
+   "current_version": "1.0",
+   "release_date": "2024-08-19T07:00:00Z",
+   "current_version_release_date": "2024-08-19T09:24:01Z",
+   "primary_genre": "Lifestyle",
+   "genre_list": [
+      "Lifestyle",
+      "Productivity"
+   ],
+   "purchase_price": 0,
+   "purchase_currency": "USD",
+   "content_rating": "4+",
+   "minimum_os_version": "15.0",
+   "screenshot_ios": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/b3/e7/fd/b3e7fdd9-6e59-4d74-8d83-4445e0f1072e/8458ec98-116b-4cd0-94d1-dae7a1028e8c_1__U00282208_U0029.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/a4/a3/65/a4a3653d-b43c-4bf7-2a24-131fbad588f2/3c284243-a245-4fe2-8d86-837b63bf63c6_2__U00282208_U0029.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/28/46/4d/28464d0a-3e58-7f90-6444-aafdddfb73b9/081f902e-aaa1-47fa-86a0-f3eab66c8702_3__U00282208_U0029.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/78/32/f1/7832f125-9572-5e76-d8d7-a2be475a391c/aec4e28e-1ef7-433e-83f8-67730989bf95_4__U00282208_U0029.jpg/392x696bb.jpg"
+   ],
+   "screenshot_ipad": [],
+   "app_subtitle": "Daily Planner with Password",
+   "in_app_purchases": [
+      {
+         "desc": "Dream habbit diarium",
+         "price": "$7.99"
+      },
+      {
+         "desc": "Private Diary App",
+         "price": "$6.99"
+      },
+      {
+         "desc": "Private Diary App",
+         "price": "$83.99"
+      },
+      {
+         "desc": "Private Diary & Journal App",
+         "price": "$99.99"
+      }
+   ]
+}

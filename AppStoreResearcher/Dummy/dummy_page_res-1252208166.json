@@ -1,0 +1,49 @@
+{
+   "app_title": "Diary With Password",
+   "app_store_url": "https://apps.apple.com/us/app/diary-with-password/id1252208166?uo=4",
+   "app_bundle_id": "com.YYTechPlayer.myDayDayDiaryYfEn",
+   "app_id": 1252208166,
+   "app_description": "Track life's progress\n\nLog a little bit about each day\n\nLook back at the emotions and the opinions and even mundane aspects of your life\n\nWrite out all your emotions in a space and no one will see\n\nThis is an electronic diary\n\nSimple and friendly\n\n■ Password \n -set a password to protect your diary secrets\n\n■ Time Stamp\n -note the time by touching the inconspicuous clock button\n\n■ Reminder \n -friendly reminder to write about your day\n\n■ Delete \n -swipe your finger to delete the diary you want to delete\n\n■ Night Mode \n -to make looking at a screen in a dark room easier on your eyes\n\n■ iCloud \n -back up your data/Restore the data on your iOS device\n\n■ Export \n -export your diary as a text/Export the diary to PDF file\n  (The exported file can be sent to you by email. Please make sure that a mail account has been set on the device. You can also choose to export your data to your iOS file system on your device)\n\n■ Sizes \n -choose a new font size from the font size list\n\n■ Sign \n -add a good diary to your favorites\n\n■ Search \n -full text search-able - search entries by containing text\n\n■ Fonts \n -to change the font type, in the font list, select a font\n\n■ Touch ID / Face ID \n -need the related hardware support (iPhone 5s+)\n\n■ Pattern Lock\n -security and ease",
+   "app_icon_60": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/3d/1c/f63d1c77-d19e-b994-449b-9ab3cc611071/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/60x60bb.jpg",
+   "app_icon_512": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/3d/1c/f63d1c77-d19e-b994-449b-9ab3cc611071/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/512x512bb.jpg",
+   "creator_name": "帆 杨",
+   "creator_url": "https://apps.apple.com/us/developer/%E5%B8%86-%E6%9D%A8/id959829749?uo=4",
+   "rating_avg": 4.72211,
+   "rating_count": 23034,
+   "current_version": "3.2.2",
+   "release_date": "2017-06-26T18:43:42Z",
+   "current_version_release_date": "2024-07-06T07:18:27Z",
+   "primary_genre": "Productivity",
+   "genre_list": [
+      "Productivity",
+      "Lifestyle"
+   ],
+   "purchase_price": 0,
+   "purchase_currency": "USD",
+   "content_rating": "4+",
+   "minimum_os_version": "12.0",
+   "screenshot_ios": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/df/ad/fa/dfadfa1a-2b68-6c95-2f5d-23243b3e1efb/mzl.wjgwpoxj.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/28/09/2c/28092ce9-3721-e895-cd9c-b319d75b5f0f/mzl.ozkwvplg.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/3a/7a/2e/3a7a2e92-dfed-74e0-cd60-a36fd0d03905/mzl.fydlkrab.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/63/82/10/6382108e-fbc0-1a17-b70c-cc3b48de5c8f/mzl.sbozjcbc.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e7/7d/49/e77d49d9-701b-8e7c-fb4e-39043d0f1574/mzl.nvnjwlzk.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/28/de/66/28de66ae-e3d3-ebde-65fd-eea7ff2a68ec/mzl.mpwvjely.png/392x696bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/bc/16/f4/bc16f4cb-d11c-2bbc-13db-e85f9120a94a/pr_source.png/392x696bb.png"
+   ],
+   "screenshot_ipad": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/fc/80/eb/fc80eb51-faa0-fba6-6d67-9c5af3d67f8b/mzl.gcduqcmg.png/576x768bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/7f/e4/99/7fe49987-7900-ffeb-7ee8-943f6519caab/mzl.fbowrpyq.png/576x768bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d2/4a/70/d24a701c-4608-f16d-7fa0-0e54c8c8f2f9/mzl.ggewwlic.png/576x768bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/6e/72/08/6e7208fe-99d1-da25-0a9b-d3bb8fc8ef9c/mzl.ccrfvghw.png/576x768bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/69/fa/76/69fa76b3-22b0-f175-e81b-77ac6fa7c276/mzl.nmkrdbqp.png/576x768bb.png",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/9c/8f/58/9c8f58a5-887c-6a7e-341a-7a179781e376/mzl.kzlqrfyq.png/576x768bb.png"
+   ],
+   "app_subtitle": "No Ads Journal Diary Notebook",
+   "in_app_purchases": [
+      {
+         "desc": "Pro version- One-time purchase",
+         "price": "$9.99"
+      }
+   ]
+}

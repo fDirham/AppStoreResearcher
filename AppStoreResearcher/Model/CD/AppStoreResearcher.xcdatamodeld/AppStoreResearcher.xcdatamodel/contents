@@ -21,28 +21,36 @@
         <attribute name="rating_avg" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="rating_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="release_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="genre_list" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
-        <relationship name="in_app_purchases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InAppPurchaseSpec"/>
-        <relationship name="screenshot_ios" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
-        <relationship name="screenshot_ipad" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder"/>
+        <relationship name="genre_list" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StringHolder" inverseName="genre_list_for_page" inverseEntity="StringHolder"/>
+        <relationship name="in_app_purchases" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="InAppPurchaseSpec" inverseName="page" inverseEntity="InAppPurchaseSpec"/>
+        <relationship name="page_items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PageItem" inverseName="app_store_page" inverseEntity="PageItem"/>
+        <relationship name="screenshot_ios" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="StringHolder" inverseName="ios_screenshot_for_page" inverseEntity="StringHolder"/>
+        <relationship name="screenshot_ipad" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="StringHolder" inverseName="ipad_screenshot_for_page" inverseEntity="StringHolder"/>
     </entity>
     <entity name="InAppPurchaseSpec" representedClassName="InAppPurchaseSpec" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="price_str" optional="YES" attributeType="String"/>
+        <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage" inverseName="in_app_purchases" inverseEntity="AppStorePage"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
-        <attribute name="contents" optional="YES" attributeType="String"/>
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <relationship name="page_group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PageGroup" inverseName="group_note" inverseEntity="PageGroup"/>
+        <relationship name="page_item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PageItem" inverseName="item_note" inverseEntity="PageItem"/>
     </entity>
     <entity name="PageGroup" representedClassName="PageGroup" syncable="YES" codeGenerationType="class">
         <attribute name="group_name" attributeType="String"/>
-        <attribute name="group_notes" optional="YES" attributeType="String"/>
-        <relationship name="page_items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PageItem"/>
+        <relationship name="group_note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="page_group" inverseEntity="Note"/>
+        <relationship name="page_items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PageItem" inverseName="group" inverseEntity="PageItem"/>
     </entity>
     <entity name="PageItem" representedClassName="PageItem" syncable="YES" codeGenerationType="class">
-        <relationship name="app_store_page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage"/>
-        <relationship name="item_notes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note"/>
+        <relationship name="app_store_page" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage" inverseName="page_items" inverseEntity="AppStorePage"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PageGroup" inverseName="page_items" inverseEntity="PageGroup"/>
+        <relationship name="item_note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="page_item" inverseEntity="Note"/>
     </entity>
     <entity name="StringHolder" representedClassName="StringHolder" syncable="YES" codeGenerationType="class">
         <attribute name="string" optional="YES" attributeType="String"/>
+        <relationship name="genre_list_for_page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage" inverseName="genre_list" inverseEntity="AppStorePage"/>
+        <relationship name="ios_screenshot_for_page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage" inverseName="screenshot_ios" inverseEntity="AppStorePage"/>
+        <relationship name="ipad_screenshot_for_page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppStorePage" inverseName="screenshot_ipad" inverseEntity="AppStorePage"/>
     </entity>
 </model>

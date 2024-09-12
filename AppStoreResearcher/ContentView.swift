@@ -23,26 +23,38 @@ struct ContentView: View {
         
         return nil
     }
+    
+    private var selectedGroupPageItems: [PageItem] {
+        if let sg = selectedGroup {
+            let arr = sg.page_items?.array as? [PageItem] ?? []
+            return arr
+        }
+        
+        return []
+    }
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \PageGroup.id, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(key: "group_name", ascending: true)],
         animation: .default) private var groupItems: FetchedResults<PageGroup>
 
     var body: some View {
         NavigationSplitView {
             List(groupItems, selection: $selectedGroupId){
-                Text($0.title ?? "")
+                Text($0.group_name ?? "")
             }
         } content: {
             HStack(spacing: 0) {
                 if let selectedGroup = selectedGroup {
-                    Text(selectedGroup.title ?? "")
+                    Text(selectedGroup.group_name ?? "")
+                }
+                ForEach(selectedGroupPageItems) {pi in
+                    Text("\(pi.app_store_page?.app_title ?? "")")
                 }
                 Spacer()
                 Divider()
                 if showDetail {
                     VStack {
-                        Text("Some detail")
+                        Text(selectedGroup?.group_note?.content ?? "")
                     }
                     .transition(.move(edge: .trailing))
                     .frame(maxHeight: .infinity)
@@ -79,7 +91,7 @@ struct ContentView: View {
         }
         .onChange(of: selectedGroup) {
             if let selectedGroup = selectedGroup {
-                contentTitle = selectedGroup.title ?? ""
+                contentTitle = selectedGroup.group_name ?? ""
             }
         }
     }

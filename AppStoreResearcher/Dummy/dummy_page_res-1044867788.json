@@ -1,0 +1,92 @@
+{
+   "app_title": "Day One Journal: Private Diary",
+   "app_store_url": "https://apps.apple.com/us/app/day-one-journal-private-diary/id1044867788?uo=4",
+   "app_bundle_id": "com.bloombuilt.dayone-ios",
+   "app_id": 1044867788,
+   "app_description": "Apple’s App of the Year with over 15 million downloads and 200,000 5-star ratings globally, Day One has reinvented journaling, letting you record your life as you live it. Securely save audio, video, photos, notes, and more wherever you are, whenever you want. \n\n“Day One creates something so rare it feels almost sacred: A completely private digital space.” – New York Times\n\n“Day One makes keeping a journal delightfully easy.” – Wired\n\nWHY DAY ONE?\n\nDay One is the original digital journal app. A decade of updates and feature additions make it the most private, trusted, and easiest-to-use journaling app in the world. \n\nSIMPLE TO USE, EASY TO LOVE\n• Beautiful, award-winning design\n• Unlimited text entries \n• Powerful rich text formatting with markdown\n• Different journals for every aspect of your life*\n\nPRIVATE AND SECURE \n• Automatic backups keep your journal entries safe\n• End-to-end encryption, which is a fancy way of saying your entries are 100% private\n• Journal entries stay secure with passcode, TouchID, or FaceID\n• Export options (pdf, plain text, etc.) ensure your entries always stay yours\n\nFORM A HABIT & STAY CONSISTENT \n• Streaks and calendar view help keep your momentum going \n• Programmable reminders through text message or phone notifications\n• Unique, daily journal prompts help eliminate writer’s cramp \n• Customizable templates save time and add organization to entries\n• Today view provides a summary of where you’ve been and what you’ve done\n• Integrates with the Health app to track mindfulness minutes\n\n\nMORE THAN WORDS\n• Unlimited photos and video*\n• Auto-importer for your Instagram posts*\n• Handwritten entries or drawings*\n• Voice recording and transcription*\n\nJOURNAL FROM WHEREVER, WHENEVER\n• Cross-platform apps available on iPhone, Apple Watch, iPad, and Mac \n• The ability to text or email entries straight to your journal\n\nBUILT FOR REMINISCING\n• On This Day feature allows you to revisit past memories\n• Tags, favorites, and search filters make it easy to find what you’re looking for\n• Map view quickly shows all the places you’ve journaled from\n• Print capabilities turn your digital journal into a premium physical book \n\nTYPE LESS, PRESERVE MORE\n• Time, date, weather, moon phase, and more are automatically added to every entry\n• IFTTT applets allow importing data from Spotify, YouTube, Strava, Fitbit, Facebook, Twitter, and more\n• Siri Shortcuts provides a powerful way to automate more of your journaling\n• Share sheet allows you to add content from other apps, like Apple Photos and Safari\n\n*Day One is FREE to use forever with unlimited entries. Additional features, including unlimited photos, videos, and audio recordings are available with a Day One Premium membership. \nStart a free trial today. \n\nPrivacy Policy: https://dayoneapp.com/privacy-policy/\n\nTerms of Use: https://dayoneapp.com/terms-of-use/\n\nFor technical assistance or other inquiries: https://dayoneapp.com/contact/",
+   "app_icon_60": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/88/e6/72/88e67218-8148-e430-43b4-ede3984c3efd/AppIcon-0-0-1x_U007epad-0-0-sRGB-85-220.png/60x60bb.jpg",
+   "app_icon_512": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/88/e6/72/88e67218-8148-e430-43b4-ede3984c3efd/AppIcon-0-0-1x_U007epad-0-0-sRGB-85-220.png/512x512bb.jpg",
+   "creator_name": "Bloom Built Inc",
+   "creator_url": "https://apps.apple.com/us/developer/bloom-built-inc/id379561506?uo=4",
+   "rating_avg": 4.82871,
+   "rating_count": 102563,
+   "current_version": "2024.18",
+   "release_date": "2016-02-04T02:19:21Z",
+   "current_version_release_date": "2024-09-03T16:05:36Z",
+   "primary_genre": "Health & Fitness",
+   "genre_list": [
+      "Health & Fitness",
+      "Productivity"
+   ],
+   "purchase_price": 0,
+   "purchase_currency": "USD",
+   "content_rating": "4+",
+   "minimum_os_version": "16.0",
+   "screenshot_ios": [
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/32/ca/46/32ca46e8-d1aa-dcf5-d406-f4cab07f48a0/0017ed4e-a155-44fb-904f-e7552cc925b5_1.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/d9/46/6b/d9466b85-5508-08f9-1463-cde5e0133f24/4c101030-c786-4e1a-a83e-53e7b6c5d8a2_2.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/07/a3/eb/07a3eb78-43a9-60d5-4259-3144c6107d65/387341d4-2f5f-450a-948a-d06354940ca8_3.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/d8/d9/a3/d8d9a3a8-f59b-8955-8613-28db2e89724a/9140ca7b-7924-426c-9033-19a0bb764c5f_4.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/41/d0/ed/41d0ed0f-7d34-d862-6ec7-14858cc55232/6fab376e-55e8-4294-b572-ce4814a9e054_5.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/cc/f6/ff/ccf6ff5e-b5b7-a209-f580-a8bcdd3d74b6/47b15fc5-db18-423c-a368-0658d1e22be5_6.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/20/e2/b7/20e2b7ec-9dd1-f5fd-4ace-e3d8eb06f223/df5b77b8-874d-4cb8-8417-914be87426d4_7.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/94/90/da/9490da11-a8f2-7156-4da4-8fb9cd715a58/8999cd44-4030-44f1-8092-368825d7590b_8.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/6c/f5/d1/6cf5d105-828f-7809-cbf3-7c35ae004b1e/a04587ae-e605-4332-81be-4d7ceba04e1a_9.jpg/392x696bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0c/6c/aa/0c6caace-79ea-73f1-245e-53de0ef81895/b975308b-3f88-45a0-a690-031e4315dc30_10.jpg/392x696bb.jpg"
+   ],
+   "screenshot_ipad": [
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/82/ab/c6/82abc6de-fff7-223f-b6a5-6faaad5b2e49/dbee567a-7170-4caa-9a71-637f99217c1b_dayone-ipad-01.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a8/5d/76/a85d7635-4f30-0cf0-5665-72be8f7dda67/fc3e4aff-7fb9-4ed2-9c42-1e6694d0553c_dayone-ipad-02.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c9/e5/b5/c9e5b5f5-d9fe-1a6b-53ea-de8b2b87a8f5/mzl.xzoapgqf.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/16/43/6d/16436db7-34bb-b608-5238-923a362a6d10/mzl.tqconwki.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c6/4d/70/c64d70b2-caca-c270-60b1-199040262203/mzl.awtquhbl.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/39/dc/8f/39dc8fb2-e078-a553-88c5-743cd56f957a/4b181991-5d68-4434-9939-611668f9440a_dayone-ipad-06.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/30/36/2c/30362c47-594b-8b6d-3f46-8fab1ff40666/mzl.tqwnzuli.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/22/06/a3/2206a3e9-18ec-5284-19c0-07001e77c715/mzl.uehvmybo.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/14/d5/b0/14d5b02f-68c7-7f60-8a58-6c0dbc5893da/mzl.ypamdsnf.jpg/552x414bb.jpg",
+      "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6b/0d/5e/6b0d5e3b-3fd0-9bd2-1182-b1452c4b40b1/mzl.rslseovw.jpg/552x414bb.jpg"
+   ],
+   "app_subtitle": "Gratitude, travel, daily notes",
+   "in_app_purchases": [
+      {
+         "desc": "Day One Premium",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Day One Premium (1 Month)",
+         "price": "$5.99"
+      },
+      {
+         "desc": "Day One Premium",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Day One Premium (1 Month)",
+         "price": "$5.99"
+      },
+      {
+         "desc": "Premium Yearly for Plus Users",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Premium Yearly",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Day One Premium",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Day One Premium",
+         "price": "$34.99"
+      },
+      {
+         "desc": "Day One Premium",
+         "price": "$34.99"
+      },
+      {
+         "desc": "300 Text Messages",
+         "price": "$4.99"
+      }
+   ]
+}
