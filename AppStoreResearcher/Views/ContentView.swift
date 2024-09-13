@@ -6,26 +6,21 @@
 //
 
 import SwiftUI
-import CoreData
+import Combine
 
 struct ContentView: View {
-    @State private var vm = ViewModel()
-    
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(key: "group_name", ascending: true)],
-        animation: .default) private var groupItems: FetchedResults<PageGroup>
+    @State var vm = ViewModel()
 
     var body: some View {
         NavigationSplitView {
-            List(groupItems, selection: $vm.selectedGroupId){
+            List(vm.pageGroupList, selection: $vm.selectedGroupId){
                 Text($0.group_name ?? "")
             }
         } content: {
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
                 if let selectedGroup = vm.selectedGroup {
-                    switch vm.viewMode {
+                    switch vm.contentMode {
                     case .OVERVIEW:
                         OverviewModeView(pg: selectedGroup)
                     case .SCREENSHOTS:
@@ -50,10 +45,10 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
-                Picker("Mode", selection: $vm.viewMode) {
-                    Text(ViewMode.OVERVIEW.rawValue).tag(ViewMode.OVERVIEW)
-                    Text(ViewMode.SCREENSHOTS.rawValue).tag(ViewMode.SCREENSHOTS)
-                    Text(ViewMode.ICONS.rawValue).tag(ViewMode.ICONS)
+                Picker("Mode", selection: $vm.contentMode) {
+                    Text(ContentMode.OVERVIEW.rawValue).tag(ContentMode.OVERVIEW)
+                    Text(ContentMode.SCREENSHOTS.rawValue).tag(ContentMode.SCREENSHOTS)
+                    Text(ContentMode.ICONS.rawValue).tag(ContentMode.ICONS)
                 }
             }
             ToolbarItemGroup(placement: .secondaryAction) {
@@ -83,7 +78,6 @@ struct ContentView: View {
 
 extension ContentView {
     @Observable class ViewModel {
-        var pageGroupList: [PageGroup] = []
         var showDetail = false
         var selectedGroupId: PageGroup.ID? = nil
         var selectedGroup: PageGroup? {
@@ -94,10 +88,19 @@ extension ContentView {
             return nil
         }
         var contentTitle: String = "ASR"
-        var viewMode: ViewMode = .OVERVIEW
+        var contentMode: ContentMode = .OVERVIEW
+        private var dataManager: DataManager
+        var anyCancellable: AnyCancellable? = nil
+        var pageGroupList: [PageGroup] {
+            dataManager.pageGroupList
+        }
+
+        init(dataManager: DataManager = DataManager.shared) {
+            self.dataManager = dataManager
+        }
     }
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView(vm: ContentView.ViewModel(dataManager: DataManager.preview))
 }

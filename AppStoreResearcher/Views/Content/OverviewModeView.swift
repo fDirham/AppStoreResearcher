@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct OverviewModeView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @State private var vm: ViewModel
     
     init(pg: PageGroup) {
@@ -82,23 +81,19 @@ struct OverviewModeView: View {
                 TableRow(obj)
             }
         }
-        .onAppear {
-            vm.setup(vc: viewContext)
-        }
     }
 }
 
 extension OverviewModeView {
     @Observable class ViewModel {
         let pg: PageGroup
-        var vc: NSManagedObjectContext?
         
         var piList: [PageItem] = []
         var aspList: [AppStorePage] = []
         
         var selectedAppStorePageId: AppStorePage.ID? = nil
         var selectedPageItem: PageItem? {
-            if vc == nil || selectedAppStorePageId == nil || aspList.isEmpty {
+            if selectedAppStorePageId == nil || aspList.isEmpty {
                 return nil
             }
             
@@ -137,9 +132,6 @@ extension OverviewModeView {
             aspList = piList.map{$0.app_store_page!}
         }
         
-        func setup(vc: NSManagedObjectContext) {
-            self.vc = vc
-        }
         
         private func _onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
             if let newKey = newSortOder.first {
@@ -149,20 +141,11 @@ extension OverviewModeView {
     }
 }
 
+// TODO: Fix this
 struct OverviewModeView_Preview: PreviewProvider {
     struct Container: View {
-        let vc: NSManagedObjectContext
-        let pg: PageGroup
-        
-        init(){
-            vc = PersistenceController.preview.container.viewContext
-            pg = PersistenceController.preview.getRandomAppGroup()!
-        }
-        
-        
         var body: some View {
-            OverviewModeView(pg: pg)
-                .environment(\.managedObjectContext, vc)
+            OverviewModeView(pg: DataManager.preview.getRandomAppGroup()!)
         }
     }
     

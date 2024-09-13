@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ViewMode: String {
+enum ContentMode: String {
     case OVERVIEW = "All"
     case SCREENSHOTS = "Screenshots"
     case ICONS = "Icons"
