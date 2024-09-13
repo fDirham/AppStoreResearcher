@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var showDetail = true
+    @State private var showDetail = false
     @State private var selectedGroupId: PageGroup.ID? = nil
     @State private var contentTitle: String = "ASR"
     @State private var viewMode: ViewMode = .OVERVIEW
@@ -44,7 +44,7 @@ struct ContentView: View {
             }
         } content: {
             HStack(spacing: 0) {
-                Spacer()
+                Spacer(minLength: 0)
                 if let selectedGroup = selectedGroup {
                     switch viewMode {
                     case .OVERVIEW:
@@ -58,7 +58,7 @@ struct ContentView: View {
                 else {
                     NoGroupSelectedView()
                 }
-                Spacer()
+                Spacer(minLength: 0)
                 Divider()
                 if showDetail {
                     MasterNoteView()

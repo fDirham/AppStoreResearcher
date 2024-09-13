@@ -13,56 +13,7 @@ struct PersistenceController {
 //#if targetEnvironment(simulator)
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        
-
-        do {
-            // Create app store pages
-            var appStorePageList: [AppStorePage] = try createDummyAppStorePages(viewContext: viewContext)
-            
-            // Create page items
-            var pageItemList: [PageItem] = []
-            let NUM_PAGE_ITEMS = 12
-            for _ in 0..<NUM_PAGE_ITEMS {
-                var content = ["This is a cool app", "Bad app", "I like the screenshots", "Hmm need to look closer", "Pretty colors", "Bad reviews lol", "Pretty old app"].randomElement()
-                var itemNote = Note(context: viewContext)
-                itemNote.content = content
-                
-                
-                var pageItem = PageItem(context: viewContext)
-                pageItem.item_note = itemNote
-                var storePage = appStorePageList.randomElement()!
-                pageItem.app_store_page = storePage
-                pageItemList.append(pageItem)
-            }
-            
-            // Create group items
-            let NUM_PAGE_GROUPS = 4
-            let NUM_PAGE_ITEMS_PER_GROUP = Int(NUM_PAGE_ITEMS / NUM_PAGE_GROUPS)
-            var groupNames = ["Journalling", "Photos", "Boomers", "Games", "Cool"]
-            for i in 0..<NUM_PAGE_GROUPS {
-                var content = ["Need to do x,y,z", "Cool beans", "Should research X more", "Do more market research", "Nice collection of cool previews"].randomElement()
-                var groupNote = Note(context: viewContext)
-                groupNote.content = content
-                
-                let piStart = i * NUM_PAGE_ITEMS_PER_GROUP
-                let piEnd = piStart + NUM_PAGE_ITEMS_PER_GROUP
-                var chosenPageItemList = Array(pageItemList[piStart..<piEnd])
-                var pageItems = NSOrderedSet(array: chosenPageItemList)
-                
-                var pageGroup = PageGroup(context: viewContext)
-                pageGroup.group_note = groupNote
-                pageGroup.group_name = groupNames.randomElement()
-                groupNames.removeAll(where: {e in e == pageGroup.group_name})
-                pageGroup.page_items = pageItems
-            }
-            
-            try viewContext.save()
-        } catch {
-            // TODO: Handle error
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        setupDummy(viewContext: result.container.viewContext)
         return result
     }()
     
@@ -101,6 +52,92 @@ struct PersistenceController {
             return objects[0]
         } catch {
             fatalError("Failed to fetch employees: \(error)")
+        }
+    }
+    
+    static func sharedSetupDummy() {
+        setupDummy(viewContext: shared.container.viewContext)
+    }
+    
+    
+    func deleteAll() {
+        let entityList = [
+            "PageGroup",
+            "PageItem",
+            "AppStorePage",
+            "StringHolder",
+            "InAppPurchaseSpec",
+            "Note"
+        ]
+        
+        entityList.forEach {ent in
+            deleteAllOfEntity(entityName: ent)
+        }
+    }
+    
+    func deleteAllOfEntity(entityName: String) {
+        print("Deleting \(entityName)")
+        
+        let ft: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+        ft.includesPropertyValues = false
+            
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: ft)
+        
+        do {
+            try self.container.persistentStoreCoordinator.execute(deleteRequest, with: self.container.viewContext)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    
+    static func setupDummy(viewContext: NSManagedObjectContext) {
+        do {
+            // Create app store pages
+            let appStorePageList: [AppStorePage] = try createDummyAppStorePages(viewContext: viewContext)
+            
+            // Create page items
+            var pageItemList: [PageItem] = []
+            let NUM_PAGE_ITEMS = 12
+            for i in 0..<NUM_PAGE_ITEMS {
+                let content = ["This is a cool app", "Bad app", "I like the screenshots", "Hmm need to look closer", "Pretty colors", "Bad reviews lol", "Pretty old app"].randomElement()
+                let itemNote = Note(context: viewContext)
+                itemNote.content = content
+                
+                
+                let pageItem = PageItem(context: viewContext)
+                pageItem.item_note = itemNote
+                pageItem.app_store_page = appStorePageList[i % appStorePageList.count]
+                pageItemList.append(pageItem)
+            }
+            
+            // Create group items
+            let NUM_PAGE_GROUPS = 4
+            let NUM_PAGE_ITEMS_PER_GROUP = Int(NUM_PAGE_ITEMS / NUM_PAGE_GROUPS)
+            var groupNames = ["Journalling", "Photos", "Boomers", "Games", "Cool"]
+            for i in 0..<NUM_PAGE_GROUPS {
+                let content = ["Need to do x,y,z", "Cool beans", "Should research X more", "Do more market research", "Nice collection of cool previews"].randomElement()
+                let groupNote = Note(context: viewContext)
+                groupNote.content = content
+                
+                let piStart = i * NUM_PAGE_ITEMS_PER_GROUP
+                let piEnd = piStart + NUM_PAGE_ITEMS_PER_GROUP
+                let chosenPageItemList = Array(pageItemList[piStart..<piEnd])
+                let pageItems = NSOrderedSet(array: chosenPageItemList)
+                
+                let pageGroup = PageGroup(context: viewContext)
+                pageGroup.group_note = groupNote
+                pageGroup.group_name = groupNames.randomElement()
+                groupNames.removeAll(where: {e in e == pageGroup.group_name})
+                pageGroup.page_items = pageItems
+            }
+            
+            try viewContext.save()
+        } catch {
+            // TODO: Handle error
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 //#endif

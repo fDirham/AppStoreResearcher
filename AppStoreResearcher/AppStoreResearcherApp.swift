@@ -15,6 +15,11 @@ struct AppStoreResearcherApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear {
+                    // TODO: Delete this for prod
+//                    persistenceController.deleteAll()
+//                    PersistenceController.sharedSetupDummy()
+                }
         }
     }
 }
