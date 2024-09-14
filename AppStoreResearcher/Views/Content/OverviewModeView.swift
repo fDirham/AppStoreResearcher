@@ -52,7 +52,12 @@ struct OverviewModeView: View {
         TableColumn("Description", value: \.app_description.unwrapOrEmpty)
         TableColumn("Creator", value: \.creator_name.unwrapOrEmpty)
         TableColumn("Rating avg", value: \.rating_avg) {model in
-            Text("\(model.rating_avg)")
+            let valStr = String(format: "%.2f", model.rating_avg)
+            let val = CGFloat(model.rating_avg)
+            HStack{
+                Text("\(valStr)")
+                RatingView(rating: val, maxRating: 5)
+            }
         }
         TableColumn("Rating count", value: \.rating_count) {model in
             Text("\(model.rating_count)")
