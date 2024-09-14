@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+import NukeUI
 
+@MainActor
 struct OverviewModeView: View {
     @State private var vm: ViewModel = ViewModel()
     var pg: PageGroup
@@ -14,7 +16,7 @@ struct OverviewModeView: View {
     init(pg: PageGroup) {
         self.pg = pg
     }
-
+    
     var body: some View {
         Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
             tableColumns1
@@ -31,17 +33,19 @@ struct OverviewModeView: View {
             vm.setPageGroup(pg: pg)
         }
     }
-
+    
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
     var tableColumns1: some TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>> {
         TableColumn("Icon") {model in
             let urlString = model.app_icon_60!
-            AsyncImage(url: URL(string: urlString)) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                Color.gray.opacity(1)
+            LazyImage(url: URL(string: urlString)) { state in
+                if let image = state.image {
+                    image.resizable().aspectRatio(contentMode: .fill)
+                } else if state.error != nil {
+                    Color.red // Indicates an error
+                } else {
+                    Color.gray
+                }
             }
             .frame(width: 32, height: 32)
             .cornerRadius(6)
@@ -88,7 +92,7 @@ struct OverviewModeView: View {
             let val = model.screenshot_ios?.count ?? 0
             Text("\(val)")
         }
-
+        
         TableColumn("iPad screenshots", sortUsing: KeyPathComparator(\AppStorePage.screenshot_ipad, comparator: OptionalOrderedSetCountComparator())) {model in
             let val = model.screenshot_ipad?.count ?? 0
             Text("\(val)")
@@ -118,7 +122,7 @@ extension OverviewModeView {
             if selectedPageItem == nil {
                 return nil
             }
-           
+            
             return selectedPageItem?.app_store_page
         }
         
@@ -129,8 +133,8 @@ extension OverviewModeView {
                 _sortOrder = newValue
             }
             get { return _sortOrder}
-          }
-
+        }
+        
         func setPageGroup(pg: PageGroup) {
             self.pg = pg
             if let newPiList = pg.page_items {

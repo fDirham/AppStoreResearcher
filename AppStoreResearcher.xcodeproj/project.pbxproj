@@ -31,6 +31,7 @@
 		8B19D3C32C948FF500D6B031 /* OptionalOrderedSetCountComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B19D3C22C948FF500D6B031 /* OptionalOrderedSetCountComparator.swift */; };
 		8B19D3C52C94A61200D6B031 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B19D3C42C94A61200D6B031 /* DataManager.swift */; };
 		8BBCE6D22C965335003A532A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D12C965335003A532A /* RatingView.swift */; };
+		8BBCE6D52C9655BE003A532A /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8BBCE6D42C9655BE003A532A /* NukeUI */; };
 		8BF3F4912C920C6D00A69692 /* DummyPageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */; };
 		8BF3F4982C920D7600A69692 /* dummy_page_res-1194023242.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4922C920D7600A69692 /* dummy_page_res-1194023242.json */; };
 		8BF3F4992C920D7600A69692 /* dummy_page_res-1638027598.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4932C920D7600A69692 /* dummy_page_res-1638027598.json */; };
@@ -102,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBCE6D52C9655BE003A532A /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +294,9 @@
 			dependencies = (
 			);
 			name = AppStoreResearcher;
+			packageProductDependencies = (
+				8BBCE6D42C9655BE003A532A /* NukeUI */,
+			);
 			productName = AppStoreResearcher;
 			productReference = 8B0951962C8F665500960603 /* AppStoreResearcher.app */;
 			productType = "com.apple.product-type.application";
@@ -364,6 +369,9 @@
 				Base,
 			);
 			mainGroup = 8B09518D2C8F665400960603;
+			packageReferences = (
+				8BBCE6D32C9655BE003A532A /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 8B0951972C8F665500960603 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -753,6 +761,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8BBCE6D32C9655BE003A532A /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8BBCE6D42C9655BE003A532A /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BBCE6D32C9655BE003A532A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */ = {
