@@ -8,12 +8,30 @@
 import SwiftUI
 
 struct OverviewModeView: View {
-    @State private var vm: ViewModel
+    @State private var vm: ViewModel = ViewModel()
+    var pg: PageGroup
     
     init(pg: PageGroup) {
-        vm = ViewModel(pg: pg)
+        self.pg = pg
     }
-    
+
+    var body: some View {
+        Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
+            tableColumns1
+            tableColumns2
+        } rows: {
+            ForEach(vm.aspList, id: \.app_bundle_id) { obj in
+                TableRow(obj)
+            }
+        }
+        .onAppear {
+            vm.setPageGroup(pg: pg)
+        }
+        .onChange(of: pg) {
+            vm.setPageGroup(pg: pg)
+        }
+    }
+
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
     var tableColumns1: some TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>> {
         TableColumn("Icon") {model in
@@ -71,29 +89,17 @@ struct OverviewModeView: View {
             Text("\(val)")
         }
     }
-
-    var body: some View {
-        Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
-            tableColumns1
-            tableColumns2
-        } rows: {
-            ForEach(vm.aspList) { obj in
-                TableRow(obj)
-            }
-        }
-    }
 }
 
 extension OverviewModeView {
     @Observable class ViewModel {
-        let pg: PageGroup
-        
+        var pg: PageGroup? = nil
         var piList: [PageItem] = []
         var aspList: [AppStorePage] = []
         
         var selectedAppStorePageId: AppStorePage.ID? = nil
         var selectedPageItem: PageItem? {
-            if selectedAppStorePageId == nil || aspList.isEmpty {
+            if selectedAppStorePageId == nil {
                 return nil
             }
             
@@ -110,6 +116,7 @@ extension OverviewModeView {
            
             return selectedPageItem?.app_store_page
         }
+        
         private var _sortOrder: [KeyPathComparator<AppStorePage>] = []
         var sortOrder: [KeyPathComparator<AppStorePage>] {
             set {
@@ -119,7 +126,7 @@ extension OverviewModeView {
             get { return _sortOrder}
           }
 
-        init(pg: PageGroup) {
+        func setPageGroup(pg: PageGroup) {
             self.pg = pg
             if let newPiList = pg.page_items {
                 let piListArr: [PageItem] = newPiList.array as? [PageItem] ?? []
@@ -131,7 +138,6 @@ extension OverviewModeView {
             
             aspList = piList.map{$0.app_store_page!}
         }
-        
         
         private func _onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
             if let newKey = newSortOder.first {

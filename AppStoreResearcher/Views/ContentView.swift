@@ -13,21 +13,14 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            List(vm.pageGroupList, selection: $vm.selectedGroupId){
-                Text($0.group_name ?? "")
+            List(vm.pageGroupList, selection: $vm.selectedGroupId){ pg in
+                Text(pg.group_name ?? "")
             }
-        } content: {
+        } detail: {
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
                 if let selectedGroup = vm.selectedGroup {
-                    switch vm.contentMode {
-                    case .OVERVIEW:
-                        OverviewModeView(pg: selectedGroup)
-                    case .SCREENSHOTS:
-                        ScreenshotModeView()
-                    case .ICONS:
-                        IconModeView()
-                    }
+                   OverviewModeView(pg: selectedGroup)
                 }
                 else {
                     NoGroupSelectedView()
@@ -39,10 +32,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle(vm.contentTitle)
-        } detail: {
-            Spacer()
-                .navigationSplitViewColumnWidth(0)
-        }
+        }        
         .toolbar {
             ToolbarItemGroup(placement: .navigation) {
                 Picker("Mode", selection: $vm.contentMode) {
@@ -69,8 +59,8 @@ struct ContentView: View {
             }
         }
         .onChange(of: vm.selectedGroup) {
-            if let selectedGroup = vm.selectedGroup {
-                vm.contentTitle = selectedGroup.group_name ?? ""
+                if let selectedGroup = vm.selectedGroup {
+                    vm.contentTitle = selectedGroup.group_name ?? ""
             }
         }
     }
@@ -94,6 +84,7 @@ extension ContentView {
         var pageGroupList: [PageGroup] {
             dataManager.pageGroupList
         }
+        var path: [String] = []
 
         init(dataManager: DataManager = DataManager.shared) {
             self.dataManager = dataManager
