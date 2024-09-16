@@ -156,7 +156,6 @@ extension OverviewModeView {
     }
 }
 
-// TODO: Fix this
 struct OverviewModeView_Preview: PreviewProvider {
     struct Container: View {
         var body: some View {

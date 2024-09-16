@@ -20,7 +20,14 @@ struct ContentView: View {
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
                 if let selectedGroup = vm.selectedGroup {
-                   OverviewModeView(pg: selectedGroup)
+                    switch vm.contentMode {
+                    case .OVERVIEW:
+                        OverviewModeView(pg: selectedGroup)
+                    case .SCREENSHOTS:
+                        ScreenshotModeView(pg: selectedGroup)
+                    default:
+                        Text("TODO")
+                    }
                 }
                 else {
                     NoGroupSelectedView()
