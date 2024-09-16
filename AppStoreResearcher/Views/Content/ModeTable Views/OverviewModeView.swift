@@ -10,28 +10,20 @@ import NukeUI
 
 @MainActor
 struct OverviewModeView: View {
-    @State private var vm: ViewModel = ViewModel()
     var pg: PageGroup
-    
+
     init(pg: PageGroup) {
         self.pg = pg
     }
     
     var body: some View {
-        Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
-            tableColumns1
-            tableColumns2
-        } rows: {
-            ForEach(vm.aspList, id: \.app_bundle_id) { obj in
-                TableRow(obj)
-            }
-        }
-        .onAppear {
-            vm.setPageGroup(pg: pg)
-        }
-        .onChange(of: pg) {
-            vm.setPageGroup(pg: pg)
-        }
+        ModeTableViewWrapper(pg: self.pg, tableColumns: allTableColumns)
+    }
+    
+    @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
+    var allTableColumns: some TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>> {
+        tableColumns1
+        tableColumns2
     }
     
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
@@ -97,11 +89,6 @@ struct OverviewModeView: View {
             let val = model.screenshot_ipad?.count ?? 0
             Text("\(val)")
         }
-    }
-}
-
-extension OverviewModeView {
-    @Observable class ViewModel: PageGroupTableModel {
     }
 }
 

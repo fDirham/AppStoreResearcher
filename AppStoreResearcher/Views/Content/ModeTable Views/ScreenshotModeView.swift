@@ -10,8 +10,6 @@ import NukeUI
 
 @MainActor
 struct ScreenshotModeView: View {
-    @State private var vm: ViewModel = ViewModel()
-    
     var pg: PageGroup
     
     init(pg: PageGroup) {
@@ -19,20 +17,13 @@ struct ScreenshotModeView: View {
     }
     
     var body: some View {
-        Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
-            TableColumn("App", value: \.app_title.unwrapOrEmpty)
-            screenshotColumns
-        } rows: {
-            ForEach(vm.aspList, id: \.app_bundle_id) { obj in
-                TableRow(obj)
-            }
-        }
-        .onAppear {
-            vm.setPageGroup(pg: pg)
-        }
-        .onChange(of: pg) {
-            vm.setPageGroup(pg: pg)
-        }
+        ModeTableViewWrapper(pg: pg, tableColumns: allTableColumns)
+    }
+    
+    @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
+    var allTableColumns: some TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>> {
+        TableColumn("App", value: \.app_title.unwrapOrEmpty)
+        screenshotColumns
     }
     
     @TableColumnBuilder<AppStorePage, Never>
@@ -75,12 +66,6 @@ struct ScreenshotModeView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .frame(width: 200, height: 350)
         }
-    }
-}
-
-
-extension ScreenshotModeView {
-    @Observable class ViewModel: PageGroupTableModel {
     }
 }
 

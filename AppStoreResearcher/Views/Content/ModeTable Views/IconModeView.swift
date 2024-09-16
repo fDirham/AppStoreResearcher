@@ -10,8 +10,6 @@ import NukeUI
 
 @MainActor
 struct IconModeView: View {
-    @State private var vm: ViewModel = ViewModel()
-    
     var pg: PageGroup
     
     init(pg: PageGroup) {
@@ -19,22 +17,15 @@ struct IconModeView: View {
     }
     
     var body: some View {
-        Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
-            TableColumn("App", value: \.app_title.unwrapOrEmpty)
-            iconColumn
-        } rows: {
-            ForEach(vm.aspList, id: \.app_bundle_id) { obj in
-                TableRow(obj)
-            }
-        }
-        .onAppear {
-            vm.setPageGroup(pg: pg)
-        }
-        .onChange(of: pg) {
-            vm.setPageGroup(pg: pg)
-        }
+        ModeTableViewWrapper(pg: pg, tableColumns: allTableColumns)
     }
     
+    @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
+    var allTableColumns: some TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>> {
+        TableColumn("App", value: \.app_title.unwrapOrEmpty)
+        iconColumn
+    }
+
     @TableColumnBuilder<AppStorePage, Never>
     var iconColumn: some TableColumnContent<AppStorePage, Never> {
         TableColumn("Icon") {model in
@@ -51,12 +42,6 @@ struct IconModeView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .frame(width: 206, height: 206)
         }
-    }
-}
-
-
-extension IconModeView {
-    @Observable class ViewModel: PageGroupTableModel {
     }
 }
 
