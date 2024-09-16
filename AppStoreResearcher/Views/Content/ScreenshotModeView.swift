@@ -72,7 +72,8 @@ struct ScreenshotModeView: View {
                     Color.gray
                 }
             }
-            .frame(width: 200, height: 433)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .frame(width: 200, height: 350)
         }
     }
 }

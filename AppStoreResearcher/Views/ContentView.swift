@@ -25,6 +25,8 @@ struct ContentView: View {
                         OverviewModeView(pg: selectedGroup)
                     case .SCREENSHOTS:
                         ScreenshotModeView(pg: selectedGroup)
+                    case .ICONS:
+                        IconModeView(pg: selectedGroup)
                     default:
                         Text("TODO")
                     }

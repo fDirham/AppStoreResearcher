@@ -11,5 +11,5 @@ enum ContentMode: String {
     case OVERVIEW = "All"
     case SCREENSHOTS = "Screenshots"
     case ICONS = "Icons"
-    
+    case IN_APP_PURCHASES = "In App Purchases"
 }
