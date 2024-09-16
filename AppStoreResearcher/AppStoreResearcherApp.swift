@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct AppStoreResearcherApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear {
                     // TODO: Delete this for prod
 //                    persistenceController.deleteAll()

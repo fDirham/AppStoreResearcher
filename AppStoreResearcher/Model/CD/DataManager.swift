@@ -90,7 +90,7 @@ extension DataManager: NSFetchedResultsControllerDelegate {
         }
     }
     
-    func fetchTodos(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) {
+    func fetchPageGroups(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) {
         if let predicate = predicate {
             pageGroupFRC.fetchRequest.predicate = predicate
         }
@@ -189,5 +189,20 @@ extension DataManager {
     
     func getRandomAppGroup() -> PageGroup? {
         return pageGroupList.randomElement()
+    }
+}
+
+// MARK: PageGroup functions
+extension DataManager {
+    func createNewPageGroup(groupName: String) {
+        let toAdd = PageGroup(context: self.viewContext)
+        toAdd.group_name = groupName
+        toAdd.group_note = Note(context: self.viewContext)
+        self.saveData()
+    }
+    
+    func deletePageGroup(pageGroup pg: PageGroup){
+        self.viewContext.delete(pg)
+        self.saveData()
     }
 }
