@@ -33,6 +33,7 @@
 		8BBCE6D22C965335003A532A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D12C965335003A532A /* RatingView.swift */; };
 		8BBCE6D52C9655BE003A532A /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8BBCE6D42C9655BE003A532A /* NukeUI */; };
 		8BBCE6D72C9890B4003A532A /* PageGroupTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D62C9890B4003A532A /* PageGroupTableModel.swift */; };
+		8BBCE6D92C989171003A532A /* InAppPurchasesModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D82C989171003A532A /* InAppPurchasesModeView.swift */; };
 		8BF3F4912C920C6D00A69692 /* DummyPageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */; };
 		8BF3F4982C920D7600A69692 /* dummy_page_res-1194023242.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4922C920D7600A69692 /* dummy_page_res-1194023242.json */; };
 		8BF3F4992C920D7600A69692 /* dummy_page_res-1638027598.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4932C920D7600A69692 /* dummy_page_res-1638027598.json */; };
@@ -90,6 +91,7 @@
 		8B19D3C42C94A61200D6B031 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8BBCE6D12C965335003A532A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		8BBCE6D62C9890B4003A532A /* PageGroupTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageGroupTableModel.swift; sourceTree = "<group>"; };
+		8BBCE6D82C989171003A532A /* InAppPurchasesModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchasesModeView.swift; sourceTree = "<group>"; };
 		8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyPageRes.swift; sourceTree = "<group>"; };
 		8BF3F4922C920D7600A69692 /* dummy_page_res-1194023242.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dummy_page_res-1194023242.json"; sourceTree = "<group>"; };
 		8BF3F4932C920D7600A69692 /* dummy_page_res-1638027598.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dummy_page_res-1638027598.json"; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				8B19D3AB2C9347E000D6B031 /* OverviewModeView.swift */,
 				8B19D3AD2C9348C400D6B031 /* ScreenshotModeView.swift */,
 				8B19D3AF2C9348CF00D6B031 /* IconModeView.swift */,
+				8BBCE6D82C989171003A532A /* InAppPurchasesModeView.swift */,
 				8B19D3B12C93490500D6B031 /* NoGroupSelectedView.swift */,
 				8BBCE6D12C965335003A532A /* RatingView.swift */,
 			);
@@ -437,6 +440,7 @@
 				8B19D3B22C93490500D6B031 /* NoGroupSelectedView.swift in Sources */,
 				8B09521B2C90C4DF00960603 /* JSONHelpers.swift in Sources */,
 				8B0951A62C8F665700960603 /* AppStoreResearcher.xcdatamodeld in Sources */,
+				8BBCE6D92C989171003A532A /* InAppPurchasesModeView.swift in Sources */,
 				8BF3F49F2C920FD400A69692 /* CoreDataHelpers.swift in Sources */,
 				8B19D3C32C948FF500D6B031 /* OptionalOrderedSetCountComparator.swift in Sources */,
 				8B19D3BC2C948C3500D6B031 /* OptionalDateComparator.swift in Sources */,

@@ -27,8 +27,8 @@ struct ContentView: View {
                         ScreenshotModeView(pg: selectedGroup)
                     case .ICONS:
                         IconModeView(pg: selectedGroup)
-                    default:
-                        Text("TODO")
+                    case .IN_APP_PURCHASES:
+                        InAppPurchasesModeView(pg: selectedGroup)
                     }
                 }
                 else {

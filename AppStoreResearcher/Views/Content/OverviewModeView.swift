@@ -47,8 +47,8 @@ struct OverviewModeView: View {
                     Color.gray
                 }
             }
+            .clipShape(RoundedRectangle(cornerRadius: 6))
             .frame(width: 32, height: 32)
-            .cornerRadius(6)
         }
         .width(32)
         TableColumn("App", value: \.app_title.unwrapOrEmpty)
