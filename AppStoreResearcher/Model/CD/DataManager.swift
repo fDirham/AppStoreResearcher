@@ -205,6 +205,14 @@ extension DataManager {
         self.viewContext.delete(pg)
         self.saveData()
     }
+    
+    func getPageGroupWithId(id: PageGroup.ID?) -> PageGroup? {
+        guard let id = id else {
+            return nil
+        }
+        
+        return pageGroupList.first{e in e.id == id}
+    }
 }
 
 // MARK: Note functions

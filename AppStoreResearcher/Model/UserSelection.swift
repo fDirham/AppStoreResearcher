@@ -8,5 +8,6 @@
 import Foundation
 
 @Observable class UserSelection {
+    var pageGroup: PageGroup? = nil
     var pageItem: PageItem? = nil
 }

@@ -10,14 +10,8 @@ import NukeUI
 
 @MainActor
 struct ScreenshotModeView: View {
-    var pg: PageGroup
-    
-    init(pg: PageGroup) {
-        self.pg = pg
-    }
-    
     var body: some View {
-        ModeTableViewWrapper(pg: pg, tableColumns: allTableColumns)
+        ModeTableViewWrapper(tableColumns: allTableColumns)
     }
     
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
@@ -71,10 +65,17 @@ struct ScreenshotModeView: View {
 
 struct ScreenshotModeView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection = UserSelection()
+        @State private var userSelection: UserSelection
         
+        init() {
+            let us = UserSelection()
+            us.pageGroup = DataManager.preview.getRandomAppGroup()
+            
+            self.userSelection = us
+        }
+
         var body: some View {
-            ScreenshotModeView(pg: DataManager.preview.getRandomAppGroup()!)
+            ScreenshotModeView()
                 .environment(userSelection)
         }
     }

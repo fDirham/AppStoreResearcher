@@ -11,11 +11,9 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
     @Environment(UserSelection.self) private var userSelection
     @State private var vm: ViewModel = ViewModel()
     
-    var pg: PageGroup
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>> var tableColumns: Content
     
-    init(pg: PageGroup, tableColumns: Content) {
-        self.pg = pg
+    init(tableColumns: Content) {
         self.tableColumns = tableColumns
     }
     
@@ -28,10 +26,10 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
             }
         }
         .onAppear {
-            vm.setup(pageGroup: pg, userSelection: userSelection)
+            vm.setup(userSelection: userSelection)
         }
-        .onChange(of: pg) {
-            vm.setPageGroup(pg: pg)
+        .onChange(of: userSelection.pageGroup) {
+            vm.onChangePageGroup(newPageGroup: userSelection.pageGroup)
         }
     }
     
@@ -51,7 +49,7 @@ extension ModeTableViewWrapper {
         var selectedAppStorePageId: AppStorePage.ID? {
             set {
                 _selectedAppStorePageId = newValue
-                self._onSelectedAppStorePageIdChanged(newId: newValue)
+                self.onSelectedAppStorePageIdChanged(newId: newValue)
             }
             get { return _selectedAppStorePageId }
         }
@@ -59,7 +57,7 @@ extension ModeTableViewWrapper {
         private var _sortOrder: [KeyPathComparator<AppStorePage>] = []
         var sortOrder: [KeyPathComparator<AppStorePage>] {
             set {
-                _onSortChange(newSortOder: newValue)
+                onSortChange(newSortOder: newValue)
                 _sortOrder = newValue
             }
             get { return _sortOrder}
@@ -67,31 +65,36 @@ extension ModeTableViewWrapper {
         
         var userSelection: UserSelection? = nil
 
-        func setup(pageGroup: PageGroup, userSelection: UserSelection) {
-            setPageGroup(pg: pageGroup)
+        func setup(userSelection: UserSelection) {
             self.userSelection = userSelection
+            onChangePageGroup(newPageGroup: userSelection.pageGroup)
         }
         
-        func setPageGroup(pg: PageGroup) {
-            self.pg = pg
-            if let newPiList = pg.page_items {
-                let piListArr: [PageItem] = newPiList.array as? [PageItem] ?? []
-                piList = piListArr
+        func onChangePageGroup(newPageGroup newPg: PageGroup?) {
+            self.pg = newPg
+            if let pg = newPg {
+                if let newPiList = pg.page_items {
+                    let piListArr: [PageItem] = newPiList.array as? [PageItem] ?? []
+                    self.piList = piListArr
+                }
+                else {
+                    self.piList = []
+                }
+                
+                self.aspList = piList.map{$0.app_store_page!}
             }
             else {
-                piList = []
+                self.aspList = []
             }
-            
-            aspList = piList.map{$0.app_store_page!}
         }
         
-        private func _onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
+        private func onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
             if let newKey = newSortOder.first {
                 aspList.sort(using: newKey)
             }
         }
         
-        private func _onSelectedAppStorePageIdChanged(newId: AppStorePage.ID?){
+        private func onSelectedAppStorePageIdChanged(newId: AppStorePage.ID?){
             let pageItem = DataManager.getPageItemFromAppStorePageId(aspId: newId, pageItems: self.piList)
             userSelection!.pageItem = pageItem
         }

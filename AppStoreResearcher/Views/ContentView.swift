@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
+    @Environment(UserSelection.self) var userSelection
     @State var vm = ViewModel()
     
     var body: some View {
@@ -52,17 +53,18 @@ struct ContentView: View {
         } detail: {
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
-                if let selectedGroup = vm.selectedGroup {
+                if vm.selectedGroupId != nil {
                     switch vm.contentMode {
                     case .OVERVIEW:
-                        OverviewModeView(pg: selectedGroup)
+                        OverviewModeView()
                     case .SCREENSHOTS:
-                        ScreenshotModeView(pg: selectedGroup)
+                        ScreenshotModeView()
                     case .ICONS:
-                        IconModeView(pg: selectedGroup)
+                        IconModeView()
                     case .IN_APP_PURCHASES:
-                        InAppPurchasesModeView(pg: selectedGroup)
+                        InAppPurchasesModeView()
                     }
+                    EmptyView()
                 }
                 else {
                     NoGroupSelectedView()
@@ -101,8 +103,11 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: vm.selectedGroup) {
-            if let selectedGroup = vm.selectedGroup {
+        .onAppear {
+            vm.setup(userSelection: userSelection)
+        }
+        .onChange(of: userSelection.pageGroup) {
+            if let selectedGroup = userSelection.pageGroup {
                 vm.contentTitle = selectedGroup.group_name ?? ""
             }
         }
@@ -111,15 +116,18 @@ struct ContentView: View {
 
 extension ContentView {
     @Observable class ViewModel {
+        var userSelection: UserSelection? = nil
+        
         var showDetail = false
-        var selectedGroupId: PageGroup.ID? = nil
-        var selectedGroup: PageGroup? {
-            if let selectedGroupId = selectedGroupId {
-                return pageGroupList.first(where: {e in e.id == selectedGroupId})
+        private var _selectedGroupId: PageGroup.ID? = nil
+        var selectedGroupId: PageGroup.ID? {
+            set {
+                _selectedGroupId = newValue
+                self._onSelectedGroupIdChanged(newId: newValue)
             }
-            
-            return nil
+            get { return _selectedGroupId }
         }
+        
         var contentTitle: String = "ASR"
         var contentMode: ContentMode = .OVERVIEW
         private var dataManager: DataManager
@@ -136,6 +144,10 @@ extension ContentView {
         
         init(dataManager: DataManager = DataManager.shared) {
             self.dataManager = dataManager
+        }
+        
+        func setup(userSelection: UserSelection) {
+            self.userSelection = userSelection
         }
         
         func startNewGroup(){
@@ -170,9 +182,25 @@ extension ContentView {
             groupToDelete = nil
             alertDeleteGroup = false
         }
+        
+        private func _onSelectedGroupIdChanged(newId: PageGroup.ID?){
+            let newPg = dataManager.getPageGroupWithId(id: newId)
+            userSelection?.pageGroup = newPg
+        }
     }
 }
 
-#Preview {
-    ContentView(vm: ContentView.ViewModel(dataManager: DataManager.preview))
+struct ContentView_Preview: PreviewProvider {
+    struct Container: View {
+        @State private var userSelection = UserSelection()
+        
+        var body: some View {
+            ContentView(vm: ContentView.ViewModel(dataManager: DataManager.preview))
+                .environment(userSelection)
+        }
+    }
+    
+    static var previews: some View {
+        Container()
+    }
 }

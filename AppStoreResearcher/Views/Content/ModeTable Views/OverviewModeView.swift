@@ -10,14 +10,8 @@ import NukeUI
 
 @MainActor
 struct OverviewModeView: View {
-    var pg: PageGroup
-
-    init(pg: PageGroup) {
-        self.pg = pg
-    }
-    
     var body: some View {
-        ModeTableViewWrapper(pg: self.pg, tableColumns: allTableColumns)
+        ModeTableViewWrapper(tableColumns: allTableColumns)
     }
     
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>>
@@ -94,10 +88,17 @@ struct OverviewModeView: View {
 
 struct OverviewModeView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection = UserSelection()
+        @State private var userSelection: UserSelection
+        
+        init() {
+            let us = UserSelection()
+            us.pageGroup = DataManager.preview.getRandomAppGroup()
+            
+            self.userSelection = us
+        }
         
         var body: some View {
-            OverviewModeView(pg: DataManager.preview.getRandomAppGroup()!)
+            OverviewModeView()
                 .environment(userSelection)
         }
     }
