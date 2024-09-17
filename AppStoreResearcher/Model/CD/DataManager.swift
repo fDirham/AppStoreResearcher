@@ -206,3 +206,18 @@ extension DataManager {
         self.saveData()
     }
 }
+
+// MARK: Convenience functions
+extension DataManager {
+    static func getPageItemFromAppStorePageId(aspId: AppStorePage.ID?, pageItems: [PageItem]) -> PageItem? {
+        if aspId == nil {
+            return nil
+        }
+        
+        let filtered = pageItems.filter({($0.app_store_page)?.id == aspId}) as [PageItem]
+        if filtered.isEmpty {
+            return nil
+        }
+        return filtered.first
+    }
+}

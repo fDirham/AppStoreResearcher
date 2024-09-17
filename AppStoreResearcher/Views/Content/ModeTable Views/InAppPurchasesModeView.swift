@@ -49,7 +49,7 @@ struct InAppPurchasesModeView: View {
         let inAppPurchasesList = asp.in_app_purchases?.array as? [InAppPurchaseSpec] ?? []
     
         VStack(alignment: .leading, spacing: 8){
-            ForEach(inAppPurchasesList, id: \.desc) {iap in
+            ForEach(inAppPurchasesList) {iap in
                 HStack {
                     Text(iap.desc!)
                     Spacer()
@@ -63,8 +63,11 @@ struct InAppPurchasesModeView: View {
 
 struct InAppPurchasesModeView_Preview: PreviewProvider {
     struct Container: View {
+        @State private var userSelection = UserSelection()
+        
         var body: some View {
             InAppPurchasesModeView(pg: DataManager.preview.getRandomAppGroup()!)
+                .environment(userSelection)
         }
     }
     

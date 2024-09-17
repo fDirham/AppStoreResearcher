@@ -47,8 +47,11 @@ struct IconModeView: View {
 
 struct IconModeView_Preview: PreviewProvider {
     struct Container: View {
+        @State private var userSelection = UserSelection()
+        
         var body: some View {
             IconModeView(pg: DataManager.preview.getRandomAppGroup()!)
+                .environment(userSelection)
         }
     }
     

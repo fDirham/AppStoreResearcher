@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AppStoreResearcherApp: App {
+    @State private var userSelection = UserSelection()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(userSelection)
                 .onAppear {
                     // TODO: Delete this for prod
 //                    persistenceController.deleteAll()

@@ -71,8 +71,11 @@ struct ScreenshotModeView: View {
 
 struct ScreenshotModeView_Preview: PreviewProvider {
     struct Container: View {
+        @State private var userSelection = UserSelection()
+        
         var body: some View {
             ScreenshotModeView(pg: DataManager.preview.getRandomAppGroup()!)
+                .environment(userSelection)
         }
     }
     
