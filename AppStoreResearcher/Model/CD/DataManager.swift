@@ -207,6 +207,20 @@ extension DataManager {
     }
 }
 
+// MARK: Note functions
+extension DataManager {
+    func createNoteForPageItem(pageItem: PageItem) {
+        if pageItem.item_note != nil {
+            return
+        }
+        
+        let toAdd = Note(context: self.viewContext)
+        pageItem.item_note = toAdd
+        self.saveData()
+    }
+}
+
+
 // MARK: Convenience functions
 extension DataManager {
     static func getPageItemFromAppStorePageId(aspId: AppStorePage.ID?, pageItems: [PageItem]) -> PageItem? {
@@ -220,4 +234,6 @@ extension DataManager {
         }
         return filtered.first
     }
+    
+    
 }
