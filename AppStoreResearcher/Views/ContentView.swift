@@ -13,102 +13,115 @@ struct ContentView: View {
     @State var vm = ViewModel()
     
     var body: some View {
-        NavigationSplitView {
-            VStack {
-                Button(action: {
-                    vm.startNewGroup()
-                }) {
-                    Text("+ New Group")
-                }
-                .alert("New group", isPresented: $vm.alertNewGroup) {
-                    TextField("e.g Social Apps", text: $vm.newGroupName)
-                    Button("Create", action: {
-                        vm.confirmNewGroup()
-                    })
-                    Button("Cancel", role:.cancel , action: {
-                        vm.cancelNewGroup()
-                    })
-                } message: {
-                    Text("What should we call the group?")
-                }
-                List(vm.pageGroupList, selection: $vm.selectedGroupId){ pg in
-                    Text(pg.group_name ?? "")
-                        .contextMenu(ContextMenu(menuItems: {
-                            Button("Delete") {
-                                vm.startDeleteGroup(pg)
-                            }
-                        }))
-                }
-                .alert("Delete group", isPresented: $vm.alertDeleteGroup) {
-                    Button("Cancel", role:.cancel , action: {
-                        vm.cancelDeleteGroup()
-                    })
-                    Button("Delete", role:.destructive , action: {
-                        vm.confirmDeleteGroup()
-                    })
-                } message: {
-                    Text("Are you sure?")
-                }
-            }
-        } detail: {
-            HStack(spacing: 0) {
-                Spacer(minLength: 0)
-                if vm.selectedGroupId != nil {
-                    switch vm.contentMode {
-                    case .OVERVIEW:
-                        OverviewModeView()
-                    case .SCREENSHOTS:
-                        ScreenshotModeView()
-                    case .ICONS:
-                        IconModeView()
-                    case .IN_APP_PURCHASES:
-                        InAppPurchasesModeView()
+        ZStack {
+            NavigationSplitView {
+                VStack {
+                    Button(action: {
+                        vm.startNewGroup()
+                    }) {
+                        Text("+ New Group")
                     }
-                    EmptyView()
-                }
-                else {
-                    NoGroupSelectedView()
-                }
-                Spacer(minLength: 0)
-                Divider()
-                if vm.showDetail {
-                    MasterNoteView()
-                }
-            }
-            .navigationTitle(vm.contentTitle)
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigation) {
-                Picker("Mode", selection: $vm.contentMode) {
-                    Text(ContentMode.OVERVIEW.rawValue).tag(ContentMode.OVERVIEW)
-                    Text(ContentMode.SCREENSHOTS.rawValue).tag(ContentMode.SCREENSHOTS)
-                    Text(ContentMode.ICONS.rawValue).tag(ContentMode.ICONS)
-                    Text(ContentMode.IN_APP_PURCHASES.rawValue).tag(ContentMode.IN_APP_PURCHASES)
-                }
-            }
-            ToolbarItemGroup(placement: .secondaryAction) {
-                Button("Add app") {
-                    print("Add tapped")
-                }
-                .roundedBG(fill: Color.indigo)
-            }
-            ToolbarItemGroup(placement: .primaryAction) {
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        vm.showDetail.toggle()
+                    .alert("New group", isPresented: $vm.alertNewGroup) {
+                        TextField("e.g Social Apps", text: $vm.newGroupName)
+                        Button("Create", action: {
+                            vm.confirmNewGroup()
+                        })
+                        Button("Cancel", role:.cancel , action: {
+                            vm.cancelNewGroup()
+                        })
+                    } message: {
+                        Text("What should we call the group?")
                     }
-                }) {
-                    Image(systemName: "sidebar.right")
+                    List(vm.pageGroupList, selection: $vm.selectedGroupId){ pg in
+                        Text(pg.group_name ?? "")
+                            .contextMenu(ContextMenu(menuItems: {
+                                Button("Delete") {
+                                    vm.startDeleteGroup(pg)
+                                }
+                            }))
+                    }
+                    .alert("Delete group", isPresented: $vm.alertDeleteGroup) {
+                        Button("Cancel", role:.cancel , action: {
+                            vm.cancelDeleteGroup()
+                        })
+                        Button("Delete", role:.destructive , action: {
+                            vm.confirmDeleteGroup()
+                        })
+                    } message: {
+                        Text("Are you sure?")
+                    }
+                }
+            } detail: {
+                HStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    if vm.selectedGroupId != nil {
+                        switch vm.contentMode {
+                        case .OVERVIEW:
+                            OverviewModeView()
+                        case .SCREENSHOTS:
+                            ScreenshotModeView()
+                        case .ICONS:
+                            IconModeView()
+                        case .IN_APP_PURCHASES:
+                            InAppPurchasesModeView()
+                        }
+                        EmptyView()
+                    }
+                    else {
+                        NoGroupSelectedView()
+                    }
+                    Spacer(minLength: 0)
+                    Divider()
+                    if vm.showDetail {
+                        MasterNoteView()
+                    }
+                }
+                .navigationTitle(vm.contentTitle)
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigation) {
+                    Picker("Mode", selection: $vm.contentMode) {
+                        Text(ContentMode.OVERVIEW.rawValue).tag(ContentMode.OVERVIEW)
+                        Text(ContentMode.SCREENSHOTS.rawValue).tag(ContentMode.SCREENSHOTS)
+                        Text(ContentMode.ICONS.rawValue).tag(ContentMode.ICONS)
+                        Text(ContentMode.IN_APP_PURCHASES.rawValue).tag(ContentMode.IN_APP_PURCHASES)
+                    }
+                }
+                ToolbarItemGroup(placement: .secondaryAction) {
+                    if vm.showAddInterface {
+                        Button("Cancel") {
+                            vm.showAddInterface = false
+                        }
+                        .roundedBG(fill: Color.red)
+                    }
+                    else {
+                        Button("Add app") {
+                            vm.showAddInterface = true
+                        }
+                        .roundedBG(fill: Color.indigo)
+                    }
+                }
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            vm.showDetail.toggle()
+                        }
+                    }) {
+                        Image(systemName: "sidebar.right")
+                    }
                 }
             }
-        }
-        .onAppear {
-            vm.setup(userSelection: userSelection)
-        }
-        .onChange(of: userSelection.pageGroup) {
-            if let selectedGroup = userSelection.pageGroup {
-                vm.contentTitle = selectedGroup.group_name ?? ""
+            .onAppear {
+                vm.setup(userSelection: userSelection)
+            }
+            .onChange(of: userSelection.pageGroup) {
+                if let selectedGroup = userSelection.pageGroup {
+                    vm.contentTitle = selectedGroup.group_name ?? ""
+                }
+            }
+            if vm.showAddInterface {
+                AppSearchView(isPresented: $vm.showAddInterface)
             }
         }
     }
@@ -140,6 +153,8 @@ extension ContentView {
         var newGroupName: String = ""
         var alertDeleteGroup = false
         var groupToDelete: PageGroup? = nil
+        
+        var showAddInterface = false
         
         
         init(dataManager: DataManager = DataManager.shared) {
