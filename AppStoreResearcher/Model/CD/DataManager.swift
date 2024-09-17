@@ -190,6 +190,10 @@ extension DataManager {
     func getRandomAppGroup() -> PageGroup? {
         return pageGroupList.randomElement()
     }
+    
+    func getRandomPageItem(pageGroup: PageGroup) -> PageItem?{
+        return pageGroup.page_items?.array.randomElement() as? PageItem
+    }
 }
 
 // MARK: PageGroup functions
@@ -217,6 +221,16 @@ extension DataManager {
 
 // MARK: Note functions
 extension DataManager {
+    func createNoteForPageGroup(pageGroup: PageGroup) {
+        if pageGroup.group_note != nil {
+            return
+        }
+        
+        let toAdd = Note(context: self.viewContext)
+        pageGroup.group_note = toAdd
+        self.saveData()
+    }
+    
     func createNoteForPageItem(pageItem: PageItem) {
         if pageItem.item_note != nil {
             return

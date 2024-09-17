@@ -86,6 +86,8 @@ extension ModeTableViewWrapper {
             else {
                 self.aspList = []
             }
+            
+            selectedAppStorePageId = nil
         }
         
         private func onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){

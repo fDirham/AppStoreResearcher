@@ -8,6 +8,15 @@
 import Foundation
 
 @Observable class UserSelection {
-    var pageGroup: PageGroup? = nil
+    private var _pageGroup: PageGroup? = nil
+    var pageGroup: PageGroup? {
+        set {
+            pageItem = nil
+            _pageGroup = newValue
+        }
+        get {
+            return _pageGroup
+        }
+    }
     var pageItem: PageItem? = nil
 }
