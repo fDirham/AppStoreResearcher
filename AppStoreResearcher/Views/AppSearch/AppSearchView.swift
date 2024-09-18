@@ -11,10 +11,11 @@ import Combine
 struct AppSearchView: View {
     @Binding var isPresented: Bool
     @State var vm = ViewModel()
-    @FocusState var fieldFocused: Bool
+    @FocusState var searchBarFocused: Bool
         
     let detector = PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<Void, Never>
+    let frameWidth: CGFloat = 500
     
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
@@ -37,34 +38,32 @@ struct AppSearchView: View {
                     isPresented = false
                 }
             
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .frame(width: 16, height: 16)
-                TextField("Search...", text: $vm.searchVal)
-                    .focused($fieldFocused)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .foregroundColor(.primary)
-                    .padding(12)
-                    .font(.system(size: 18))
-                    .background(.clear)
-                    .onSubmit {
-                        vm.onSearch()
-                    }
-                    .onChange(of: vm.searchVal) { detector.send() }
-                    .onReceive(publisher) { vm.onSearch() }
+            VStack(alignment: .center, spacing: 0) {
+                SearchBarView(
+                    searchBarFocused: $searchBarFocused,
+                    searchVal: $vm.searchVal,
+                    isLoading: vm.isLoading,
+                    onSearch: vm.doSearch
+                )
+                
+                if !vm.searchResults.isEmpty {
+                    Divider()
+                        .frame(width: frameWidth - 20)
+                    SearchResultsView(searchResults: vm.searchResults)
+                        .padding(.top, 16)
+                }
             }
-            .padding(.horizontal)
             .roundedBG(fill: Color.macBrown, cornerRadius: 12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.macBrownLight))
-            .frame(width: 500)
             .shadow(radius: 16)
+            .frame(width: frameWidth)
+            .frame(maxHeight: 300)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
-                self.fieldFocused = true
+                self.searchBarFocused = true
             }
         }
     }
@@ -73,14 +72,29 @@ struct AppSearchView: View {
 extension AppSearchView {
     @Observable
     class ViewModel {
-        var searchVal: String = ""
+        var searchVal: String = "some text"
+        var isLoading: Bool = false
+        var searchResults: [DummySearchRes] = []
         
-        func onSearch(){
-            if searchVal != "" {
-                print("Searching", searchVal)
+        func doSearch() {
+            Task {
+                if searchVal != "" && !isLoading {
+                    // TODO: Replace with actual implementation
+                    isLoading = true
+                    try? await Task.sleep(for: .seconds(1))
+                    isLoading = false
+                    
+                    do {
+                        if let results: [DummySearchRes] = try decodeJSONFile(fileName: "dummy_search", fileType: "json") {
+                            self.searchResults = results
+                        }
+                    }
+                    catch {
+                        print("Cannot get dummy results")
+                    }
+                }
             }
         }
-        
     }
 }
 

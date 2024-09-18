@@ -24,9 +24,16 @@ func decodeJSONObj<T: Decodable>(_ inJSONStr: String) throws -> T {
     return product
 }
 
-func decodeJSONFile<T: Decodable>(_ filePath: String) throws -> T {
+func decodeJSONFile<T: Decodable>(filePath: String) throws -> T {
     let plainJSONDecoder = JSONDecoder()
     let dataJson = try Data(contentsOf: URL(fileURLWithPath: filePath), options: .mappedIfSafe)
     let product = try plainJSONDecoder.decode(T.self, from: dataJson)
     return product
+}
+
+func decodeJSONFile<T: Decodable>(fileName: String, fileType: String) throws -> T? {
+    if let filePath = Bundle.main.path(forResource: fileName, ofType: fileType){
+        return try decodeJSONFile(filePath: filePath) as T
+    }
+    return nil
 }

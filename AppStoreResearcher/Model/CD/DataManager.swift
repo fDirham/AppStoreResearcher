@@ -177,11 +177,9 @@ extension DataManager {
         
         var toReturn: [AppStorePage] = []
         for fileName in DUMMY_FILE_NAME_LIST {
-            if let filePath = Bundle.main.path(forResource: fileName, ofType: "json"){
-                let dummy: DummyPageRes = try decodeJSONFile(filePath)
-                let toAdd: AppStorePage = dummy.createAppStorePage(viewContext: viewContext)
-                toReturn.append(toAdd)
-            }
+            let dummy: DummyPageRes = try decodeJSONFile(fileName: fileName, fileType: "json")!
+            let toAdd: AppStorePage = dummy.createAppStorePage(viewContext: viewContext)
+            toReturn.append(toAdd)
         }
         
         return toReturn
