@@ -9,12 +9,12 @@ import SwiftUI
 import NukeUI
 
 struct SearchResultsView: View {
-    var searchResults: [DummySearchRes]
+    var searchResults: [AppSearchRes]
     
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
-                ForEach(searchResults, id: \.appTitle) { res in
+                ForEach(searchResults, id: \.appUrl) { res in
                     SearchResultBlockView(searchResult: res)
                 }
             }
@@ -24,11 +24,11 @@ struct SearchResultsView: View {
 }
 
 struct SearchResultBlockView: View {
-    var searchResult: DummySearchRes
+    var searchResult: AppSearchRes
     
     var body: some View {
         HStack(alignment: .center) {
-            let urlString = searchResult.appUrl
+            let urlString = searchResult.appIcon
             LazyImage(url: URL(string: urlString)) { state in
                 if let image = state.image {
                     image.resizable().aspectRatio(contentMode: .fill)
@@ -40,12 +40,8 @@ struct SearchResultBlockView: View {
             }
             .clipShape(RoundedRectangle(cornerRadius: 6))
             .frame(width: 32, height: 32)
-            VStack(alignment: .leading) {
-                Text(searchResult.appTitle)
-                    .font(.system(size: 14))
-                Text(searchResult.subtitle)
-                    .font(.system(size: 12))
-            }
+            Text(searchResult.appTitle)
+                .font(.system(size: 14))
             Spacer()
             HStack{
                 Button(action: {
@@ -69,18 +65,10 @@ struct SearchResultBlockView: View {
 
 struct SearchResultsView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var searchResults: [DummySearchRes] = []
+        @State private var searchResults: [AppSearchRes] = AppSearchRes.DUMMY
         
         var body: some View {
             SearchResultsView(searchResults: searchResults)
-                .onAppear {
-                    do {
-                        if let res: [DummySearchRes] = try decodeJSONFile(fileName: "dummy_search", fileType: "json") {
-                            searchResults = res
-                        }
-                    }
-                    catch{}
-                }
         }
     }
     

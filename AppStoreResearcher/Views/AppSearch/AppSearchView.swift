@@ -74,24 +74,34 @@ extension AppSearchView {
     class ViewModel {
         var searchVal: String = "some text"
         var isLoading: Bool = false
-        var searchResults: [DummySearchRes] = []
+        var searchResults: [AppSearchRes] = []
+        var appStoreSearcher: AppStoreSearcherService
+        
+        init(appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
+            self.appStoreSearcher = appStoreSearcher
+        }
         
         func doSearch() {
             Task {
                 if searchVal != "" && !isLoading {
-                    // TODO: Replace with actual implementation
                     isLoading = true
-                    try? await Task.sleep(for: .seconds(1))
-                    isLoading = false
                     
                     do {
-                        if let results: [DummySearchRes] = try decodeJSONFile(fileName: "dummy_search", fileType: "json") {
-                            self.searchResults = results
+                        let itunesRes = try await appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
+                        
+                        var newSearchResults: [AppSearchRes] = []
+                        for ituneRes in itunesRes.results {
+                            let toAdd = AppSearchRes(itunesResult: ituneRes)
+                            newSearchResults.append(toAdd)
                         }
+                        self.searchResults = newSearchResults
                     }
                     catch {
-                        print("Cannot get dummy results")
+                        // TODO: Better error handling
+                        print("Cannot get search results", error.localizedDescription)
                     }
+                    
+                    isLoading = false
                 }
             }
         }

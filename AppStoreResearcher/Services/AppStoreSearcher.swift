@@ -9,7 +9,9 @@ import Foundation
 import JavaScriptCore
 
 protocol AppStoreSearcherService {
-    func search(query: String) async throws -> [DummyPageRes]
+    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes
+    func queryItunesSearch(searchQuery:String) async throws -> ItunesSearchRes
+    func queryAppStorePageHtml(pageUrl: String) async throws -> String
 }
 
 class MainAppStoreSearcherService: AppStoreSearcherService {
@@ -17,10 +19,6 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
     
     private let vm = JSVirtualMachine()
     private let context: JSContext
-    
-    func search(query: String) async throws -> [DummyPageRes] {
-        return []
-    }
     
     init(){
         self.context = JSContext(virtualMachine: vm)
@@ -41,13 +39,14 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
 
     }
     
-    func testAppStoreSearch() async throws -> String?{
+    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes{
         let jsModule = self.context.objectForKeyedSubscript("AppStoreSearcher")
-        if let promise = jsModule?.invokeMethod("searchAppStore", withArguments: ["productivity"]) {
-            let res = try await self.context.resolveAsyncPromise(promise: promise)
-            return res.toString()
+        if let res = jsModule?.invokeMethod("scrapeAppStorePage", withArguments: [pageHTML]) {
+            let toReturn: CheerioScrapeRes = try decodeJSONObj(res.toString())
+            return toReturn
         }
-        return nil
+        
+        throw "Something went wrong getting module"
     }
     
     func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
@@ -69,8 +68,17 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
     
     func queryAppStorePageHtml(pageUrl: String) async throws -> String {
         guard let url = URL(string: pageUrl) else {
-            throw "URL Invalid"        }
-        let (data, _) = try await URLSession.shared.data(from: url)
+            throw "URL Invalid"
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("text/html", forHTTPHeaderField: "Accept")
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0", forHTTPHeaderField: "User-Agent")
+        request.setValue("en-US,en;q=0.5", forHTTPHeaderField: "Accept-Language")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
         return String(decoding: data, as: UTF8.self)
     }
 }
