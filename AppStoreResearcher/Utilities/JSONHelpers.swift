@@ -18,9 +18,13 @@ func encodeJSONObj<T: Encodable>(_ obj: T) throws -> String {
 }
 
 func decodeJSONObj<T: Decodable>(_ inJSONStr: String) throws -> T {
-    let plainJSONDecoder = JSONDecoder()
     let dataJson = inJSONStr.data(using: .utf8)!
-    let product = try plainJSONDecoder.decode(T.self, from: dataJson)
+    return try decodeJSONData(dataJson)
+}
+
+func decodeJSONData<T: Decodable>(_ inJSONData: Data) throws -> T {
+    let plainJSONDecoder = JSONDecoder()
+    let product = try plainJSONDecoder.decode(T.self, from: inJSONData)
     return product
 }
 

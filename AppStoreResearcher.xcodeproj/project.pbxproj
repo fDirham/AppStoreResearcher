@@ -41,6 +41,19 @@
 		8BBCE6EC2C9B2260003A532A /* DummySearchRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6EB2C9B2260003A532A /* DummySearchRes.swift */; };
 		8BBCE6EE2C9B24D1003A532A /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6ED2C9B24D1003A532A /* SearchBarView.swift */; };
 		8BBCE6F02C9B2A48003A532A /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6EF2C9B2A48003A532A /* SearchResultsView.swift */; };
+		8BBCE6F32C9B379E003A532A /* AppStoreSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6F22C9B379E003A532A /* AppStoreSearcher.swift */; };
+		8BBCE6F92C9B3ABD003A532A /* AppStoreSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6F22C9B379E003A532A /* AppStoreSearcher.swift */; };
+		8BBCE7002C9B42FF003A532A /* AppStoreResearcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */; };
+		8BBCE7012C9B4304003A532A /* DummyPageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */; };
+		8BBCE7032C9B43C8003A532A /* JSContext+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE7022C9B43C8003A532A /* JSContext+Async.swift */; };
+		8BBCE7092C9B54D0003A532A /* JSContext+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE7022C9B43C8003A532A /* JSContext+Async.swift */; };
+		8BBCE7162C9B5DBE003A532A /* AppStoreSearcher.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 8BBCE7152C9B5DBE003A532A /* AppStoreSearcher.bundle.js */; };
+		8BBCE7172C9B5DBE003A532A /* AppStoreSearcher.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 8BBCE7152C9B5DBE003A532A /* AppStoreSearcher.bundle.js */; };
+		8BBCE7192C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE7182C9C7CBC003A532A /* URLComponents+queryItems.swift */; };
+		8BBCE71A2C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE7182C9C7CBC003A532A /* URLComponents+queryItems.swift */; };
+		8BBCE71D2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE71C2C9C7F14003A532A /* ItunesSearchRes.swift */; };
+		8BBCE71E2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE71C2C9C7F14003A532A /* ItunesSearchRes.swift */; };
+		8BBCE71F2C9C7F38003A532A /* JSONHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09521A2C90C4DF00960603 /* JSONHelpers.swift */; };
 		8BF3F4912C920C6D00A69692 /* DummyPageRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */; };
 		8BF3F4982C920D7600A69692 /* dummy_page_res-1194023242.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4922C920D7600A69692 /* dummy_page_res-1194023242.json */; };
 		8BF3F4992C920D7600A69692 /* dummy_page_res-1638027598.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3F4932C920D7600A69692 /* dummy_page_res-1638027598.json */; };
@@ -106,6 +119,11 @@
 		8BBCE6EB2C9B2260003A532A /* DummySearchRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySearchRes.swift; sourceTree = "<group>"; };
 		8BBCE6ED2C9B24D1003A532A /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		8BBCE6EF2C9B2A48003A532A /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		8BBCE6F22C9B379E003A532A /* AppStoreSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreSearcher.swift; sourceTree = "<group>"; };
+		8BBCE7022C9B43C8003A532A /* JSContext+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSContext+Async.swift"; sourceTree = "<group>"; };
+		8BBCE7152C9B5DBE003A532A /* AppStoreSearcher.bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppStoreSearcher.bundle.js; sourceTree = "<group>"; };
+		8BBCE7182C9C7CBC003A532A /* URLComponents+queryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+queryItems.swift"; sourceTree = "<group>"; };
+		8BBCE71C2C9C7F14003A532A /* ItunesSearchRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesSearchRes.swift; sourceTree = "<group>"; };
 		8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyPageRes.swift; sourceTree = "<group>"; };
 		8BF3F4922C920D7600A69692 /* dummy_page_res-1194023242.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dummy_page_res-1194023242.json"; sourceTree = "<group>"; };
 		8BF3F4932C920D7600A69692 /* dummy_page_res-1638027598.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "dummy_page_res-1638027598.json"; sourceTree = "<group>"; };
@@ -165,6 +183,8 @@
 		8B0951982C8F665500960603 /* AppStoreResearcher */ = {
 			isa = PBXGroup;
 			children = (
+				8BBCE6F62C9B3A6C003A532A /* JavaScript */,
+				8BBCE6F12C9B378D003A532A /* Services */,
 				8B0951992C8F665500960603 /* AppStoreResearcherApp.swift */,
 				8B09521C2C90C53000960603 /* Extensions */,
 				8B0952172C90C2AB00960603 /* Utilities */,
@@ -206,6 +226,8 @@
 		8B0951C92C8F75D600960603 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B7B352C2C9C82DC007BF389 /* New Group */,
+				8BBCE71B2C9C7EFD003A532A /* ExternalCalls */,
 				8BBCE6E12C99D1DB003A532A /* UserSelection.swift */,
 				8BBCE6EB2C9B2260003A532A /* DummySearchRes.swift */,
 				8B0951CA2C8F75EF00960603 /* CD */,
@@ -256,6 +278,8 @@
 				8B09521D2C90C53A00960603 /* String+Error.swift */,
 				8B19D3A82C93461100D6B031 /* View+Styles.swift */,
 				8B19D3BD2C948DFF00D6B031 /* Optional+unwrapOrEmpty.swift */,
+				8BBCE7022C9B43C8003A532A /* JSContext+Async.swift */,
+				8BBCE7182C9C7CBC003A532A /* URLComponents+queryItems.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +323,13 @@
 			path = Comparators;
 			sourceTree = "<group>";
 		};
+		8B7B352C2C9C82DC007BF389 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		8BBCE6E02C98B290003A532A /* ModeTable Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +358,30 @@
 				8BBCE6EF2C9B2A48003A532A /* SearchResultsView.swift */,
 			);
 			path = AppSearch;
+			sourceTree = "<group>";
+		};
+		8BBCE6F12C9B378D003A532A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCE6F22C9B379E003A532A /* AppStoreSearcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8BBCE6F62C9B3A6C003A532A /* JavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCE7152C9B5DBE003A532A /* AppStoreSearcher.bundle.js */,
+			);
+			path = JavaScript;
+			sourceTree = "<group>";
+		};
+		8BBCE71B2C9C7EFD003A532A /* ExternalCalls */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCE71C2C9C7F14003A532A /* ItunesSearchRes.swift */,
+			);
+			path = ExternalCalls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +496,7 @@
 			files = (
 				8BBCE6EA2C9A0A22003A532A /* dummy_search.json in Resources */,
 				8BF3F49C2C920D7600A69692 /* dummy_page_res-1044867788.json in Resources */,
+				8BBCE7162C9B5DBE003A532A /* AppStoreSearcher.bundle.js in Resources */,
 				8BF3F49A2C920D7600A69692 /* dummy_page_res-1252208166.json in Resources */,
 				8BF3F49B2C920D7600A69692 /* dummy_page_res-1528322796.json in Resources */,
 				8BF3F4982C920D7600A69692 /* dummy_page_res-1194023242.json in Resources */,
@@ -455,6 +511,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBCE7172C9B5DBE003A532A /* AppStoreSearcher.bundle.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +541,7 @@
 				8B0952192C90C2B900960603 /* Helpers.swift in Sources */,
 				8BBCE6DF2C98B238003A532A /* ModeTableViewWrapper.swift in Sources */,
 				8B19D3AC2C9347E000D6B031 /* OverviewModeView.swift in Sources */,
+				8BBCE6F32C9B379E003A532A /* AppStoreSearcher.swift in Sources */,
 				8B19D3A92C93461100D6B031 /* View+Styles.swift in Sources */,
 				8B19D3B22C93490500D6B031 /* NoGroupSelectedView.swift in Sources */,
 				8B09521B2C90C4DF00960603 /* JSONHelpers.swift in Sources */,
@@ -492,11 +550,14 @@
 				8BF3F49F2C920FD400A69692 /* CoreDataHelpers.swift in Sources */,
 				8B19D3C32C948FF500D6B031 /* OptionalOrderedSetCountComparator.swift in Sources */,
 				8BBCE6E22C99D1DB003A532A /* UserSelection.swift in Sources */,
+				8BBCE7192C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */,
 				8B19D3BC2C948C3500D6B031 /* OptionalDateComparator.swift in Sources */,
+				8BBCE71D2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */,
 				8BBCE6EC2C9B2260003A532A /* DummySearchRes.swift in Sources */,
 				8B09519C2C8F665500960603 /* ContentView.swift in Sources */,
 				8B19D3B42C9349A500D6B031 /* MasterNoteView.swift in Sources */,
 				8BBCE6EE2C9B24D1003A532A /* SearchBarView.swift in Sources */,
+				8BBCE7032C9B43C8003A532A /* JSContext+Async.swift in Sources */,
 				8B09519A2C8F665500960603 /* AppStoreResearcherApp.swift in Sources */,
 				8B19D3B02C9348CF00D6B031 /* IconModeView.swift in Sources */,
 				8BBCE6F02C9B2A48003A532A /* SearchResultsView.swift in Sources */,
@@ -508,6 +569,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBCE7092C9B54D0003A532A /* JSContext+Async.swift in Sources */,
+				8BBCE71F2C9C7F38003A532A /* JSONHelpers.swift in Sources */,
+				8BBCE7012C9B4304003A532A /* DummyPageRes.swift in Sources */,
+				8BBCE7002C9B42FF003A532A /* AppStoreResearcher.xcdatamodeld in Sources */,
+				8BBCE71E2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */,
+				8BBCE71A2C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */,
+				8BBCE6F92C9B3ABD003A532A /* AppStoreSearcher.swift in Sources */,
 				8B0951B12C8F665700960603 /* AppStoreResearcherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
