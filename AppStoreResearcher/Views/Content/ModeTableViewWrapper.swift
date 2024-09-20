@@ -31,7 +31,7 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
             vm.setup(userSelection: userSelection, dataManager: dataManager)
         }
         .onChange(of: userSelection.pageGroup) {
-            vm.onChangePageGroup(newPageGroup: userSelection.pageGroup)
+            vm.onChangePageGroup()
         }
     }
     
@@ -46,7 +46,14 @@ extension ModeTableViewWrapper {
         var userSelection: UserSelection!
         var dataManager: DataManager!
         
-        var pg: PageGroup? = nil
+        var pg: PageGroup? {
+            guard let userSelection = userSelection else {
+                return nil
+            }
+           
+            return userSelection.pageGroup
+        }
+        
         var sortKey: KeyPathComparator<AppStorePage>?
         var aspArr: [AppStorePage] {
             guard let pg = pg else {
@@ -90,11 +97,9 @@ extension ModeTableViewWrapper {
         func setup(userSelection: UserSelection, dataManager: DataManager) {
             self.userSelection = userSelection
             self.dataManager = dataManager
-            onChangePageGroup(newPageGroup: userSelection.pageGroup)
         }
         
-        func onChangePageGroup(newPageGroup newPg: PageGroup?) {
-            self.pg = newPg
+        func onChangePageGroup() {
             selectedAppStorePageId = nil
         }
         
