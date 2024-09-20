@@ -21,7 +21,7 @@ struct AppSearchView: View {
         self._isPresented = isPresented
         
         publisher = detector
-            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
@@ -72,7 +72,7 @@ struct AppSearchView: View {
 extension AppSearchView {
     @Observable
     class ViewModel {
-        var searchVal: String = "some text"
+        var searchVal: String = ""
         var isLoading: Bool = false
         var searchResults: [AppSearchRes] = []
         var appStoreSearcher: AppStoreSearcherService
@@ -83,7 +83,10 @@ extension AppSearchView {
         
         func doSearch() {
             Task {
-                if searchVal != "" && !isLoading {
+                if searchVal == "" {
+                    self.searchResults = []
+                }
+                else if !isLoading {
                     isLoading = true
                     
                     do {
@@ -109,5 +112,5 @@ extension AppSearchView {
 }
 
 #Preview {
-    AppSearchView(isPresented: .constant(true))
+    AppSearchView(isPresented: .constant(true), vm: AppSearchView.ViewModel(appStoreSearcher: DummyAppStoreSearcherService()))
 }

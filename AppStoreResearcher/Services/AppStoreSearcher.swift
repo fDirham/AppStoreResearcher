@@ -83,3 +83,20 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
     }
 }
 
+class DummyAppStoreSearcherService: AppStoreSearcherService {
+    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes {
+        return CheerioScrapeRes.DUMMY
+    }
+    
+    func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
+        try await Task.sleep(for: .seconds(3))
+        return ItunesSearchRes.DUMMY
+    }
+    
+    func queryAppStorePageHtml(pageUrl: String) async throws -> String {
+        try await Task.sleep(for: .seconds(3))
+        return "DUMMY HTML!"
+    }
+    
+    
+}

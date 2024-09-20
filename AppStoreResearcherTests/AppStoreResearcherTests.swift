@@ -20,7 +20,7 @@ final class AppStoreResearcherTests: XCTestCase {
         
         print(testObj.trackViewUrl)
         
-        let pageTestRes = try await ass.queryAppStorePageHtml(pageUrl: testObj.trackViewUrl)
+        let _ = try await ass.queryAppStorePageHtml(pageUrl: testObj.trackViewUrl)
       
         XCTAssert(true)
     }
@@ -35,9 +35,7 @@ final class AppStoreResearcherTests: XCTestCase {
         let fileData = try Data(contentsOf: URL(fileURLWithPath: filePath!), options: .mappedIfSafe)
         let htmlString =  String(decoding: fileData, as: UTF8.self)
         
-        let scrapedRes = try await ass.scrapeAppStorePage(pageHTML: htmlString)
-        XCTAssert(scrapeRes != nil)
-        
+        let scrapeRes = try ass.scrapeAppStorePage(pageHTML: htmlString)
     }
 
 }
