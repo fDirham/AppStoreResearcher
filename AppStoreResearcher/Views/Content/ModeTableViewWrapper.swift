@@ -21,7 +21,7 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
         Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
             tableColumns
         } rows: {
-            ForEach(vm.aspList, id: \.app_bundle_id) { obj in
+            ForEach(vm.aspArr, id: \.app_bundle_id) { obj in
                 TableRow(obj)
             }
         }
@@ -42,8 +42,26 @@ extension ModeTableViewWrapper {
     @Observable
     class ViewModel {
         var pg: PageGroup? = nil
-        var piList: [PageItem] = []
-        var aspList: [AppStorePage] = []
+        var sortKey: KeyPathComparator<AppStorePage>?
+        var aspArr: [AppStorePage] {
+            guard let pg = pg else {
+                return []
+            }
+            
+            guard let piList = pg.page_items else {
+                return []
+            }
+            
+            let piArr: [PageItem] = piList.array as? [PageItem] ?? []
+            var toReturn: [AppStorePage] = piArr.map{$0.app_store_page!}
+            
+            if let sortKey = sortKey {
+                toReturn.sort(using: sortKey)
+            }
+
+            return toReturn
+
+        }
         
         private var _selectedAppStorePageId: AppStorePage.ID? = nil
         var selectedAppStorePageId: AppStorePage.ID? {
@@ -72,32 +90,19 @@ extension ModeTableViewWrapper {
         
         func onChangePageGroup(newPageGroup newPg: PageGroup?) {
             self.pg = newPg
-            if let pg = newPg {
-                if let newPiList = pg.page_items {
-                    let piListArr: [PageItem] = newPiList.array as? [PageItem] ?? []
-                    self.piList = piListArr
-                }
-                else {
-                    self.piList = []
-                }
-                
-                self.aspList = piList.map{$0.app_store_page!}
-            }
-            else {
-                self.aspList = []
-            }
-            
             selectedAppStorePageId = nil
         }
         
         private func onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
             if let newKey = newSortOder.first {
-                aspList.sort(using: newKey)
+                sortKey = newKey
             }
         }
         
         private func onSelectedAppStorePageIdChanged(newId: AppStorePage.ID?){
-            let pageItem = DataManager.getPageItemFromAppStorePageId(aspId: newId, pageItems: self.piList)
+            let pageItems = pg!.page_items?.array as! [PageItem]
+            
+            let pageItem = DataManager.getPageItemFromAppStorePageId(aspId: newId, pageItems: pageItems)
             userSelection!.pageItem = pageItem
         }
     }
