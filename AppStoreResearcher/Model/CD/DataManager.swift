@@ -217,6 +217,18 @@ extension DataManager {
     }
 }
 
+// MARK: PageItem functions
+extension DataManager {
+    func createNewPageItem(asp: AppStorePage, pageGroup: PageGroup){
+        let toAdd = PageItem(context: self.viewContext)
+        toAdd.app_store_page = asp
+        toAdd.item_note = Note(context: self.viewContext)
+        
+        pageGroup.addToPage_items(toAdd)
+        self.saveData()
+    }
+}
+
 // MARK: Note functions
 extension DataManager {
     func createNoteForPageGroup(pageGroup: PageGroup) {
@@ -240,6 +252,79 @@ extension DataManager {
     }
 }
 
+// MARK: AppStorePage functions
+extension DataManager {
+    func getAppStorePageWithBundleId(_ bundleId: String) throws -> AppStorePage?{
+        let fetchRequest: NSFetchRequest<AppStorePage>
+        fetchRequest = AppStorePage.fetchRequest()
+
+        fetchRequest.predicate = NSPredicate(
+            format: "app_bundle_id LIKE %@", bundleId
+        )
+
+        let objects = try self.viewContext.fetch(fetchRequest)
+        return objects.first
+    }
+    
+    func createIncompleteAppStorePage(itunesRes: ItunesSearchRes.Result) -> AppStorePage {
+        // Create stringholders
+        let cdGenreListArr: [StringHolder] = itunesRes.genres.map({strVal in
+            let toAdd = StringHolder(context: viewContext)
+            toAdd.string = strVal
+            return toAdd
+        })
+        let cdGenreList: NSSet = NSSet(array: cdGenreListArr)
+        
+        var cdScreenshotIosArr: [StringHolder] = []
+        for strVal in itunesRes.screenshotUrls {
+            let toAdd = StringHolder(context: viewContext)
+            toAdd.string = strVal
+            cdScreenshotIosArr.append(toAdd)
+        }
+        let cdScreenshotIos = NSOrderedSet(array: cdScreenshotIosArr)
+
+        var cdScreenshotIpadArr: [StringHolder] = []
+        for strVal in itunesRes.ipadScreenshotUrls {
+            let toAdd = StringHolder(context: viewContext)
+            toAdd.string = strVal
+            cdScreenshotIpadArr.append(toAdd)
+        }
+        let cdScreenshotIpad = NSOrderedSet(array: cdScreenshotIpadArr)
+
+        // Parse dates
+        let dateFormatter = ISO8601DateFormatter()
+        let releaseDate = dateFormatter.date(from: itunesRes.releaseDate)
+        let currVerReleaseDate = dateFormatter.date(from: itunesRes.currentVersionReleaseDate)
+        
+        let asp: AppStorePage = AppStorePage(context: viewContext)
+        asp.app_title = itunesRes.trackName
+        asp.app_store_url = itunesRes.trackViewUrl
+        asp.app_bundle_id = itunesRes.bundleId
+        asp.app_id = String(itunesRes.trackId)
+        asp.app_description = itunesRes.description
+        asp.app_icon_60 = itunesRes.artworkUrl60
+        asp.app_icon_512 = itunesRes.artworkUrl512
+        asp.creator_name = itunesRes.artistName
+        asp.creator_url = itunesRes.artistViewUrl
+        asp.rating_avg = itunesRes.averageUserRating
+        asp.rating_count = Int64(itunesRes.userRatingCount)
+        asp.current_version = itunesRes.version
+        asp.release_date = releaseDate
+        asp.current_version_release_date = currVerReleaseDate
+        asp.primary_genre = itunesRes.primaryGenreName
+        asp.genre_list = cdGenreList
+        asp.purchase_price = itunesRes.price
+        asp.purchase_currency = itunesRes.currency
+        asp.content_rating = itunesRes.trackContentRating
+        asp.minimum_os_version = itunesRes.minimumOsVersion
+        asp.screenshot_ios = cdScreenshotIos
+        asp.screenshot_ipad = cdScreenshotIpad
+        
+        saveData()
+        
+        return asp
+    }
+}
 
 // MARK: Convenience functions
 extension DataManager {
@@ -255,5 +340,13 @@ extension DataManager {
         return filtered.first
     }
     
+    static func doesPageGroupContainAppStorePageWithBundleId(_ bundleId: String, pageGroup: PageGroup) -> Bool {
+        let piList = pageGroup.page_items!.array as! [PageItem]
+        let selected = piList.first(where: {pi in
+            let asp = pi.app_store_page!
+            return asp.app_bundle_id == bundleId
+        })
+        return selected != nil
+    }
     
 }

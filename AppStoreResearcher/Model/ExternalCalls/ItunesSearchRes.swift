@@ -52,6 +52,7 @@ struct ItunesSearchRes: Codable {
     var resultCount: Int
 }
 
+
 //#if targetEnvironment(simulator)
 extension ItunesSearchRes {
     

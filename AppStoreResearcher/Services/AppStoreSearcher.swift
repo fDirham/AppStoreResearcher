@@ -9,9 +9,8 @@ import Foundation
 import JavaScriptCore
 
 protocol AppStoreSearcherService {
-    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes
-    func queryItunesSearch(searchQuery:String) async throws -> ItunesSearchRes
-    func queryAppStorePageHtml(pageUrl: String) async throws -> String
+    func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes
+    func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes
 }
 
 class MainAppStoreSearcherService: AppStoreSearcherService {
@@ -39,14 +38,9 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
 
     }
     
-    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes{
-        let jsModule = self.context.objectForKeyedSubscript("AppStoreSearcher")
-        if let res = jsModule?.invokeMethod("scrapeAppStorePage", withArguments: [pageHTML]) {
-            let toReturn: CheerioScrapeRes = try decodeJSONObj(res.toString())
-            return toReturn
-        }
-        
-        throw "Something went wrong getting module"
+    func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes {
+        let html = try await queryAppStorePageHtml(pageUrl: pageUrl)
+        return try scrapeAppStorePage(pageHTML: html)
     }
     
     func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
@@ -66,7 +60,17 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
         return itunesRes
     }
     
-    func queryAppStorePageHtml(pageUrl: String) async throws -> String {
+    private func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes{
+        let jsModule = self.context.objectForKeyedSubscript("AppStoreSearcher")
+        if let res = jsModule?.invokeMethod("scrapeAppStorePage", withArguments: [pageHTML]) {
+            let toReturn: CheerioScrapeRes = try decodeJSONObj(res.toString())
+            return toReturn
+        }
+        
+        throw "Something went wrong getting module"
+    }
+    
+    private func queryAppStorePageHtml(pageUrl: String) async throws -> String {
         guard let url = URL(string: pageUrl) else {
             throw "URL Invalid"
         }
@@ -84,7 +88,8 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
 }
 
 class DummyAppStoreSearcherService: AppStoreSearcherService {
-    func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes {
+    func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes {
+        try await Task.sleep(for: .seconds(3))
         return CheerioScrapeRes.DUMMY
     }
     
@@ -92,11 +97,5 @@ class DummyAppStoreSearcherService: AppStoreSearcherService {
         try await Task.sleep(for: .seconds(3))
         return ItunesSearchRes.DUMMY
     }
-    
-    func queryAppStorePageHtml(pageUrl: String) async throws -> String {
-        try await Task.sleep(for: .seconds(3))
-        return "DUMMY HTML!"
-    }
-    
     
 }

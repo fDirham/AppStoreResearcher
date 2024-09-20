@@ -36,8 +36,6 @@
 		8B7B353B2C9C8EAE007BF389 /* CheerioScrapeRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B35392C9C8EAE007BF389 /* CheerioScrapeRes.swift */; };
 		8B7B353D2C9C93B3007BF389 /* AppStoreSearcher.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B7B353C2C9C93B3007BF389 /* AppStoreSearcher.bundle.js */; };
 		8B7B353E2C9C93B3007BF389 /* AppStoreSearcher.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 8B7B353C2C9C93B3007BF389 /* AppStoreSearcher.bundle.js */; };
-		8B7B35432C9CA4C9007BF389 /* ProtoAppStorePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B35422C9CA4C9007BF389 /* ProtoAppStorePage.swift */; };
-		8B7B35442C9CA4C9007BF389 /* ProtoAppStorePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B35422C9CA4C9007BF389 /* ProtoAppStorePage.swift */; };
 		8BBCE6D22C965335003A532A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D12C965335003A532A /* RatingView.swift */; };
 		8BBCE6D52C9655BE003A532A /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8BBCE6D42C9655BE003A532A /* NukeUI */; };
 		8BBCE6D92C989171003A532A /* InAppPurchasesModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCE6D82C989171003A532A /* InAppPurchasesModeView.swift */; };
@@ -117,7 +115,6 @@
 		8B7B35362C9C8D68007BF389 /* page_fetch_res.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = page_fetch_res.html; sourceTree = "<group>"; };
 		8B7B35392C9C8EAE007BF389 /* CheerioScrapeRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheerioScrapeRes.swift; sourceTree = "<group>"; };
 		8B7B353C2C9C93B3007BF389 /* AppStoreSearcher.bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppStoreSearcher.bundle.js; sourceTree = "<group>"; };
-		8B7B35422C9CA4C9007BF389 /* ProtoAppStorePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoAppStorePage.swift; sourceTree = "<group>"; };
 		8BBCE6D12C965335003A532A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		8BBCE6D82C989171003A532A /* InAppPurchasesModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchasesModeView.swift; sourceTree = "<group>"; };
 		8BBCE6DE2C98B238003A532A /* ModeTableViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeTableViewWrapper.swift; sourceTree = "<group>"; };
@@ -250,7 +247,6 @@
 				8B0951A22C8F665700960603 /* Persistence.swift */,
 				8B0951A42C8F665700960603 /* AppStoreResearcher.xcdatamodeld */,
 				8BF3F4902C920C6D00A69692 /* DummyPageRes.swift */,
-				8B7B35422C9CA4C9007BF389 /* ProtoAppStorePage.swift */,
 			);
 			path = CD;
 			sourceTree = "<group>";
@@ -561,7 +557,6 @@
 				8BBCE6D92C989171003A532A /* InAppPurchasesModeView.swift in Sources */,
 				8B19D3C32C948FF500D6B031 /* OptionalOrderedSetCountComparator.swift in Sources */,
 				8BBCE6E22C99D1DB003A532A /* UserSelection.swift in Sources */,
-				8B7B35432C9CA4C9007BF389 /* ProtoAppStorePage.swift in Sources */,
 				8BBCE7192C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */,
 				8B19D3BC2C948C3500D6B031 /* OptionalDateComparator.swift in Sources */,
 				8BBCE71D2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */,
@@ -586,7 +581,6 @@
 				8BBCE7012C9B4304003A532A /* DummyPageRes.swift in Sources */,
 				8BBCE7002C9B42FF003A532A /* AppStoreResearcher.xcdatamodeld in Sources */,
 				8BBCE71E2C9C7F14003A532A /* ItunesSearchRes.swift in Sources */,
-				8B7B35442C9CA4C9007BF389 /* ProtoAppStorePage.swift in Sources */,
 				8B7B353B2C9C8EAE007BF389 /* CheerioScrapeRes.swift in Sources */,
 				8BBCE71A2C9C7CBC003A532A /* URLComponents+queryItems.swift in Sources */,
 				8BBCE6F92C9B3ABD003A532A /* AppStoreSearcher.swift in Sources */,

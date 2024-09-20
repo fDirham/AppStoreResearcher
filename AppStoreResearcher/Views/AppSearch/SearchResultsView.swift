@@ -10,12 +10,13 @@ import NukeUI
 
 struct SearchResultsView: View {
     var searchResults: [AppSearchRes]
-    
+    var onAdd: (AppSearchRes) -> Void
+
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(searchResults, id: \.appUrl) { res in
-                    SearchResultBlockView(searchResult: res)
+                    SearchResultBlockView(searchResult: res, onAdd: onAdd)
                 }
             }
         }
@@ -25,6 +26,7 @@ struct SearchResultsView: View {
 
 struct SearchResultBlockView: View {
     var searchResult: AppSearchRes
+    var onAdd: (AppSearchRes) -> Void
     
     var body: some View {
         HStack(alignment: .center) {
@@ -51,7 +53,7 @@ struct SearchResultBlockView: View {
                 }
                 .buttonStyle(.borderless)
                 Button(action: {
-                    print("TODO")
+                    onAdd(searchResult)
                 }) {
                     Image(systemName: "plus.circle")
                 }
@@ -68,7 +70,7 @@ struct SearchResultsView_Preview: PreviewProvider {
         @State private var searchResults: [AppSearchRes] = AppSearchRes.DUMMY
         
         var body: some View {
-            SearchResultsView(searchResults: searchResults)
+            SearchResultsView(searchResults: searchResults, onAdd: {_ in})
         }
     }
     
