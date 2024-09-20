@@ -65,12 +65,31 @@ struct AppSearchView: View {
             .frame(maxHeight: 300)
         }
         .onAppear {
-            vm.setup(userSelection: userSelection, dataManager: dataManager)
+            vm.setup(
+                userSelection: userSelection,
+                dataManager: dataManager,
+                onAddFinish: self.handleAddFinish
+            )
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
                 self.searchBarFocused = true
             }
         }
+        .alert(
+            Text("Error"),
+            isPresented: $vm.showErrorAlert
+        ) {
+            Button("Ok") {
+                // Handle the retry action.
+                vm.showErrorAlert = false
+            }
+        } message: {
+            Text(vm.errorVal?.localizedDescription ?? "Unknown error")
+        }
+    }
+    
+    private func handleAddFinish() {
+       isPresented = false
     }
 }
 
@@ -87,15 +106,33 @@ extension AppSearchView {
         var displaySearchResults: [AppSearchRes] {
             itunesSearchResults.map({obj in AppSearchRes(itunesResult: obj)})
         }
+        var onAddFinish: (() -> Void)!
         
+        var errorVal: Error?
+        var showErrorAlert: Bool {
+            set {
+                errorVal = nil
+            }
+            get {
+                errorVal == nil
+            }
+        }
+
         init(appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
             // TODO: Change back when done testing
+            // TODO: Make this part of some env variable
             self.appStoreSearcher = DummyAppStoreSearcherService()
         }
         
-        func setup(userSelection: UserSelection, dataManager: DataManager){
+        func setup(
+            userSelection: UserSelection,
+            dataManager: DataManager,
+            onAddFinish: @escaping () -> Void
+        )
+        {
             self.userSelection = userSelection
             self.dataManager = dataManager
+            self.onAddFinish = onAddFinish
         }
         
         func doSearch() {
@@ -112,8 +149,8 @@ extension AppSearchView {
                         self.itunesSearchResults = itunesRes.results
                     }
                     catch {
-                        // TODO: Better error handling
-                        print("Cannot get search results", error.localizedDescription)
+                        print("Cannot get search results. Check your wifi and try again later.", error.localizedDescription)
+                        errorVal = error
                     }
                     
                     isLoading = false
@@ -128,7 +165,7 @@ extension AppSearchView {
                 
                 // Check if other bundle ids in group already exists
                 guard let selectedPageGroup = userSelection?.pageGroup else {
-                    throw "Please select a group. This error should not be possible."
+                    throw "Please select a group."
                 }
                 
                 if DataManager.doesPageGroupContainAppStorePageWithBundleId(searchRes.bundleId, pageGroup: selectedPageGroup) {
@@ -153,17 +190,17 @@ extension AppSearchView {
                     
                     dataManager.createNewPageItem(asp: aspToAdd, pageGroup: selectedPageGroup)
                     
-                    // TODO: Refresh
+                    onAddFinish()
                 }
                 catch {
                     // All errors here are due to system errors
                     print(error.localizedDescription)
+                    errorVal = "System error" as LocalizedError
                 }
             }
             catch {
                 // All errors here alert user
-                // TODO: Alert user
-                print(error.localizedDescription)
+                errorVal = error
             }
             
         }
