@@ -10,6 +10,8 @@ import Combine
 
 struct MasterNoteView: View {
     @Environment(UserSelection.self) private var userSelection
+    @Environment(DataManager.self) private var dataManager
+    
     @State var vm = ViewModel()
     
     let detector = PassthroughSubject<Void, Never>()
@@ -62,7 +64,7 @@ struct MasterNoteView: View {
         }
         .frame(width: 300)
         .onAppear() {
-            vm.setup(userSelection: userSelection)
+            vm.setup(userSelection: userSelection, dataManager: dataManager)
         }
         .onChange(of: userSelection.pageGroup) {
             vm.changePageGroup()
@@ -76,9 +78,9 @@ struct MasterNoteView: View {
 extension MasterNoteView {
     @Observable
     class ViewModel {
-        var dataManager: DataManager
+        var dataManager: DataManager!
+        var userSelection: UserSelection!
         
-        var userSelection: UserSelection?
         private var _noteMode: NoteMode = .NONE
         var noteMode: NoteMode {
             set {
@@ -112,14 +114,11 @@ extension MasterNoteView {
         }
         
         var noteContents: String = ""
-
-        init(dataManager: DataManager = DataManager.shared) {
-            self.dataManager = dataManager
-        }
         
-        func setup(userSelection: UserSelection){
+        func setup(userSelection: UserSelection, dataManager: DataManager){
             self.userSelection = userSelection
-            
+            self.dataManager = dataManager
+
             var startWithPg = false
             var startWithPi = false
             
@@ -256,17 +255,13 @@ extension MasterNoteView {
 
 struct MasterNoteView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection: UserSelection
-        
-        init(){
-            userSelection = UserSelection()
-            userSelection.pageGroup = DataManager.preview.getRandomAppGroup()
-            userSelection.pageItem = DataManager.preview.getRandomPageItem(pageGroup: userSelection.pageGroup!)
-        }
-        
+        @State private var userSelection = UserSelection.preview
+        @State private var dataManager = DataManager.preview
+
         var body: some View {
-            MasterNoteView(vm: MasterNoteView.ViewModel(dataManager: DataManager.preview))
+            MasterNoteView()
                 .environment(userSelection)
+                .environment(dataManager)
         }
     }
     

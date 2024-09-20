@@ -187,15 +187,15 @@
 		8B0951982C8F665500960603 /* AppStoreResearcher */ = {
 			isa = PBXGroup;
 			children = (
+				8B0951992C8F665500960603 /* AppStoreResearcherApp.swift */,
 				8BBCE6F62C9B3A6C003A532A /* JavaScript */,
 				8BBCE6F12C9B378D003A532A /* Services */,
-				8B0951992C8F665500960603 /* AppStoreResearcherApp.swift */,
 				8B09521C2C90C53000960603 /* Extensions */,
 				8B0952172C90C2AB00960603 /* Utilities */,
 				8B19D3AA2C93468100D6B031 /* Views */,
+				8B0951C92C8F75D600960603 /* Model */,
 				8B09519D2C8F665700960603 /* Assets.xcassets */,
 				8B0951A72C8F665700960603 /* AppStoreResearcher.entitlements */,
-				8B0951C92C8F75D600960603 /* Model */,
 				8B09519F2C8F665700960603 /* Preview Content */,
 				8B0952092C90991A00960603 /* Dummy */,
 			);

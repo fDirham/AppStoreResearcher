@@ -17,7 +17,7 @@ struct SearchBarView: View {
     let detector = PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<Void, Never>
     
-    init(searchBarFocused: FocusState<Bool>.Binding, searchVal: Binding<String>, isLoading: Bool, onSearch: @escaping ()->Void) {
+    init(searchBarFocused: FocusState<Bool>.Binding, searchVal: Binding<String>, isLoading: Bool, onSearch: @escaping ()-> Void) {
         self._searchBarFocused = searchBarFocused
         self._searchVal = searchVal
         self.isLoading = isLoading
@@ -66,7 +66,7 @@ struct SearchBarView_Preview: PreviewProvider {
         @FocusState private var searchBarFocused: Bool
 
         var body: some View {
-            SearchBarView(searchBarFocused: $searchBarFocused, searchVal: $searchVal,isLoading: false, onSearch: {})
+            SearchBarView(searchBarFocused: $searchBarFocused, searchVal: $searchVal, isLoading: false, onSearch: {})
         }
     }
     

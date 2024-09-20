@@ -8,6 +8,15 @@
 import Foundation
 
 @Observable class UserSelection {
+    static var shared: UserSelection = UserSelection()
+    static var preview: UserSelection = {
+        let toReturn = UserSelection()
+        toReturn.pageGroup = DataManager.preview.getRandomAppGroup()
+        toReturn.pageItem = DataManager.preview.getRandomPageItem(pageGroup: toReturn.pageGroup!)
+        
+        return toReturn
+    }()
+    
     private var _pageGroup: PageGroup? = nil
     var pageGroup: PageGroup? {
         set {

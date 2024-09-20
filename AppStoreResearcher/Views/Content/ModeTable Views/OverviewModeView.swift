@@ -88,18 +88,13 @@ struct OverviewModeView: View {
 
 struct OverviewModeView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection: UserSelection
-        
-        init() {
-            let us = UserSelection()
-            us.pageGroup = DataManager.preview.getRandomAppGroup()
-            
-            self.userSelection = us
-        }
-        
+        @State private var userSelection =  UserSelection.preview
+        @State private var dataManager = DataManager.preview
+
         var body: some View {
             OverviewModeView()
                 .environment(userSelection)
+                .environment(dataManager)
         }
     }
     

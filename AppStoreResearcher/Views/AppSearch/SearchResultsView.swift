@@ -67,10 +67,8 @@ struct SearchResultBlockView: View {
 
 struct SearchResultsView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var searchResults: [AppSearchRes] = AppSearchRes.DUMMY
-        
         var body: some View {
-            SearchResultsView(searchResults: searchResults, onAdd: {_ in})
+            SearchResultsView(searchResults: AppSearchRes.DUMMY, onAdd: {_ in})
         }
     }
     

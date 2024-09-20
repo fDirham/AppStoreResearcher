@@ -10,6 +10,8 @@ import Combine
 
 struct AppSearchView: View {
     @Environment(UserSelection.self) private var userSelection
+    @Environment(DataManager.self) private var dataManager
+    
     @Binding var isPresented: Bool
     @State var vm = ViewModel()
     @FocusState var searchBarFocused: Bool
@@ -63,7 +65,7 @@ struct AppSearchView: View {
             .frame(maxHeight: 300)
         }
         .onAppear {
-            vm.setup(userSelection: userSelection)
+            vm.setup(userSelection: userSelection, dataManager: dataManager)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
                 self.searchBarFocused = true
@@ -76,8 +78,8 @@ extension AppSearchView {
     @Observable
     class ViewModel {
         var appStoreSearcher: AppStoreSearcherService
-        var dataManager: DataManager
-        var userSelection: UserSelection?
+        var dataManager: DataManager!
+        var userSelection: UserSelection!
 
         var searchVal: String = ""
         var isLoading: Bool = false
@@ -86,14 +88,14 @@ extension AppSearchView {
             itunesSearchResults.map({obj in AppSearchRes(itunesResult: obj)})
         }
         
-        init(dataManager: DataManager = DataManager.shared, appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
+        init(appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
             // TODO: Change back when done testing
             self.appStoreSearcher = DummyAppStoreSearcherService()
-            self.dataManager = dataManager
         }
         
-        func setup(userSelection: UserSelection){
+        func setup(userSelection: UserSelection, dataManager: DataManager){
             self.userSelection = userSelection
+            self.dataManager = dataManager
         }
         
         func doSearch() {
@@ -170,20 +172,15 @@ extension AppSearchView {
 
 struct AppSearchView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection: UserSelection
-        
-        init(){
-            userSelection = UserSelection()
-            userSelection.pageGroup = DataManager.preview.getRandomAppGroup()
-            userSelection.pageItem = DataManager.preview.getRandomPageItem(pageGroup: userSelection.pageGroup!)
-        }
-        
+        @State private var userSelection = UserSelection.preview
+        @State private var dataManager = DataManager.preview
+
         var body: some View {
             AppSearchView(isPresented: .constant(true), vm: AppSearchView.ViewModel(
-                dataManager: DataManager.preview,
                 appStoreSearcher: DummyAppStoreSearcherService())
             )
             .environment(userSelection)
+            .environment(dataManager)
         }
     }
     

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathComparator<AppStorePage>>>: View {
     @Environment(UserSelection.self) private var userSelection
+    @Environment(DataManager.self) private var dataManager
+    
     @State private var vm: ViewModel = ViewModel()
     
     @TableColumnBuilder<AppStorePage, KeyPathComparator<AppStorePage>> var tableColumns: Content
@@ -26,7 +28,7 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
             }
         }
         .onAppear {
-            vm.setup(userSelection: userSelection)
+            vm.setup(userSelection: userSelection, dataManager: dataManager)
         }
         .onChange(of: userSelection.pageGroup) {
             vm.onChangePageGroup(newPageGroup: userSelection.pageGroup)
@@ -41,6 +43,9 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
 extension ModeTableViewWrapper {
     @Observable
     class ViewModel {
+        var userSelection: UserSelection!
+        var dataManager: DataManager!
+        
         var pg: PageGroup? = nil
         var sortKey: KeyPathComparator<AppStorePage>?
         var aspArr: [AppStorePage] {
@@ -81,10 +86,10 @@ extension ModeTableViewWrapper {
             get { return _sortOrder}
         }
         
-        var userSelection: UserSelection? = nil
 
-        func setup(userSelection: UserSelection) {
+        func setup(userSelection: UserSelection, dataManager: DataManager) {
             self.userSelection = userSelection
+            self.dataManager = dataManager
             onChangePageGroup(newPageGroup: userSelection.pageGroup)
         }
         

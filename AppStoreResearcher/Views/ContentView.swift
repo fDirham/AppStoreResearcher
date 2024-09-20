@@ -10,6 +10,7 @@ import Combine
 
 struct ContentView: View {
     @Environment(UserSelection.self) var userSelection
+    @Environment(DataManager.self) var dataManager
     @State var vm = ViewModel()
     
     var body: some View {
@@ -113,7 +114,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                vm.setup(userSelection: userSelection)
+                vm.setup(userSelection: userSelection, dataManager: dataManager)
             }
             .onChange(of: userSelection.pageGroup) {
                 if let selectedGroup = userSelection.pageGroup {
@@ -129,7 +130,8 @@ struct ContentView: View {
 
 extension ContentView {
     @Observable class ViewModel {
-        var userSelection: UserSelection? = nil
+        var userSelection: UserSelection!
+        private var dataManager: DataManager!
         
         var showDetail = false
         private var _selectedGroupId: PageGroup.ID? = nil
@@ -143,12 +145,13 @@ extension ContentView {
         
         var contentTitle: String = "ASR"
         var contentMode: ContentMode = .OVERVIEW
-        private var dataManager: DataManager
         var anyCancellable: AnyCancellable? = nil
         var pageGroupList: [PageGroup] {
-            dataManager.pageGroupList
+            guard let dataManager = dataManager else {
+                return []
+            }
+            return dataManager.pageGroupList
         }
-        
         var alertNewGroup = false
         var newGroupName: String = ""
         var alertDeleteGroup = false
@@ -156,13 +159,9 @@ extension ContentView {
         
         var showAddInterface = false
         
-        
-        init(dataManager: DataManager = DataManager.shared) {
-            self.dataManager = dataManager
-        }
-        
-        func setup(userSelection: UserSelection) {
+        func setup(userSelection: UserSelection, dataManager: DataManager) {
             self.userSelection = userSelection
+            self.dataManager = dataManager
         }
         
         func startNewGroup(){
@@ -207,11 +206,13 @@ extension ContentView {
 
 struct ContentView_Preview: PreviewProvider {
     struct Container: View {
-        @State private var userSelection = UserSelection()
-        
+        @State private var userSelection = UserSelection.preview
+        @State private var dataManager = DataManager.preview
+
         var body: some View {
-            ContentView(vm: ContentView.ViewModel(dataManager: DataManager.preview))
+            ContentView()
                 .environment(userSelection)
+                .environment(dataManager)
         }
     }
     
