@@ -231,6 +231,19 @@ extension DataManager {
         pageGroup.addToPage_items(toAdd)
         self.saveData()
     }
+    
+    func getPageItemWithAppStorePage(asp: AppStorePage, pageGroup: PageGroup) -> PageItem? {
+        guard let piArr = pageGroup.page_items?.array as? [PageItem] else {
+            return nil
+        }
+        
+        return piArr.first(where: {pi in pi.app_store_page?.app_bundle_id == asp.app_bundle_id})
+    }
+    
+    func deletePageItem(pageItem pi: PageItem){
+        self.viewContext.delete(pi)
+        self.saveData()
+    }
 }
 
 // MARK: Note functions

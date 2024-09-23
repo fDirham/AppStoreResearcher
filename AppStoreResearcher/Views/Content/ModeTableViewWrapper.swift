@@ -25,6 +25,13 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
         } rows: {
             ForEach(vm.aspArr, id: \.id) { obj in
                 TableRow(obj)
+                    .contextMenu {
+                        Button {
+                            vm.onDeleteRow(asp: obj)
+                        } label: {
+                            Text("Delete")
+                        }
+                    }
             }
         }
         .onAppear {
@@ -103,6 +110,12 @@ extension ModeTableViewWrapper {
         
         func onChangePageGroup() {
             selectedAppStorePageId = nil
+        }
+        
+        func onDeleteRow(asp: AppStorePage) {
+            if let pi = dataManager.getPageItemWithAppStorePage(asp: asp, pageGroup: pg!) {
+                dataManager.deletePageItem(pageItem: pi)
+            }
         }
         
         private func onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
