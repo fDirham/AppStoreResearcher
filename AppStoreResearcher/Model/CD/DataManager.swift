@@ -287,7 +287,7 @@ extension DataManager {
         // Create stringholders
         var cdGenreListArr: [StringHolder] = []
         if let genreList = itunesRes.genres {
-            let toReplace: [StringHolder] = genreList.map({strVal in
+            cdGenreListArr = genreList.map({strVal in
                 let toAdd = StringHolder(context: viewContext)
                 toAdd.string = strVal
                 return toAdd
