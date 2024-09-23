@@ -45,6 +45,38 @@ class AppStoreSearcher: AppStoreSearcherService {
     }
     
     func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
+        let isBundleSearch = searchQuery.hasPrefix("com.")
+        
+        var searchUrl: URL!
+        if isBundleSearch {
+            searchUrl = try getBundleIdItunesSearchUrl(bundleId: searchQuery)
+        }
+        else {
+            searchUrl = try getGenericItunesSearchUrl(searchQuery: searchQuery)
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: searchUrl)
+        
+        var itunesRes: ItunesSearchRes = try decodeJSONData(data)
+        itunesRes.removeWeirdResults()
+        
+        return itunesRes
+    }
+    
+    private func getBundleIdItunesSearchUrl(bundleId: String) throws -> URL {
+        let mediaQItem = URLQueryItem(name: "media", value: "software")
+        let termQItem = URLQueryItem(name: "bundleId", value: bundleId)
+        guard let url = URLComponents(
+            host: "itunes.apple.com",
+            path: "/lookup",
+            queryItems: [mediaQItem, termQItem]
+        ).url else {
+            throw "URL Invalid"
+        }
+        return url
+    }
+
+    private func getGenericItunesSearchUrl(searchQuery: String) throws -> URL {
         let mediaQItem = URLQueryItem(name: "media", value: "software")
         let termQItem = URLQueryItem(name: "term", value: searchQuery)
         guard let url = URLComponents(
@@ -54,13 +86,7 @@ class AppStoreSearcher: AppStoreSearcherService {
         ).url else {
             throw "URL Invalid"
         }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        
-        var itunesRes: ItunesSearchRes = try decodeJSONData(data)
-        itunesRes.removeWeirdResults()
-        
-        return itunesRes
+        return url
     }
     
     private func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes{
