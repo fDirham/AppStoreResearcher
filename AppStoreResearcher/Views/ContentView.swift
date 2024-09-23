@@ -169,9 +169,11 @@ extension ContentView {
         }
         
         func confirmNewGroup(){
-            dataManager.createNewPageGroup(groupName: self.newGroupName)
+            let newlyAdded = dataManager.createNewPageGroup(groupName: self.newGroupName)
             newGroupName = ""
             alertNewGroup = false
+            
+            self.selectedGroupId = newlyAdded.id
         }
         
         func cancelNewGroup(){
@@ -186,10 +188,12 @@ extension ContentView {
         
         func confirmDeleteGroup(){
             if let pg = groupToDelete {
+                self.selectedGroupId = nil
                 dataManager.deletePageGroup(pageGroup: pg)
             }
             groupToDelete = nil
             alertDeleteGroup = false
+            
         }
         
         func cancelDeleteGroup(){

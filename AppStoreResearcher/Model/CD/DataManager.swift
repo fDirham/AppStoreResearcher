@@ -200,11 +200,12 @@ extension DataManager {
 
 // MARK: PageGroup functions
 extension DataManager {
-    func createNewPageGroup(groupName: String) {
+    func createNewPageGroup(groupName: String) -> PageGroup {
         let toAdd = PageGroup(context: self.viewContext)
         toAdd.group_name = groupName
         toAdd.group_note = Note(context: self.viewContext)
         self.saveData()
+        return toAdd
     }
     
     func deletePageGroup(pageGroup pg: PageGroup){

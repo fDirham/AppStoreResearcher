@@ -49,12 +49,9 @@ struct SearchResultBlockView: View {
                 .font(.system(size: 14))
             Spacer()
             HStack{
-                Button(action: {
-                    print("TODO")
-                }) {
+                Link(destination: URL(string: searchResult.appUrl)!) {
                     Image(systemName: "link")
                 }
-                .buttonStyle(.borderless)
                 if !isAddLoading {
                     Button(action: {
                         Task {
