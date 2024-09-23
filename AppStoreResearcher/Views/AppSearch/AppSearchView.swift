@@ -9,9 +9,10 @@ import SwiftUI
 import Combine
 
 struct AppSearchView: View {
+    @Environment(ServiceCentral.self) private var serviceCentral
     @Environment(UserSelection.self) private var userSelection
     @Environment(DataManager.self) private var dataManager
-    
+
     @Binding var isPresented: Bool
     @State var vm = ViewModel()
     @FocusState var searchBarFocused: Bool
@@ -60,6 +61,7 @@ struct AppSearchView: View {
         }
         .onAppear {
             vm.setup(
+                serviceCentral: serviceCentral,
                 userSelection: userSelection,
                 dataManager: dataManager,
                 onAddFinish: self.handleAddFinish
@@ -90,7 +92,7 @@ struct AppSearchView: View {
 extension AppSearchView {
     @Observable
     class ViewModel {
-        var appStoreSearcher: AppStoreSearcherService
+        var serviceCentral: ServiceCentral!
         var dataManager: DataManager!
         var userSelection: UserSelection!
 
@@ -113,19 +115,15 @@ extension AppSearchView {
         }
         
         var isAddLoading: Bool = false
-
-        init(appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
-            // TODO: Change back when done testing
-            // TODO: Make this part of some env variable
-            self.appStoreSearcher = DummyAppStoreSearcherService()
-        }
         
         func setup(
+            serviceCentral: ServiceCentral,
             userSelection: UserSelection,
             dataManager: DataManager,
             onAddFinish: @escaping () -> Void
         )
         {
+            self.serviceCentral = serviceCentral
             self.userSelection = userSelection
             self.dataManager = dataManager
             self.onAddFinish = onAddFinish
@@ -140,7 +138,7 @@ extension AppSearchView {
                     isSearchLoading = true
                     
                     do {
-                        let itunesRes = try await appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
+                        let itunesRes = try await serviceCentral.appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
                         
                         self.itunesSearchResults = itunesRes.results
                     }
@@ -181,7 +179,7 @@ extension AppSearchView {
                         }
                         
                         isAddLoading = true
-                        let scrapeRes = try await self.appStoreSearcher.queryAppStorePage(pageUrl: itunesRes.trackViewUrl)
+                        let scrapeRes = try await serviceCentral.appStoreSearcher.queryAppStorePage(pageUrl: itunesRes.trackViewUrl)
                         
                         aspToAdd = dataManager.createAppStorePage(itunesRes: itunesRes, scrapeRes: scrapeRes)
                         isAddLoading = false
@@ -208,15 +206,15 @@ extension AppSearchView {
 
 struct AppSearchView_Preview: PreviewProvider {
     struct Container: View {
+        @State private var serviceCentral = ServiceCentral.preview
         @State private var userSelection = UserSelection.preview
         @State private var dataManager = DataManager.preview
 
         var body: some View {
-            AppSearchView(isPresented: .constant(true), vm: AppSearchView.ViewModel(
-                appStoreSearcher: DummyAppStoreSearcherService())
-            )
-            .environment(userSelection)
-            .environment(dataManager)
+            AppSearchView(isPresented: .constant(true))
+                .environment(serviceCentral)
+                .environment(userSelection)
+                .environment(dataManager)
         }
     }
     

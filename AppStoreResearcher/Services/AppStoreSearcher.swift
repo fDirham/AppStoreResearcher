@@ -13,8 +13,9 @@ protocol AppStoreSearcherService {
     func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes
 }
 
-class MainAppStoreSearcherService: AppStoreSearcherService {
-    static var shared = MainAppStoreSearcherService()
+class AppStoreSearcher: AppStoreSearcherService {
+    static var shared = AppStoreSearcher()
+    static var preview = DummyAppStoreSearcher()
     
     private let vm = JSVirtualMachine()
     private let context: JSContext
@@ -54,6 +55,8 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
             throw "URL Invalid"
         }
         
+        print("searching", url)
+        
         let (data, _) = try await URLSession.shared.data(from: url)
         let itunesRes: ItunesSearchRes = try decodeJSONData(data)
         
@@ -87,14 +90,16 @@ class MainAppStoreSearcherService: AppStoreSearcherService {
     }
 }
 
-class DummyAppStoreSearcherService: AppStoreSearcherService {
+class DummyAppStoreSearcher: AppStoreSearcherService {
     func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes {
-        try await Task.sleep(for: .seconds(3))
+        print("DUMMY QUERY APP STORE PAGE \(pageUrl)")
+        try await Task.sleep(for: .seconds(1))
         return CheerioScrapeRes.DUMMY
     }
     
     func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
-        try await Task.sleep(for: .seconds(3))
+        print("DUMMY ITUNES SEARCH \(searchQuery)")
+        try await Task.sleep(for: .seconds(1))
         return ItunesSearchRes.DUMMY
     }
     

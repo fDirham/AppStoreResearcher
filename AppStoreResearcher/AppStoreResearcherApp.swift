@@ -11,10 +11,12 @@ import SwiftUI
 struct AppStoreResearcherApp: App {
     @State private var dataManager = DataManager.shared
     @State private var userSelection = UserSelection.shared
+    @State private var serviceCentral = ServiceCentral.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(serviceCentral)
                 .environment(userSelection)
                 .environment(dataManager)
                 .onAppear {
