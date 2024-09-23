@@ -55,10 +55,10 @@ class AppStoreSearcher: AppStoreSearcherService {
             throw "URL Invalid"
         }
         
-        print("searching", url)
-        
         let (data, _) = try await URLSession.shared.data(from: url)
-        let itunesRes: ItunesSearchRes = try decodeJSONData(data)
+        
+        var itunesRes: ItunesSearchRes = try decodeJSONData(data)
+        itunesRes.removeWeirdResults()
         
         return itunesRes
     }

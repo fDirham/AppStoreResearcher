@@ -25,12 +25,12 @@ struct AppSearchRes: Codable {
     }
     
     init(itunesResult: ItunesSearchRes.Result){
-        self.appTitle = itunesResult.trackName
-        self.appIcon = itunesResult.artworkUrl60
-        self.appUrl = itunesResult.trackViewUrl
-        self.ratingAvg = itunesResult.averageUserRating
-        self.ratingCount = itunesResult.userRatingCount
-        self.bundleId = itunesResult.bundleId
+        self.appTitle = itunesResult.trackName ?? ""
+        self.appIcon = itunesResult.artworkUrl60 ?? ""
+        self.appUrl = itunesResult.trackViewUrl ?? ""
+        self.ratingAvg = itunesResult.averageUserRating ?? 0
+        self.ratingCount = itunesResult.userRatingCount ?? 0
+        self.bundleId = itunesResult.bundleId ?? ""
     }
 }
 

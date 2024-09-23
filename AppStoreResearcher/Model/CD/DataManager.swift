@@ -272,26 +272,33 @@ extension DataManager {
     
     func createAppStorePage(itunesRes: ItunesSearchRes.Result, scrapeRes: CheerioScrapeRes) -> AppStorePage {
         // Create stringholders
-        let cdGenreListArr: [StringHolder] = itunesRes.genres.map({strVal in
-            let toAdd = StringHolder(context: viewContext)
-            toAdd.string = strVal
-            return toAdd
-        })
+        var cdGenreListArr: [StringHolder] = []
+        if let genreList = itunesRes.genres {
+            let toReplace: [StringHolder] = genreList.map({strVal in
+                let toAdd = StringHolder(context: viewContext)
+                toAdd.string = strVal
+                return toAdd
+            })
+        }
         let cdGenreList: NSSet = NSSet(array: cdGenreListArr)
         
         var cdScreenshotIosArr: [StringHolder] = []
-        for strVal in itunesRes.screenshotUrls {
-            let toAdd = StringHolder(context: viewContext)
-            toAdd.string = strVal
-            cdScreenshotIosArr.append(toAdd)
+        if let screenshotUrlList = itunesRes.screenshotUrls {
+            for strVal in screenshotUrlList {
+                let toAdd = StringHolder(context: viewContext)
+                toAdd.string = strVal
+                cdScreenshotIosArr.append(toAdd)
+            }
         }
         let cdScreenshotIos = NSOrderedSet(array: cdScreenshotIosArr)
 
         var cdScreenshotIpadArr: [StringHolder] = []
-        for strVal in itunesRes.ipadScreenshotUrls {
-            let toAdd = StringHolder(context: viewContext)
-            toAdd.string = strVal
-            cdScreenshotIpadArr.append(toAdd)
+        if let ipadScreenshotUrlList = itunesRes.ipadScreenshotUrls {
+            for strVal in ipadScreenshotUrlList {
+                let toAdd = StringHolder(context: viewContext)
+                toAdd.string = strVal
+                cdScreenshotIpadArr.append(toAdd)
+            }
         }
         let cdScreenshotIpad = NSOrderedSet(array: cdScreenshotIpadArr)
         
@@ -307,27 +314,27 @@ extension DataManager {
 
         // Parse dates
         let dateFormatter = ISO8601DateFormatter()
-        let releaseDate = dateFormatter.date(from: itunesRes.releaseDate)
-        let currVerReleaseDate = dateFormatter.date(from: itunesRes.currentVersionReleaseDate)
+        let releaseDate = (itunesRes.releaseDate != nil) ? dateFormatter.date(from: itunesRes.releaseDate!) : Date.now
+        let currVerReleaseDate = (itunesRes.currentVersionReleaseDate != nil) ? dateFormatter.date(from: itunesRes.currentVersionReleaseDate!): Date.now
         
         let asp: AppStorePage = AppStorePage(context: viewContext)
         asp.app_title = itunesRes.trackName
         asp.app_store_url = itunesRes.trackViewUrl
         asp.app_bundle_id = itunesRes.bundleId
-        asp.app_id = String(itunesRes.trackId)
+        asp.app_id = String(itunesRes.trackId ?? 0)
         asp.app_description = itunesRes.description
         asp.app_icon_60 = itunesRes.artworkUrl60
         asp.app_icon_512 = itunesRes.artworkUrl512
         asp.creator_name = itunesRes.artistName
         asp.creator_url = itunesRes.artistViewUrl
-        asp.rating_avg = itunesRes.averageUserRating
-        asp.rating_count = Int64(itunesRes.userRatingCount)
+        asp.rating_avg = itunesRes.averageUserRating ?? 0
+        asp.rating_count = Int64(itunesRes.userRatingCount ?? 0)
         asp.current_version = itunesRes.version
         asp.release_date = releaseDate
         asp.current_version_release_date = currVerReleaseDate
         asp.primary_genre = itunesRes.primaryGenreName
         asp.genre_list = cdGenreList
-        asp.purchase_price = itunesRes.price
+        asp.purchase_price = itunesRes.price ?? 0
         asp.purchase_currency = itunesRes.currency
         asp.content_rating = itunesRes.trackContentRating
         asp.minimum_os_version = itunesRes.minimumOsVersion
@@ -377,6 +384,7 @@ extension DataManager {
             try self.viewContext.execute(deleteRequest)
         } catch let error as NSError {
             // TODO: handle the error
+            print(error)
         }
     }
 

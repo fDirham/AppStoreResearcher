@@ -23,11 +23,6 @@ struct AppSearchView: View {
         self._isPresented = isPresented
     }
     
-    init(isPresented: Binding<Bool>, vm: ViewModel) {
-        self.init(isPresented: isPresented)
-        self.vm = vm
-    }
-    
     var body: some View {
         ZStack {
             Color.black.opacity(0.4)
@@ -143,8 +138,8 @@ extension AppSearchView {
                         self.itunesSearchResults = itunesRes.results
                     }
                     catch {
-                        print("Cannot get search results. Check your wifi and try again later.", error.localizedDescription)
-                        errorVal = error
+                        print(error)
+                        errorVal = "Cannot get search results. Check your wifi and try again later." as LocalizedError
                     }
                     
                     isSearchLoading = false
@@ -179,7 +174,7 @@ extension AppSearchView {
                         }
                         
                         isAddLoading = true
-                        let scrapeRes = try await serviceCentral.appStoreSearcher.queryAppStorePage(pageUrl: itunesRes.trackViewUrl)
+                        let scrapeRes = try await serviceCentral.appStoreSearcher.queryAppStorePage(pageUrl: itunesRes.trackViewUrl!)
                         
                         aspToAdd = dataManager.createAppStorePage(itunesRes: itunesRes, scrapeRes: scrapeRes)
                         isAddLoading = false
@@ -191,7 +186,7 @@ extension AppSearchView {
                 }
                 catch {
                     // All errors here are due to system errors
-                    print(error.localizedDescription)
+                    print(error)
                     errorVal = "System error. Please try again later." as LocalizedError
                 }
             }

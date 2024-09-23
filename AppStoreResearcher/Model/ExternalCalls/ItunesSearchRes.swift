@@ -10,48 +10,53 @@ import Foundation
 
 struct ItunesSearchRes: Codable {
     struct Result: Codable {
-        var artistViewUrl: String
-        var artworkUrl60: String
-        var supportedDevices: [String]
-        var features: [String]
-        var isGameCenterEnabled: Bool
-        var advisories: [String]
-        var screenshotUrls: [String]
-        var ipadScreenshotUrls: [String]
-        var appletvScreenshotUrls: [String]
-        var artworkUrl512: String
-        var trackViewUrl: String
-        var contentAdvisoryRating: String
-        var averageUserRating: Float
-        var currentVersionReleaseDate: String
-        var releaseNotes: String
-        var minimumOsVersion: String
-        var artistId: Int
-        var artistName: String
-        var genres: [String]
-        var price: Float
-        var genreIds: [String]
-        var primaryGenreName: String
-        var description: String
-        var bundleId: String
-        var trackId: Int
-        var trackName: String
-        var sellerName: String
-        var currency: String
-        var fileSizeBytes: String
-        var formattedPrice: String
-        var userRatingCountForCurrentVersion: Int
-        var trackContentRating: String
-        var averageUserRatingForCurrentVersion: Float
-        var releaseDate: String
-        var version: String
-        var userRatingCount: Int
+        var artistViewUrl: String?
+        var artworkUrl60: String?
+        var supportedDevices: [String]?
+        var features: [String]?
+        var isGameCenterEnabled: Bool?
+        var advisories: [String]?
+        var screenshotUrls: [String]?
+        var ipadScreenshotUrls: [String]?
+        var appletvScreenshotUrls: [String]?
+        var artworkUrl512: String?
+        var trackViewUrl: String?
+        var contentAdvisoryRating: String?
+        var averageUserRating: Float?
+        var currentVersionReleaseDate: String?
+        var releaseNotes: String?
+        var minimumOsVersion: String?
+        var artistId: Int?
+        var artistName: String?
+        var genres: [String]?
+        var price: Float?
+        var genreIds: [String]?
+        var primaryGenreName: String?
+        var description: String?
+        var bundleId: String?
+        var trackId: Int?
+        var trackName: String?
+        var sellerName: String?
+        var currency: String?
+        var fileSizeBytes: String?
+        var userRatingCountForCurrentVersion: Int?
+        var trackContentRating: String?
+        var averageUserRatingForCurrentVersion: Float?
+        var releaseDate: String?
+        var version: String?
+        var userRatingCount: Int?
     }
     
     var results: [Result]
     var resultCount: Int
 }
 
+extension ItunesSearchRes {
+    mutating func removeWeirdResults(){
+        let newRes = self.results.filter {obj in obj.price != nil && obj.releaseDate != nil}
+        self.results = newRes
+    }
+}
 
 //#if targetEnvironment(simulator)
 extension ItunesSearchRes {
@@ -254,7 +259,6 @@ extension ItunesSearchRes {
             sellerName: "FaceApp Technology Limited",
             currency: "USD",
             fileSizeBytes: "132574208",
-            formattedPrice: "Free",
             userRatingCountForCurrentVersion: 1597749,
             trackContentRating: "9+",
             averageUserRatingForCurrentVersion: 4.73332,
@@ -528,7 +532,6 @@ extension ItunesSearchRes {
             sellerName: "SHANTANU PTE. LTD.",
             currency: "USD",
             fileSizeBytes: "255775744",
-            formattedPrice: "Free",
             userRatingCountForCurrentVersion: 134534,
             trackContentRating: "4+",
             averageUserRatingForCurrentVersion: 4.85311,
@@ -760,7 +763,6 @@ extension ItunesSearchRes {
             sellerName: "Alpha Mobile Limited",
             currency: "USD",
             fileSizeBytes: "217390080",
-            formattedPrice: "Free",
             userRatingCountForCurrentVersion: 1660,
             trackContentRating: "4+",
             averageUserRatingForCurrentVersion: 4.7271,
