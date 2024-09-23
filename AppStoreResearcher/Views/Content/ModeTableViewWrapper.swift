@@ -23,7 +23,7 @@ struct ModeTableViewWrapper<Content: TableColumnContent<AppStorePage, KeyPathCom
         Table(of: AppStorePage.self, selection: $vm.selectedAppStorePageId, sortOrder: $vm.sortOrder) {
             tableColumns
         } rows: {
-            ForEach(vm.aspArr, id: \.app_bundle_id) { obj in
+            ForEach(vm.aspArr, id: \.id) { obj in
                 TableRow(obj)
             }
         }
@@ -81,7 +81,9 @@ extension ModeTableViewWrapper {
                 _selectedAppStorePageId = newValue
                 self.onSelectedAppStorePageIdChanged(newId: newValue)
             }
-            get { return _selectedAppStorePageId }
+            get {
+                return _selectedAppStorePageId
+            }
         }
         
         private var _sortOrder: [KeyPathComparator<AppStorePage>] = []
