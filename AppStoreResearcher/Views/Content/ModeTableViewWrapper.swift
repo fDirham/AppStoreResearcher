@@ -82,14 +82,33 @@ extension ModeTableViewWrapper {
 
         }
         
-        private var _selectedAppStorePageId: AppStorePage.ID? = nil
         var selectedAppStorePageId: AppStorePage.ID? {
             set {
-                _selectedAppStorePageId = newValue
-                self.onSelectedAppStorePageIdChanged(newId: newValue)
+                if self.userSelection == nil {
+                    return
+                }
+                
+                guard let pg = self.pg else {
+                    return
+                }
+                
+                guard let pageItems = pg.page_items?.array as? [PageItem] else {
+                    return
+                }
+                
+                let pageItem = DataManager.getPageItemFromAppStorePageId(aspId: newValue, pageItems: pageItems)
+                self.userSelection!.pageItem = pageItem
             }
             get {
-                return _selectedAppStorePageId
+                guard let userSelection = userSelection else {
+                    return nil
+                }
+                
+                guard let pi = userSelection.pageItem else {
+                    return nil
+                }
+                
+                return pi.app_store_page?.id
             }
         }
         
@@ -125,10 +144,6 @@ extension ModeTableViewWrapper {
         }
         
         private func onSelectedAppStorePageIdChanged(newId: AppStorePage.ID?){
-            let pageItems = pg!.page_items?.array as! [PageItem]
-            
-            let pageItem = DataManager.getPageItemFromAppStorePageId(aspId: newId, pageItems: pageItems)
-            userSelection!.pageItem = pageItem
         }
     }
 }

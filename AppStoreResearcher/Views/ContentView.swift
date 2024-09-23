@@ -14,6 +14,8 @@ struct ContentView: View {
     @State var vm = ViewModel()
     
     var body: some View {
+        @Bindable var userSelectionBinding = userSelection
+        
         ZStack {
             NavigationSplitView {
                 VStack {
@@ -56,7 +58,7 @@ struct ContentView: View {
                 HStack(spacing: 0) {
                     Spacer(minLength: 0)
                     if vm.selectedGroupId != nil {
-                        switch vm.contentMode {
+                        switch userSelection.viewingContentMode {
                         case .OVERVIEW:
                             OverviewModeView()
                         case .SCREENSHOTS:
@@ -81,7 +83,7 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigation) {
-                    Picker("Mode", selection: $vm.contentMode) {
+                    Picker("Mode", selection: $userSelectionBinding.viewingContentMode) {
                         Text(ContentMode.OVERVIEW.rawValue).tag(ContentMode.OVERVIEW)
                         Text(ContentMode.SCREENSHOTS.rawValue).tag(ContentMode.SCREENSHOTS)
                         Text(ContentMode.ICONS.rawValue).tag(ContentMode.ICONS)
@@ -116,11 +118,6 @@ struct ContentView: View {
             .onAppear {
                 vm.setup(userSelection: userSelection, dataManager: dataManager)
             }
-            .onChange(of: userSelection.pageGroup) {
-                if let selectedGroup = userSelection.pageGroup {
-                    vm.contentTitle = selectedGroup.group_name ?? ""
-                }
-            }
             if vm.showAddInterface {
                 AppSearchView(isPresented: $vm.showAddInterface)
             }
@@ -137,14 +134,26 @@ extension ContentView {
         private var _selectedGroupId: PageGroup.ID? = nil
         var selectedGroupId: PageGroup.ID? {
             set {
-                _selectedGroupId = newValue
-                self._onSelectedGroupIdChanged(newId: newValue)
+                let newPg = dataManager.getPageGroupWithId(id: newValue)
+                userSelection?.pageGroup = newPg
             }
-            get { return _selectedGroupId }
+            get {
+                guard let us = userSelection else {
+                    return nil
+                }
+                
+                return us.pageGroup?.id
+            }
         }
         
-        var contentTitle: String = "ASR"
-        var contentMode: ContentMode = .OVERVIEW
+        var contentTitle: String {
+            guard let us = userSelection else {
+                return "ASR"
+            }
+            
+            return us.pageGroup?.group_name ?? "ASR"
+        }
+        
         var anyCancellable: AnyCancellable? = nil
         var pageGroupList: [PageGroup] {
             guard let dataManager = dataManager else {
@@ -201,10 +210,6 @@ extension ContentView {
             alertDeleteGroup = false
         }
         
-        private func _onSelectedGroupIdChanged(newId: PageGroup.ID?){
-            let newPg = dataManager.getPageGroupWithId(id: newId)
-            userSelection?.pageGroup = newPg
-        }
     }
 }
 

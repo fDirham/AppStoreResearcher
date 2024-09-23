@@ -77,5 +77,6 @@ import Foundation
             return piArr[idx]
         }
     }
-
+    
+    var viewingContentMode: ContentMode = .OVERVIEW
 }
