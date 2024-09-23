@@ -11,13 +11,13 @@ import Combine
 struct SearchBarView: View {
     @FocusState.Binding var searchBarFocused: Bool
     @Binding var searchVal: String
-    var onSearch: () -> Void
+    var onSearch: () async -> Void
     var isLoading: Bool
     
     let detector = PassthroughSubject<Void, Never>()
     let publisher: AnyPublisher<Void, Never>
     
-    init(searchBarFocused: FocusState<Bool>.Binding, searchVal: Binding<String>, isLoading: Bool, onSearch: @escaping ()-> Void) {
+    init(searchBarFocused: FocusState<Bool>.Binding, searchVal: Binding<String>, isLoading: Bool, onSearch: @escaping () async -> Void) {
         self._searchBarFocused = searchBarFocused
         self._searchVal = searchVal
         self.isLoading = isLoading
@@ -42,10 +42,16 @@ struct SearchBarView: View {
                 .font(.system(size: 18))
                 .background(.clear)
                 .onSubmit {
-                    onSearch()
+                    Task {
+                       await onSearch()
+                    }
                 }
                 .onChange(of: searchVal) { detector.send() }
-                .onReceive(publisher) { onSearch() }
+                .onReceive(publisher) {
+                    Task {
+                        await onSearch()
+                    }
+                }
             HStack{
                 Spacer()
                 if isLoading {

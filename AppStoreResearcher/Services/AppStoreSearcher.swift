@@ -9,7 +9,7 @@ import Foundation
 import JavaScriptCore
 
 protocol AppStoreSearcherService {
-    func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes
+    func queryItunesSearch(searchQuery: String) async throws -> (autoSelectFirst: Bool, result: ItunesSearchRes)
     func queryAppStorePage(pageUrl: String) async throws -> CheerioScrapeRes
 }
 
@@ -44,15 +44,21 @@ class AppStoreSearcher: AppStoreSearcherService {
         return try scrapeAppStorePage(pageHTML: html)
     }
     
-    func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
+    func queryItunesSearch(searchQuery: String) async throws -> (autoSelectFirst: Bool, result: ItunesSearchRes) {
         let isBundleSearch = searchQuery.hasPrefix("com.")
+        let isAppStorePageSearch = searchQuery.hasPrefix("https://apps.apple") && searchQuery.contains("/id")
         
         var searchUrl: URL!
-        if isBundleSearch {
+        var autoSelectFirst = true
+        if isAppStorePageSearch {
+            searchUrl = try getASPItunesSearchUrl(aspLink: searchQuery)
+        }
+        else if isBundleSearch {
             searchUrl = try getBundleIdItunesSearchUrl(bundleId: searchQuery)
         }
         else {
             searchUrl = try getGenericItunesSearchUrl(searchQuery: searchQuery)
+        autoSelectFirst = false
         }
         
         let (data, _) = try await URLSession.shared.data(from: searchUrl)
@@ -60,7 +66,28 @@ class AppStoreSearcher: AppStoreSearcherService {
         var itunesRes: ItunesSearchRes = try decodeJSONData(data)
         itunesRes.removeWeirdResults()
         
-        return itunesRes
+        return (autoSelectFirst: autoSelectFirst, result: itunesRes)
+    }
+    
+    private func getASPItunesSearchUrl(aspLink: String) throws -> URL {
+        
+        let inUrl = URL(string: aspLink)!
+        let pathComponents = inUrl.pathComponents
+        let idComponent = pathComponents.first(where: {com in com.hasPrefix("id")})!
+        let startIdx = idComponent.index(after: idComponent.firstIndex(of: "d") ?? idComponent.startIndex)
+        let idVal = idComponent.suffix(from: startIdx)
+        
+        
+        let mediaQItem = URLQueryItem(name: "media", value: "software")
+        let idQItem = URLQueryItem(name: "id", value: String(idVal))
+        guard let url = URLComponents(
+            host: "itunes.apple.com",
+            path: "/lookup",
+            queryItems: [mediaQItem, idQItem]
+        ).url else {
+            throw "URL Invalid"
+        }
+        return url
     }
     
     private func getBundleIdItunesSearchUrl(bundleId: String) throws -> URL {
@@ -89,7 +116,7 @@ class AppStoreSearcher: AppStoreSearcherService {
         return url
     }
     
-    private func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes{
+    private func scrapeAppStorePage(pageHTML: String) throws -> CheerioScrapeRes {
         let jsModule = self.context.objectForKeyedSubscript("AppStoreSearcher")
         if let res = jsModule?.invokeMethod("scrapeAppStorePage", withArguments: [pageHTML]) {
             let toReturn: CheerioScrapeRes = try decodeJSONObj(res.toString())
@@ -123,10 +150,10 @@ class DummyAppStoreSearcher: AppStoreSearcherService {
         return CheerioScrapeRes.DUMMY
     }
     
-    func queryItunesSearch(searchQuery: String) async throws -> ItunesSearchRes {
+    func queryItunesSearch(searchQuery: String) async throws -> (autoSelectFirst: Bool, result: ItunesSearchRes) {
         print("DUMMY ITUNES SEARCH \(searchQuery)")
         try await Task.sleep(for: .seconds(1))
-        return ItunesSearchRes.DUMMY
+        return (autoSelectFirst: false, result: ItunesSearchRes.DUMMY)
     }
     
 }

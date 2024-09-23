@@ -12,11 +12,11 @@ struct AppSearchView: View {
     @Environment(ServiceCentral.self) private var serviceCentral
     @Environment(UserSelection.self) private var userSelection
     @Environment(DataManager.self) private var dataManager
-
+    
     @Binding var isPresented: Bool
     @State var vm = ViewModel()
     @FocusState var searchBarFocused: Bool
-        
+    
     let frameWidth: CGFloat = 500
     
     init(isPresented: Binding<Bool>) {
@@ -80,7 +80,7 @@ struct AppSearchView: View {
     }
     
     private func handleAddFinish() {
-       isPresented = false
+        isPresented = false
     }
 }
 
@@ -90,7 +90,7 @@ extension AppSearchView {
         var serviceCentral: ServiceCentral!
         var dataManager: DataManager!
         var userSelection: UserSelection!
-
+        
         var searchVal: String = ""
         var isSearchLoading: Bool = false
         var itunesSearchResults: [ItunesSearchRes.Result] = []
@@ -124,32 +124,42 @@ extension AppSearchView {
             self.onAddFinish = onAddFinish
         }
         
-        func doSearch() {
-            Task {
-                if searchVal == "" {
-                    self.itunesSearchResults = []
-                }
-                else if !isSearchLoading {
-                    isSearchLoading = true
+        func doSearch() async {
+            if searchVal == "" {
+                self.itunesSearchResults = []
+            }
+            else if !isSearchLoading {
+                isSearchLoading = true
+                
+                do {
+                    let queryRes = try await serviceCentral.appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
                     
-                    do {
-                        let itunesRes = try await serviceCentral.appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
-                        
+                    if queryRes.autoSelectFirst {
+                        let itunesRes = queryRes.result
+                        if itunesRes.resultCount > 0 {
+                            self.itunesSearchResults = itunesRes.results
+                            let toAdd = itunesRes.results.first!
+                            let searchRes = AppSearchRes(itunesResult: toAdd)
+                            await onAddSearchResult(searchRes: searchRes)
+                        }
+                    }
+                    else {
+                        let itunesRes = queryRes.result
                         self.itunesSearchResults = itunesRes.results
                     }
-                    catch {
-                        print(error)
-                        errorVal = "Cannot get search results. Check your wifi and try again later." as LocalizedError
-                    }
-                    
-                    isSearchLoading = false
                 }
+                catch {
+                    print(error)
+                    errorVal = "Cannot get search results. Check your wifi and try again later." as LocalizedError
+                }
+                
+                isSearchLoading = false
             }
         }
         
         func onAddSearchResult(searchRes: AppSearchRes) async {
             var aspToAdd: AppStorePage!
-
+            
             do {
                 
                 // Check if other bundle ids in group already exists
@@ -204,7 +214,7 @@ struct AppSearchView_Preview: PreviewProvider {
         @State private var serviceCentral = ServiceCentral.preview
         @State private var userSelection = UserSelection.preview
         @State private var dataManager = DataManager.preview
-
+        
         var body: some View {
             AppSearchView(isPresented: .constant(true))
                 .environment(serviceCentral)
