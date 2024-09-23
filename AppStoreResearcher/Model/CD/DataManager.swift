@@ -20,6 +20,7 @@ enum DataManagerType {
     var pageGroupList: [PageGroup] = []
     
     fileprivate var viewContext: NSManagedObjectContext
+    fileprivate var container: NSPersistentContainer
     private let pageGroupFRC: NSFetchedResultsController<PageGroup>
     
     private init(type: DataManagerType) {
@@ -28,16 +29,19 @@ enum DataManagerType {
         switch type {
         case .normal:
             let persistentStore = PersistenceController()
+            self.container = persistentStore.container
             vc = persistentStore.container.viewContext
             
         case .preview:
             let persistentStore = PersistenceController(inMemory: true)
+            self.container = persistentStore.container
             vc = persistentStore.container.viewContext
             Self.setupDummy(viewContext: vc)
             try? vc.save()
             
         case .testing:
             let persistentStore = PersistenceController(inMemory: true)
+            self.container = persistentStore.container
             vc = persistentStore.container.viewContext
         }
         
@@ -266,7 +270,7 @@ extension DataManager {
         return objects.first
     }
     
-    func createIncompleteAppStorePage(itunesRes: ItunesSearchRes.Result) -> AppStorePage {
+    func createAppStorePage(itunesRes: ItunesSearchRes.Result, scrapeRes: CheerioScrapeRes) -> AppStorePage {
         // Create stringholders
         let cdGenreListArr: [StringHolder] = itunesRes.genres.map({strVal in
             let toAdd = StringHolder(context: viewContext)
@@ -290,6 +294,16 @@ extension DataManager {
             cdScreenshotIpadArr.append(toAdd)
         }
         let cdScreenshotIpad = NSOrderedSet(array: cdScreenshotIpadArr)
+        
+        // In app purchases
+        var cdInAppPurchasesList: [InAppPurchaseSpec] = []
+        for inAppSpec in scrapeRes.in_app_purchases {
+            let toAdd = InAppPurchaseSpec(context: viewContext)
+            toAdd.desc = inAppSpec.desc
+            toAdd.price_str = inAppSpec.price_str
+            cdInAppPurchasesList.append(toAdd)
+        }
+        let cdInAppPurchases = NSOrderedSet(array: cdInAppPurchasesList)
 
         // Parse dates
         let dateFormatter = ISO8601DateFormatter()
@@ -319,6 +333,8 @@ extension DataManager {
         asp.minimum_os_version = itunesRes.minimumOsVersion
         asp.screenshot_ios = cdScreenshotIos
         asp.screenshot_ipad = cdScreenshotIpad
+        asp.in_app_purchases = cdInAppPurchases
+        asp.app_subtitle = scrapeRes.app_subtitle
         
         saveData()
         
@@ -349,4 +365,19 @@ extension DataManager {
         return selected != nil
     }
     
+}
+
+// MARK: Delete functions
+extension DataManager {
+    func deleteAll(entityName: String) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try self.viewContext.execute(deleteRequest)
+        } catch let error as NSError {
+            // TODO: handle the error
+        }
+    }
+
 }

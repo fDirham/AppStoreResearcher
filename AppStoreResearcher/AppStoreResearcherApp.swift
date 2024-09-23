@@ -19,8 +19,8 @@ struct AppStoreResearcherApp: App {
                 .environment(dataManager)
                 .onAppear {
                     // TODO: Delete this for prod
-//                    persistenceController.deleteAll()
-//                    PersistenceController.sharedSetupDummy()
+//                    dataManager.deleteAll(entityName: "AppStorePage")
+//                    dataManager.deleteAll(entityName: "PageItem")
                 }
         }
     }

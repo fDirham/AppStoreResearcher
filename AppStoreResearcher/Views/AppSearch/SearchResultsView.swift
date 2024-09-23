@@ -10,13 +10,14 @@ import NukeUI
 
 struct SearchResultsView: View {
     var searchResults: [AppSearchRes]
-    var onAdd: (AppSearchRes) -> Void
+    var onAdd: (AppSearchRes) async -> Void
+    var isAddLoading: Bool
 
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(searchResults, id: \.appUrl) { res in
-                    SearchResultBlockView(searchResult: res, onAdd: onAdd)
+                    SearchResultBlockView(searchResult: res, onAdd: onAdd, isAddLoading: isAddLoading)
                 }
             }
         }
@@ -26,7 +27,9 @@ struct SearchResultsView: View {
 
 struct SearchResultBlockView: View {
     var searchResult: AppSearchRes
-    var onAdd: (AppSearchRes) -> Void
+    var onAdd: (AppSearchRes) async -> Void
+    var isAddLoading: Bool
+
     
     var body: some View {
         HStack(alignment: .center) {
@@ -52,12 +55,23 @@ struct SearchResultBlockView: View {
                     Image(systemName: "link")
                 }
                 .buttonStyle(.borderless)
-                Button(action: {
-                    onAdd(searchResult)
-                }) {
-                    Image(systemName: "plus.circle")
+                if !isAddLoading {
+                    Button(action: {
+                        Task {
+                            await onAdd(searchResult)
+                        }
+                    }) {
+                        Image(systemName: "plus.circle")
+                    }
+                    .buttonStyle(.borderless)
+                    .frame(width: 24, height: 16)
                 }
-                .buttonStyle(.borderless)
+                else {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.4)
+                        .frame(width: 24, height: 16)
+                }
             }
         }
         .padding(.horizontal)
@@ -68,7 +82,7 @@ struct SearchResultBlockView: View {
 struct SearchResultsView_Preview: PreviewProvider {
     struct Container: View {
         var body: some View {
-            SearchResultsView(searchResults: AppSearchRes.DUMMY, onAdd: {_ in})
+            SearchResultsView(searchResults: AppSearchRes.DUMMY, onAdd: {_ in}, isAddLoading: false)
         }
     }
     

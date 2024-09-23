@@ -24,7 +24,7 @@ struct SearchBarView: View {
         self.onSearch = onSearch
 
         publisher = detector
-            .debounce(for: .seconds(3), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
 
     }

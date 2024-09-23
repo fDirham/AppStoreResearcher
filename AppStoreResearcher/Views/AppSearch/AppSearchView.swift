@@ -16,16 +16,10 @@ struct AppSearchView: View {
     @State var vm = ViewModel()
     @FocusState var searchBarFocused: Bool
         
-    let detector = PassthroughSubject<Void, Never>()
-    let publisher: AnyPublisher<Void, Never>
     let frameWidth: CGFloat = 500
     
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
-        
-        publisher = detector
-            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
-            .eraseToAnyPublisher()
     }
     
     init(isPresented: Binding<Bool>, vm: ViewModel) {
@@ -45,14 +39,14 @@ struct AppSearchView: View {
                 SearchBarView(
                     searchBarFocused: $searchBarFocused,
                     searchVal: $vm.searchVal,
-                    isLoading: vm.isLoading,
+                    isLoading: vm.isSearchLoading,
                     onSearch: vm.doSearch
                 )
                 
                 if !vm.displaySearchResults.isEmpty {
                     Divider()
                         .frame(width: frameWidth - 20)
-                    SearchResultsView(searchResults: vm.displaySearchResults, onAdd: vm.onAddSearchResult(searchRes:))
+                    SearchResultsView(searchResults: vm.displaySearchResults, onAdd: vm.onAddSearchResult(searchRes:), isAddLoading: vm.isAddLoading)
                         .padding(.top, 16)
                 }
             }
@@ -101,7 +95,7 @@ extension AppSearchView {
         var userSelection: UserSelection!
 
         var searchVal: String = ""
-        var isLoading: Bool = false
+        var isSearchLoading: Bool = false
         var itunesSearchResults: [ItunesSearchRes.Result] = []
         var displaySearchResults: [AppSearchRes] {
             itunesSearchResults.map({obj in AppSearchRes(itunesResult: obj)})
@@ -114,9 +108,11 @@ extension AppSearchView {
                 errorVal = nil
             }
             get {
-                errorVal == nil
+                errorVal != nil
             }
         }
+        
+        var isAddLoading: Bool = false
 
         init(appStoreSearcher: AppStoreSearcherService = MainAppStoreSearcherService.shared) {
             // TODO: Change back when done testing
@@ -140,8 +136,8 @@ extension AppSearchView {
                 if searchVal == "" {
                     self.itunesSearchResults = []
                 }
-                else if !isLoading {
-                    isLoading = true
+                else if !isSearchLoading {
+                    isSearchLoading = true
                     
                     do {
                         let itunesRes = try await appStoreSearcher.queryItunesSearch(searchQuery: searchVal)
@@ -153,12 +149,12 @@ extension AppSearchView {
                         errorVal = error
                     }
                     
-                    isLoading = false
+                    isSearchLoading = false
                 }
             }
         }
         
-        func onAddSearchResult(searchRes: AppSearchRes) {
+        func onAddSearchResult(searchRes: AppSearchRes) async {
             var aspToAdd: AppStorePage!
 
             do {
@@ -183,9 +179,12 @@ extension AppSearchView {
                         }) else {
                             throw "Can't find itunesRes for given appSearchRes"
                         }
-                        aspToAdd = dataManager.createIncompleteAppStorePage(itunesRes: itunesRes)
                         
-                        // TODO: Add background task to complete asp
+                        isAddLoading = true
+                        let scrapeRes = try await self.appStoreSearcher.queryAppStorePage(pageUrl: itunesRes.trackViewUrl)
+                        
+                        aspToAdd = dataManager.createAppStorePage(itunesRes: itunesRes, scrapeRes: scrapeRes)
+                        isAddLoading = false
                     }
                     
                     dataManager.createNewPageItem(asp: aspToAdd, pageGroup: selectedPageGroup)
@@ -195,7 +194,7 @@ extension AppSearchView {
                 catch {
                     // All errors here are due to system errors
                     print(error.localizedDescription)
-                    errorVal = "System error" as LocalizedError
+                    errorVal = "System error. Please try again later." as LocalizedError
                 }
             }
             catch {
