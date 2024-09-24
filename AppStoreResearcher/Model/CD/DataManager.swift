@@ -220,6 +220,11 @@ extension DataManager {
         
         return pageGroupList.first{e in e.id == id}
     }
+    
+    func renamePageGroup(pg: PageGroup, newName: String){
+        pg.group_name = newName
+        self.saveData()
+    }
 }
 
 // MARK: PageItem functions

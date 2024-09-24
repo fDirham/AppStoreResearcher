@@ -38,10 +38,23 @@ struct ContentView: View {
                     List(vm.pageGroupList, selection: $vm.selectedGroupId){ pg in
                         Text(pg.group_name ?? "")
                             .contextMenu(ContextMenu(menuItems: {
+                                Button("Rename") {
+                                    vm.startRenameGroup(pg)
+                                }
+                                Divider()
                                 Button("Delete") {
                                     vm.startDeleteGroup(pg)
                                 }
                             }))
+                    }
+                    .alert("Rename group", isPresented: $vm.alertRenameGroup) {
+                        TextField("...", text: $vm.tempGroupRenameVal)
+                        Button("Rename", action: {
+                            vm.confirmRenameGroup()
+                        })
+                        Button("Cancel", role:.cancel , action: {
+                            vm.cancelRenameGroup()
+                        })
                     }
                     .alert("Delete group", isPresented: $vm.alertDeleteGroup) {
                         Button("Cancel", role:.cancel , action: {
@@ -163,8 +176,13 @@ extension ContentView {
         }
         var alertNewGroup = false
         var newGroupName: String = ""
+        
         var alertDeleteGroup = false
         var groupToDelete: PageGroup? = nil
+        
+        var alertRenameGroup = false
+        var tempGroupRenameVal = ""
+        var groupToRename: PageGroup? = nil
         
         var showAddInterface = false
         
@@ -208,6 +226,24 @@ extension ContentView {
         func cancelDeleteGroup(){
             groupToDelete = nil
             alertDeleteGroup = false
+        }
+        
+        func startRenameGroup(_ pg: PageGroup) {
+            alertRenameGroup = true
+            tempGroupRenameVal = pg.group_name ?? ""
+            groupToRename = pg
+        }
+        
+        func confirmRenameGroup(){
+            dataManager.renamePageGroup(pg: self.groupToRename!, newName: self.tempGroupRenameVal)
+            groupToRename = nil
+            alertRenameGroup = false
+        }
+        
+        func cancelRenameGroup(){
+            groupToRename = nil
+            alertRenameGroup = false
+            tempGroupRenameVal = ""
         }
         
     }
