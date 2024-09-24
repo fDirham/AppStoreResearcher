@@ -37,7 +37,12 @@ struct OverviewModeView: View {
             .frame(width: 32, height: 32)
         }
         .width(32)
-        TableColumn("App", value: \.app_title.unwrapOrEmpty)
+        TableColumn("App", value: \.app_title.unwrapOrEmpty) {model in
+            Link(destination: URL(string: model.app_store_url ?? "")!) {
+                Text(model.app_title ?? "")
+                    .multilineTextAlignment(.leading)
+            }
+        }
         TableColumn("Subtitle", value: \.app_subtitle.unwrapOrEmpty)
         TableColumn("Description", value: \.app_description.unwrapOrEmpty)
         TableColumn("Creator", value: \.creator_name.unwrapOrEmpty)
