@@ -61,7 +61,6 @@ extension ModeTableViewWrapper {
             return userSelection.pageGroup
         }
         
-        var sortKey: KeyPathComparator<AppStorePage>?
         var aspArr: [AppStorePage] {
             guard let pg = pg else {
                 return []
@@ -112,13 +111,27 @@ extension ModeTableViewWrapper {
             }
         }
         
-        private var _sortOrder: [KeyPathComparator<AppStorePage>] = []
+        var sortKey: KeyPathComparator<AppStorePage>? {
+            if userSelection == nil {
+                return nil
+            }
+            
+            return userSelection.tableSortArray.first
+        }
+        
         var sortOrder: [KeyPathComparator<AppStorePage>] {
             set {
-                onSortChange(newSortOder: newValue)
-                _sortOrder = newValue
+                if userSelection != nil {
+                    userSelection.tableSortArray = newValue
+                }
             }
-            get { return _sortOrder}
+            get {
+                if userSelection == nil {
+                    return []
+                }
+                
+                return userSelection.tableSortArray
+            }
         }
         
 
@@ -135,15 +148,6 @@ extension ModeTableViewWrapper {
             if let pi = dataManager.getPageItemWithAppStorePage(asp: asp, pageGroup: pg!) {
                 dataManager.deletePageItem(pageItem: pi)
             }
-        }
-        
-        private func onSortChange(newSortOder: [KeyPathComparator<AppStorePage>]){
-            if let newKey = newSortOder.first {
-                sortKey = newKey
-            }
-        }
-        
-        private func onSelectedAppStorePageIdChanged(newId: AppStorePage.ID?){
         }
     }
 }

@@ -79,4 +79,6 @@ import Foundation
     }
     
     var viewingContentMode: ContentMode = .OVERVIEW
+    
+    var tableSortArray: [KeyPathComparator<AppStorePage>] = []
 }
