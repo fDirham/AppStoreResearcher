@@ -80,7 +80,7 @@ struct AppSearchView: View {
     }
     
     private func handleAddFinish() {
-        isPresented = false
+//        isPresented = false
     }
 }
 
